@@ -2,13 +2,13 @@
 /*	background: url("../img/salad.JPG") no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
-	background-size: cover;*/
- background: url("../img/salad.JPG");
-        background-size: 100% 100% !important;
-        background-position: center center fixed;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-       display:block;max-width:100%;height:auto;
+  //	background-size: cover;*/
+  background: url("../img/bakBlur.JPG");
+  background-size: 100% 100% !important;
+  background-position: center center fixed;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display:block;max-width:100%;height:auto;
 
 
 }
@@ -44,14 +44,14 @@
 	transform: translate(-50%, -50%);
 }
 
- #rgister_form{
-        position: fixed;
-        top: 54%;
-        left: 50%;
-        width: 100%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-    }
+#rgister_form{
+  position: fixed;
+  top: 54%;
+  left: 50%;
+  width: 100%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 
 
 .padding{
@@ -67,7 +67,20 @@
 
 .help-block{
   font-weight: bold;
-  color: white;
+  color: red;
+}
+.help-block-match{
+  font-weight: bold;
+  color: green;
+}
+.help-block-notMatch{
+  font-weight: bold;
+  color: red;
+}
+.soi-logo-header{
+ width: 32px;
+ height: 33px;
+ margin-left: 5px;
 }
 
 .popup-container .popup {
@@ -89,4 +102,9 @@
   -moz-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+}
+
+.home-serach-button{
+  margin-left: 80%;
+  margin-top: 1%;
 }

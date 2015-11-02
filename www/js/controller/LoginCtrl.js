@@ -1,6 +1,8 @@
 'use strict';
 app.controller('LoginCtrl', function($scope, $ionicPopup) {
  $scope.activeTab="guest";
+ $scope.passwordMatches=false;
+ $scope.user={};
  var myPopup=null;
  $scope.changeTab=function(tab){
  	$scope.activeTab=tab;
@@ -10,9 +12,19 @@ app.controller('LoginCtrl', function($scope, $ionicPopup) {
 
 };
 
+ $scope.comparePassword=function(password,conPassword){
+    if( conPassword !==undefined && conPassword.length>7 && password==conPassword){
+      $scope.passwordMatches=true;
+     // alert("password matches");
+    }else{
+      $scope.passwordMatches=false;
+      //alert("password do not match");
+    }
+   };
+
 
 $scope.onRegister=false;
-$scope.user={};
+
 $scope.gotoRegister=function(){
   $scope.onRegister=!$scope.onRegister;
 }
@@ -49,7 +61,7 @@ $scope.gotoRegister=function(){
 
     });
 myPopup.then(function(res) {
-  console.log('Tapped!', res);
+ //console.log('Tapped!', res);
 });
 };
 
