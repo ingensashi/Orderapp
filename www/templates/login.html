@@ -3,43 +3,35 @@
 <i class="pull-left"><img src="img/logo.jpg" class="img-responsive soi-logo-header" /></i>
 <h1 class="title" style="text-align:center">Registration</h1>
 <!-- <div class="logo">
-<img src="../img/sashikant.jpg"></div> -->
+  <img src="../img/sashikant.jpg"></div> -->
+
+
 </ion-header-bar>
 
-<!-- <ion-subheader-bar>
-</ion-subheader-bar>  -->
-<!-- <div class="bar bar-subheader bar-positive" >
- 
-</div> -->
+<div class="bar bar-subheader">
+  <div class="button-bar">
+    <button class="button button-small" ng-click="changeTab('guest')" ng-class="{'button-positive': activeTab == 'guest','button-light': activeTab == 'user'}">Guest</button>
+    <button  class="button button-small" ng-click="changeTab('user')" ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">User</button>
+  </div> 
+</div>  
 
 
-<!-- <ion-content class="login-bg-img" scroll="false">
-
-</ion-content> -->
-
-
-
-<ion-content padding="false" >
-<div class="button-bar">
-
- <button class="button button-small" ng-click="changeTab('guest')" ng-class="{'button-positive': activeTab == 'guest','button-light': activeTab == 'user'}">Guest</button>
- <button  class="button button-small" ng-click="changeTab('user')" ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">User</button>
-</div> 
+<ion-content>
 <div id="form">
 
-  <ion-list >
+  <ion-list>
   <div>
     <div ng-if="activeTab=='user' && !onRegister">
-       <form name="loginForm" novalidate>
+     <form name="loginForm" novalidate>
       <label class="item item-input">
         <input type="number" name="mobileNo" ng-model="mobileNo" placeholder="Type your Mobile no" 
 
-     ng-maxlength="10" ng-minlength="10" class="center-align" ng-required="true">
+        ng-maxlength="10" ng-minlength="10" class="center-align" ng-required="true">
       </label> 
       <span class="help-block" ng-show="loginForm.mobileNo.$dirty && loginForm.mobileNo.$invalid">
 
-      <span ng-show="loginForm.mobileNo.$error.required || loginForm.mobileNo.$error.number">valid Mobile NO. is required.</span>
-    </span>
+        <span ng-show="loginForm.mobileNo.$error.required || loginForm.mobileNo.$error.number">valid Mobile NO. is required.</span>
+      </span>
       <label class="item item-input" style="margin-top:2%;">
         <input type="password" name="password" ng-model="password" placeholder="Password" class="center-align" ng-required="true" ng-minlength="8">
       </label>
@@ -47,31 +39,31 @@
 
        <span ng-show="loginForm.password.$error.required">valid Password is required.</span>
      </span>
-      <button ng-disabled="loginForm.mobileNo.$invalid || loginForm.password.$invalid "  class="button button-full button-block button-calm" style="margin-top:5%;" ui-sref="home">Log In</button>
-      <div style="margin-top:5%;color:red;text-align:center;">Forgot password</div>
-      <div style="margin-top:18px;font-size:100%;text-align:center;">Not a Member?<span  style="color:green;" ng-click="gotoRegister()">REGISTER HERE</span>
+     <button ng-disabled="loginForm.mobileNo.$invalid || loginForm.password.$invalid "  class="button button-full button-block button-calm" style="margin-top:5%;" ng-click="userLogin(mobileNo,password)">Log In</button>
+     <div style="margin-top:5%;color:red;text-align:center;">Forgot password</div>
+     <div style="margin-top:18px;font-size:100%;text-align:center;">Not a Member?<span  style="color:green;" ng-click="gotoRegister()">REGISTER HERE</span>
 
-</form>
+     </form>
 
-      </div>
-    </div>
+   </div>
+ </div>
 
-    <div ng-if="activeTab=='guest' && !onRegister">
+ <div ng-if="activeTab=='guest' && !onRegister">
   <form name="guestForm" novalidate>
-       <label class="item item-input">
-        <input type="number" name="mobileNo" ng-model="mobileNo" placeholder="Type your Mobile no" 
+   <label class="item item-input">
+    <input type="number" name="mobileNo" ng-model="mobileNo" placeholder="Type your Mobile no" 
 
-     ng-maxlength="10" ng-minlength="10" class="center-align" ng-required="true">
-      </label> 
-<span class="help-block" ng-show="guestForm.mobileNo.$dirty && guestForm.mobileNo.$invalid">
-  <span ng-show="guestForm.mobileNo.$error.required || guestForm.mobileNo.$error.number">valid Mobile NO. is required.</span>
-</span>
- <!--  <span ng-show="((myForm.mobileNo.$error.minlength || myForm.mobileNo.$error.maxlength)&& myform.mobileNo.$dirty)">Mobile No. must be 10 digits.</span> -->
+    ng-maxlength="10" ng-minlength="10" class="center-align" ng-required="true">
+  </label> 
+  <span class="help-block" ng-show="guestForm.mobileNo.$dirty && guestForm.mobileNo.$invalid">
+    <span ng-show="guestForm.mobileNo.$error.required || guestForm.mobileNo.$error.number">valid Mobile NO. is required.</span>
+  </span>
+  <!--  <span ng-show="((myForm.mobileNo.$error.minlength || myForm.mobileNo.$error.maxlength)&& myform.mobileNo.$dirty)">Mobile No. must be 10 digits.</span> -->
   
-      <button  ng-disabled="guestForm.mobileNo.$invalid" class="button button-full button-calm" style="margin-top:5%;" ng-click="showPopup()">Continue</button>
-    </form>
-    </div>
-  </div>
+  <button  ng-disabled="guestForm.mobileNo.$invalid" class="button button-full button-calm" style="margin-top:5%;" ng-click="guestLogin(mobileNo)">Continue</button>
+</form>
+</div>
+</div>
 </ion-list>
 </div>
 </div>

@@ -23,13 +23,13 @@
 		<input class="center-align" type="password" ng-model="user.password" name="password"placeholder="Password" ng-minlength="8" ng-required="true">
 	</label>
 		<span ng-show="register_form.password.$invalid && !register_form.password.$pristine" class="help-block">Minimum 8 character Password is required</span>
-	<label class="item item-input" style="margin-top:2%;">
+	<!-- <label class="item item-input" style="margin-top:2%;">
 		<input type="password" class="center-align" name="conPassword" ng-minlength="8" ng-model="user.conPassword"	 placeholder="Confirm password" ng-required="true"
 		    ng-blur="comparePassword(user.password,user.conPassword)">
-	</label>
-		<span ng-show="register_form.conPassword.$invalid && !register_form.conPassword.$pristine" class="help-block">confirm password is required</span>
+	</label> -->
+		<!-- <span ng-show="register_form.conPassword.$invalid && !register_form.conPassword.$pristine" class="help-block">confirm password is required</span>
 		<span ng-if="user.conPassword!==undefined && passwordMatches" class="help-block-match">Password matches succesfully</span>
-		<span ng-if="user.conPassword!==undefined && !passwordMatches" class="help-block-notMatch">Password do not match</span>
+		<span ng-if="user.conPassword!==undefined && !passwordMatches" class="help-block-notMatch">Password do not match</span> -->
 	<label class="item item-input" style="margin-top:2%;">
 		<input class="center-align" type="email" ng-model="user.email" name="email" placeholder="Email" ng-required="true">
 	</label>
@@ -59,7 +59,7 @@
 		</div> -->
 	</div>
 	<button class="button button-full button-block button-calm"
-	 ng-disabled="register_form.name.$invalid || register_form.mobileNo.$invalid || register_form.password.$invalid || register_form.conPassword.$invalid || register_form.email.$invalid" style="margin-top:5%;" ng-click="showPopup()">Register</button>
+	 ng-disabled="register_form.name.$invalid || register_form.mobileNo.$invalid || register_form.password.$invalid || register_form.conPassword.$invalid || register_form.email.$invalid" style="margin-top:5%;" ng-click="registerUser(user)">Register</button>
 </form>
 </ion-list>
 </div>

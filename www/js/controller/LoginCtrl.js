@@ -1,33 +1,90 @@
 'use strict';
-app.controller('LoginCtrl', function($scope, $ionicPopup) {
+app.controller('LoginCtrl', function($scope, $ionicPopup,$http) {
  $scope.activeTab="guest";
  $scope.passwordMatches=false;
  $scope.user={};
  var myPopup=null;
  $scope.changeTab=function(tab){
- 	$scope.activeTab=tab;
+  $scope.activeTab=tab;
   if( $scope.onRegister){
     $scope.gotoRegister();
   }
 
 };
 
- $scope.comparePassword=function(password,conPassword){
-    if( conPassword !==undefined && conPassword.length>7 && password==conPassword){
-      $scope.passwordMatches=true;
+$scope.userLogin=function(userName,password){
+  var user={};
+  user.device_id="123";
+  user.device_name="moto_e";
+  user.device_version="4.4";
+  user.mobile_no=userName;
+  user.login_password=password;
+  console.log("user",user);
+  $http({
+    url:'http://216.15.228.130:8083/NUserLoginRequestwithPassword.php', 
+    method: "post",
+    data: user
+  }).then(function(response){
+    console.log("reponse userLogin",response);
+    alert("data"+JSON.stringify(reponse.data));
+  });
+
+}
+$scope.guestLogin=function(mobileNo){
+  var guest={};
+  guest.device_id="123";
+  guest.device_name="moto_e";
+  guest.device_version="4.4";
+  guest.mobile_no=mobileNo;
+  console.log("guest",guest);
+  $http({
+    url:'http://216.15.228.130:8083/NGuestRequest.php', 
+    method: "post",
+    data: guest
+  }).then(function(response){
+    console.log("reponse guestLogin",response);
+  });
+}
+
+$scope.registerUser=function(registerUser){
+  console.log(registerUser);
+  var tempUser={};
+  tempUser.device_id="123";
+  tempUser.device_name="moto_e";
+  tempUser.device_version="4.4";
+  tempUser.customer_name=registerUser.name;
+  tempUser.mobile_no=registerUser.mobileNo;
+  tempUser.customer_email=registerUser.email;
+  tempUser.login_password=registerUser.password;
+  tempUser.food_preference="0";
+  console.log("tempUrer",tempUser);
+  $http({
+    url:'http://216.15.228.130:8083/NUserRegistration.php', 
+    method: "post",
+    data: tempUser
+  }).then(function(response){
+    console.log("reponse registerUser",response);
+    $scope.user={};
+  });
+}
+
+
+$scope.comparePassword=function(password,conPassword){
+  if( conPassword !==undefined && conPassword.length>7 && password==conPassword){
+    $scope.passwordMatches=true;
      // alert("password matches");
-    }else{
-      $scope.passwordMatches=false;
+   }else{
+    $scope.passwordMatches=false;
       //alert("password do not match");
     }
-   };
+  };
 
 
-$scope.onRegister=false;
+  $scope.onRegister=false;
 
-$scope.gotoRegister=function(){
-  $scope.onRegister=!$scope.onRegister;
-}
+  $scope.gotoRegister=function(){
+    $scope.onRegister=!$scope.onRegister;
+  }
 
  // Triggered on a button click, or some other target
  $scope.showPopup = function() {
@@ -60,7 +117,7 @@ $scope.gotoRegister=function(){
       ]*/
 
     });
-myPopup.then(function(res) {
+  myPopup.then(function(res) {
  //console.log('Tapped!', res);
 });
 };
