@@ -1,67 +1,74 @@
-<ion-view view-title="Register" class="login-bg-img">
-<ion-content  has-bouncing="false">
-<div class="button-bar">
+<ion-view view-title="Login" class="login-bg-img">
+<ion-header-bar class="bar bar-stable">
+<i class="ion-ios-arrow-thin-left" style="font-size:27px" ng-click="gotoRegister()"></i>
+<i class="pull-left"><img src="img/logo.jpg" class="img-responsive soi-logo-header" /></i>
+<h1 class="title" style="text-align:center">Registration</h1>
+<!-- <div class="logo">
+  <img src="../img/sashikant.jpg"></div> -->
 
-	<button class="button button-small" ng-click="changeTab('guest')" ng-class="{'button-positive': activeTab == 'guest','button-light': activeTab == 'user'}">Guest</button>
-	<button  class="button button-small" ng-click="changeTab('user')" ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">User</button>
-</div> 
-<div id="rgister_form">
+
+</ion-header-bar>
+
+<div class="bar bar-subheader">
+  <div class="button-bar">
+    <button class="button button-small" ng-click="changeTab('guest')" ng-class="{'button-positive': activeTab == 'guest','button-light': activeTab == 'user'}">Guest</button>
+    <button  class="button button-small" ng-click="changeTab('user')" ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">User</button>
+  </div> 
+</div>  
+
+
+<ion-content style="margin-top:18%">
 <ion-list>
 <form name="register_form" nonvalidate>
-	<label class="item item-input ">
-		<input class="center-align" name="name" ng-model="user.name" type="text" placeholder="Name" ng-required="true">
+<div class="list-item">
+<label class=" item-input label-item">
+		<input class="center-align input-item" name="name" ng-model="user.name" type="text" placeholder="Name" ng-required="true">
 	</label> 
 	<span ng-show="register_form.name.$invalid && !register_form.name.$pristine" class="help-block">Your name is required</span>
-	<label class="item item-input" style="margin-top:2%;">
-		<input class="center-align" name="mobileNo" ng-model="user.mobileNo" type="number" placeholder="Mobile no" ng-maxlength="10" ng-minlength="10" ng-required="true">
+</div>
+<div class="list-item">
+<label class="item item-input label-item">
+		<input class="center-align input-item" name="mobileNo" ng-model="user.mobileNo" type="number" placeholder="Mobile no" ng-maxlength="10" ng-minlength="10" ng-required="true">
 	</label>
 		<span  ng-show="register_form.mobileNo.$dirty && register_form.mobileNo.$invalid">
 
       <span ng-show="register_form.mobileNo.$error.required || register_form.mobileNo.$error.number" class="help-block">valid Mobile NO. is required.</span>
     </span>
-	<label class="item item-input" style="margin-top:2%;">
-		<input class="center-align" type="password" ng-model="user.password" name="password"placeholder="Password" ng-minlength="8" ng-required="true">
+
+</div>
+<div class="list-item">
+<label class="item item-input label-item">
+		<input class="center-align input-item" type="password" ng-model="user.password" name="password"placeholder="Password" ng-minlength="6" ng-required="true">
 	</label>
-		<span ng-show="register_form.password.$invalid && !register_form.password.$pristine" class="help-block">Minimum 8 character Password is required</span>
-	<!-- <label class="item item-input" style="margin-top:2%;">
-		<input type="password" class="center-align" name="conPassword" ng-minlength="8" ng-model="user.conPassword"	 placeholder="Confirm password" ng-required="true"
-		    ng-blur="comparePassword(user.password,user.conPassword)">
-	</label> -->
-		<!-- <span ng-show="register_form.conPassword.$invalid && !register_form.conPassword.$pristine" class="help-block">confirm password is required</span>
-		<span ng-if="user.conPassword!==undefined && passwordMatches" class="help-block-match">Password matches succesfully</span>
-		<span ng-if="user.conPassword!==undefined && !passwordMatches" class="help-block-notMatch">Password do not match</span> -->
-	<label class="item item-input" style="margin-top:2%;">
-		<input class="center-align" type="email" ng-model="user.email" name="email" placeholder="Email" ng-required="true">
+		<span ng-show="register_form.password.$invalid && !register_form.password.$pristine" class="help-block">Minimum 6 character Password is required</span>
+</div>
+<div class="list-item">
+<label class="item item-input label-item">
+		<input class="center-align input-item" type="email" ng-model="user.email" name="email" placeholder="Email" ng-required="true">
 	</label>
 		<span ng-show="register_form.email.$invalid && !register_form.email.$pristine" class="help-block">Enter valid Email Id </span>
 	
-	<h4 style="color:black">Preferences:</h4>
+</div>
+ <h4 style="color:black">Preferences:</h4> 
 
 
 	<div class="row">
 		<div class="item item-checkbox" style="width:50%">
 			<label class="checkbox">
-				<input type="checkbox">
+				<input type="checkbox" ng-model="choice.veg">
 			</label>
 			<span style="color:green"><b>veg</b><span> 
 			</div>
 			<div class="item item-checkbox" style="width:50%">
 				<label class="checkbox">
-					<input type="checkbox">
+					<input type="checkbox" ng-model="choice.everything">
 				</label>
-				<span style="color:red"><b>non veg</b><span> 
+				<span style="color:red"><b>Everything</b><span> 
 				</div>
-		<!-- <div class="item item-checkbox">
-			<label class="checkbox">
-				<input type="checkbox">
-			</label>
-			Both
-		</div> -->
 	</div>
 	<button class="button button-full button-block button-calm"
 	 ng-disabled="register_form.name.$invalid || register_form.mobileNo.$invalid || register_form.password.$invalid || register_form.conPassword.$invalid || register_form.email.$invalid" style="margin-top:5%;" ng-click="registerUser(user)">Register</button>
 </form>
 </ion-list>
-</div>
 </ion-content>
 </ion-view>

@@ -1,71 +1,161 @@
 'use strict';
-app.controller('LoginCtrl', function($scope, $ionicPopup,$http) {
- $scope.activeTab="guest";
- $scope.passwordMatches=false;
- $scope.user={};
- var myPopup=null;
- $scope.changeTab=function(tab){
-  $scope.activeTab=tab;
-  if( $scope.onRegister){
-    $scope.gotoRegister();
-  }
+app.controller('LoginCtrl', function($scope, $ionicPopup,$ionicLoading,$http,$localStorage,$state,$cordovaDevice,$localStorageService) {
+ // console.log("$cordovaDevice",$cordovaDevice);
+  // $ionicViewSwitcher.nextTransition('none');
+  var isDevelopment=true;
+  $scope.choice={};
+  var deviceId='';
+  var deviceName='';
+  var deviceVersion;
+  var mobileNo="";
+  /**For production
+  */
 
-};
+  /*document.addEventListener("deviceready", function () {
 
-$scope.userLogin=function(userName,password){
-  var user={};
-  user.device_id="123";
-  user.device_name="moto_e";
-  user.device_version="4.4";
-  user.mobile_no=userName;
-  user.login_password=password;
-  console.log("user",user);
+    deviceName = $cordovaDevice.getModel();
+
+   // var cordova = $cordovaDevice.getCordova();
+
+  //  var model = $cordovaDevice.getModel();
+    //var platform = $cordovaDevice.getPlatform();
+
+    deviceId= $cordovaDevice.getUUID();
+
+    deviceVersion = $cordovaDevice.getVersion();
+  //  alert("di  "+deviceId+" dn  "+deviceName+"  dv "+deviceVersion);
+
+}, false);*/
+
+  /**For development
+  */
+  deviceId='a3b2a43154f74e2d';
+  deviceName='XT1022';
+  deviceVersion='4.4.4';
+
+  var init=function(){
+    if($localStorageService.getUser()==null){
+      $localStorageService.setUser();
+    }
+  };
+  init();
+
+
+  $scope.activeTab="guest";
+  $scope.passwordMatches=false;
+  $scope.user={};
+  $scope.guestReponse={};
+  $scope.userResponse={};
+  $scope.invalidOTP=false;
+  var myPopup=null;
+
+
+  $scope.changeTab=function(tab){
+    $scope.activeTab=tab;
+    if( $scope.onRegister){
+      $scope.gotoRegister();
+    }
+
+  };
+
+  $scope.userLogin=function(userName,password){
+    $scope.showSpinner();
+    var user={};
+    user.device_id=deviceId;
+    user.device_name=deviceName;
+    user.device_version=deviceVersion;
+    user.mobile_no=userName.toString();
+    user.login_password=password;
+  //console.log("user",user);
+  //$scope.showSpinner();
   $http({
     url:'http://216.15.228.130:8083/NUserLoginRequestwithPassword.php', 
     method: "post",
     data: user
   }).then(function(response){
     console.log("reponse userLogin",response);
-    alert("data"+JSON.stringify(reponse.data));
-  });
+    $scope.userReponse=response.data;
+//$scope.hideSpinner();
+if($scope.userReponse.userstatus=="success"){
+  $localStorageService.setUserStatus(1);
+  $localStorageService.setUserDetails($scope.userReponse.userdetails);
+ $state.go('home');/*.then(function() {
+  $scope.hideSpinner();
+});*/
+}else{
+  $scope.hideSpinner();
+  $scope.showAlert('Invalid user',$scope.userReponse.userdetails.result);
+   // alert($scope.userReponse.userdetails.result);
+ }
+
+ //   $localStorage.sessionId=response.data.UserDetails.SessionId;
+});
 
 }
 $scope.guestLogin=function(mobileNo){
+  $scope.showSpinner();
   var guest={};
-  guest.device_id="123";
-  guest.device_name="moto_e";
-  guest.device_version="4.4";
-  guest.mobile_no=mobileNo;
-  console.log("guest",guest);
-  $http({
-    url:'http://216.15.228.130:8083/NGuestRequest.php', 
-    method: "post",
-    data: guest
-  }).then(function(response){
-    console.log("reponse guestLogin",response);
-  });
+  guest.device_id=deviceId;
+  guest.device_name=deviceName;
+  guest.device_version=deviceVersion;
+  guest.mobile_no=mobileNo.toString();
+  mobileNo=guest.mobile_no;
+//  console.log("guest",guest);
+//$scope.showSpinner();
+$http({
+  url:'http://216.15.228.130:8083/NGuestRequest.php', 
+  method: "post",
+  data: guest
+}).then(function(response){
+ $scope.guestReponse=response.data;
+  // console.log("reponse guestLogin",$scope.guestReponse);
+  if($scope.guestReponse.gueststatus=="success"){
+    $scope.showPopup();
+    $scope.userReponse=undefined;
+  }else{
+    $scope.hideSpinner();
+    $scope.showAlert('Something wrong happened','Try again');
+  }
+});
 }
 
 $scope.registerUser=function(registerUser){
-  console.log(registerUser);
+ $scope.showSpinner();
+  //console.log(registerUser);
+  $scope.user=registerUser;
   var tempUser={};
-  tempUser.device_id="123";
-  tempUser.device_name="moto_e";
-  tempUser.device_version="4.4";
+  tempUser.device_id=deviceId;
+  tempUser.device_name=deviceName;
+  tempUser.device_version=deviceVersion;
   tempUser.customer_name=registerUser.name;
-  tempUser.mobile_no=registerUser.mobileNo;
+  tempUser.mobile_no=registerUser.mobileNo.toString();
   tempUser.customer_email=registerUser.email;
   tempUser.login_password=registerUser.password;
   tempUser.food_preference="0";
-  console.log("tempUrer",tempUser);
+  if($scope.choice.veg && $scope.choice.everything){
+    tempUser.food_preference="3";
+  }else if($scope.choice.veg){
+    tempUser.food_preference="1";
+  }else if($scope.choice.everything){
+    tempUser.food_preference="2";
+  }
+  console.log("tempUser",tempUser);
   $http({
     url:'http://216.15.228.130:8083/NUserRegistration.php', 
     method: "post",
     data: tempUser
   }).then(function(response){
-    console.log("reponse registerUser",response);
-    $scope.user={};
-  });
+  //  console.log("reponse registerUser",response);
+  $scope.userReponse=response.data;
+  console.log("userReponse registerUser",response);
+  if($scope.userReponse.userstatus=="otp verified required" || $scope.userReponse.userstatus=="success"){
+    $scope.showPopup();
+    $scope.guestReponse=undefined;
+  }else{
+    $scope.hideSpinner();
+    $scope.showAlert('Existing user',$scope.userReponse.userregistration.resultstring);
+  }
+});
 }
 
 
@@ -88,13 +178,15 @@ $scope.comparePassword=function(password,conPassword){
 
  // Triggered on a button click, or some other target
  $scope.showPopup = function() {
-  $scope.data = {}
+   $scope.hideSpinner();
+   $scope.data = {}
 
   // An elaborate, custom popup
   myPopup = $ionicPopup.show({
     template: ' <label class="item item-input"><input type="text" placeholder="one time password" ng-model="data.wifi"></label>'+
-    '<div style="text-align:center"><div class="button-bar"><button class="button  button-positive" style="margin-top:3%;" ng-click="hidePopup()" ui-sref="home">Submit</button>'+
-    '<button class="button  button-assertive" style="margin-top:3%;" ng-click="hidePopup()">Cancel</button></div><br>'+
+    '<span ng-show="invalidOTP" class="help-block" style="text-align:center;">Enter valid OTP</span>'+
+    '<div style="text-align:center"><div class="button-bar"><button class="button  button-positive" style="margin-top:3%;" ng-click="hidePopup(\'submit\')" >Submit</button>'+
+    '<button class="button  button-assertive" style="margin-top:3%;" ng-click="hidePopup(\'cancel\')">Cancel</button></div><br>'+
     '<label>Resend OTP</label></div>',
     title: '<span style="text-align:center">Enter one time Password</span>',
     subTitle: 'Four digit OTP number',
@@ -117,13 +209,99 @@ $scope.comparePassword=function(password,conPassword){
       ]*/
 
     });
-  myPopup.then(function(res) {
+myPopup.then(function(res) {
  //console.log('Tapped!', res);
 });
 };
 
-$scope.hidePopup=function(){
-  myPopup.close();
+$scope.hidePopup=function(flag){
+  if (window.cordova && window.cordova.plugins.Keyboard) {
+    cordova.plugins.Keyboard.close();
+  }
+  //alert($scope.data.wifi+"$scope.data"+flag);
+  if(flag=='submit'){
+
+   // alert("1"+$scope.userReponse);
+   if($scope.userReponse===undefined){
+   // alert("2"+$scope.guestReponse.guestregistration.otp);
+    //alert("val "+$scope.guestReponse.guestregistration.otp  +"warfb  "+$scope.data.wifi);
+    if($scope.guestReponse.guestregistration.otp==$scope.data.wifi){
+      $scope.showSpinner();
+     //alert("3");
+    // console.log("localStorage before",$localStorage);
+  //  $localStorage.sessionId=$scope.guestReponse.guestregistration.sessionid;
+     //console.log("localStorage after",$localStorage);
+     $localStorageService.setUserStatus(0);
+     $scope.guestReponse.mobileNo=mobileNo;
+     $localStorageService.setUserDetails($scope.guestReponse.guestregistration);
+     $state.go('home');/*.then(function() {
+      $scope.hideSpinner();
+    });;*/
+}else{
+  $scope.invalidOTP=true;
+  return;
 }
+}else if($scope.guestReponse===undefined){
+  //alert("2"+$scope.userReponse.userregistration.otp);
+  if($scope.userReponse.userregistration.otp==$scope.data.wifi){
+       // alert("3");
+    //   console.log("localStorage before",$localStorage);
+    $scope.showSpinner();
+    var reqData={};
+    reqData.device_id=deviceId;
+    reqData.session_id=$scope.userReponse.userregistration.sessionid;
+    reqData.mobile_no=$scope.user.mobileNo.toString();
+    console.log("reqData user",reqData);
+    $http({
+      url:'http://216.15.228.130:8083/NUserRegistrationVerify.php', 
+      method: "post",
+      data: reqData
+    }).then(function(response){
+     console.log("reponse userregistration response",response);
+   //  console.log("response.data.userdetails.userstatus"+response.data.userstatus);
+   if(response.data.userstatus!="Invalid"){
+    //  alert("valid request");
+    $scope.userReponse=response.data;
+     //   console.log("localStorage after",$localStorage);
+     $state.go('home');
+     $localStorageService.setUserStatus(1);
+     $localStorageService.setUserDetails($scope.userReponse.userdetails);
+   }else{
+     $scope.hideSpinner();
+     $scope.showAlert('Invalid request',"please try again");
+   }
+     /*.then(function() {
+      $scope.hideSpinner();
+    });;*/
+  });
+
+  }else{
+    $scope.invalidOTP=true;
+    return;
+  }
+}
+}
+myPopup.close();
+}
+
+$scope.showSpinner = function() {
+  $ionicLoading.show({
+   template: '<ion-spinner icon="android"  class="spinner-light"></ion-spinner>',
+  //  template: 'Loading....',
+  duration : 4000
+});
+};
+$scope.hideSpinner = function(){
+  $ionicLoading.hide();
+};
+$scope.showAlert = function(state,msg) {
+ var alertPopup = $ionicPopup.alert({
+   title: state,
+   template: msg
+ });
+ alertPopup.then(function(res) {
+     //console.log('Thank you for not eating my delicious ice cream cone');
+   });
+};
 
 });

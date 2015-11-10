@@ -1,11 +1,28 @@
+var user;
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app=angular.module('foodApp', ['ionic'])
+var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$localStorage,$state,$timeout) {
+  user=$localStorage.user;
+  console.log("$localStorage app run",user);
+
+  if(user!==undefined && user.userStatus!=undefined){
+   // alert("1");
+    if(user.userStatus==1){
+     // alert("2");
+    //  $state.go('home');
+      $timeout(function() {
+        $state.go('home');
+      });
+    }else{
+    //  alert("3")
+      $state.go('login');
+    }
+  }
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs).
@@ -26,21 +43,30 @@ var app=angular.module('foodApp', ['ionic'])
 })
 
 app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
-$ionicConfigProvider.tabs.position('bottom'); 
- $stateProvider
- .state('home', {
-  url: '/home',
-  templateUrl: 'templates/home.html',
-  controller: 'AppCtrl'
-})
 
- .state('login', {
-  url: '/login',
-  templateUrl: 'templates/login.html',
-  controller: 'LoginCtrl'
-})
+  if(!ionic.Platform.isIOS()){
+    $ionicConfigProvider.scrolling.jsScrolling(false);
+  } 
+  $ionicConfigProvider.tabs.position('bottom'); 
+  $stateProvider
+  .state('home', {
+    url: '/home',
+    templateUrl: 'templates/home.html',
+    controller: 'AppCtrl'
+  })
 
- $urlRouterProvider.otherwise('/login');
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'LoginCtrl'
+  }).state('category', {
+    url: '/category',
+    templateUrl: 'templates/category.html',
+    params : {categoryId: null},
+    controller: 'CategoryCtrl'
+  });
+ // alert("here");
+  $urlRouterProvider.otherwise('/login');
        /*.state('user', {
         url: '/user',
         templateUrl: '/templates/login.html'

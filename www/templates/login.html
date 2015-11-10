@@ -17,7 +17,7 @@
 
 
 <ion-content>
-<div id="form">
+<div id="form"                                                                                                                                                                                                                                                                                                              >
 
   <ion-list>
   <div>
@@ -33,7 +33,7 @@
         <span ng-show="loginForm.mobileNo.$error.required || loginForm.mobileNo.$error.number">valid Mobile NO. is required.</span>
       </span>
       <label class="item item-input" style="margin-top:2%;">
-        <input type="password" name="password" ng-model="password" placeholder="Password" class="center-align" ng-required="true" ng-minlength="8">
+        <input type="password" name="password" ng-model="password" placeholder="Password" class="center-align" ng-required="true" ng-minlength="6">
       </label>
       <span class="help-block" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
 
@@ -67,6 +67,10 @@
 </ion-list>
 </div>
 </div>
-<div ng-if="onRegister" ng-include="'templates/register.html'"></div>
+
 </ion-content>
+
 </ion-view>
+<div ng-if="onRegister" ng-include="'templates/register.html'"></div>
+
+
