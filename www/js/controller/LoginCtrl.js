@@ -2,12 +2,26 @@
 app.controller('LoginCtrl', function($scope, $ionicPopup,$ionicLoading,$http,$localStorage,$state,$cordovaDevice,$localStorageService) {
  // console.log("$cordovaDevice",$cordovaDevice);
   // $ionicViewSwitcher.nextTransition('none');
+
+  $scope.forgotPassword=false;
+  $scope.mobileNoScreen=false;
+  $scope.passwordScreen=false;
+  var passwordReset={};
   var isDevelopment=true;
   $scope.choice={};
   var deviceId='';
   var deviceName='';
   var deviceVersion;
   var mobileNo="";
+
+  $scope.activeTab="guest";
+  $scope.passwordMatches=false;
+  $scope.user={};
+  $scope.guestReponse={};
+  $scope.userResponse={};
+  $scope.invalidOTP=false;
+  var passwordResetResponse={};
+  var myPopup=null;
   /**For production
   */
 
@@ -39,15 +53,6 @@ app.controller('LoginCtrl', function($scope, $ionicPopup,$ionicLoading,$http,$lo
     }
   };
   init();
-
-
-  $scope.activeTab="guest";
-  $scope.passwordMatches=false;
-  $scope.user={};
-  $scope.guestReponse={};
-  $scope.userResponse={};
-  $scope.invalidOTP=false;
-  var myPopup=null;
 
 
   $scope.changeTab=function(tab){
@@ -117,7 +122,7 @@ $http({
     $scope.showAlert('Something wrong happened','Try again');
   }
 });
-}
+};
 
 $scope.registerUser=function(registerUser){
  $scope.showSpinner();
@@ -156,7 +161,7 @@ $scope.registerUser=function(registerUser){
     $scope.showAlert('Existing user',$scope.userReponse.userregistration.resultstring);
   }
 });
-}
+};
 
 
 $scope.comparePassword=function(password,conPassword){
@@ -220,9 +225,13 @@ $scope.hidePopup=function(flag){
   }
   //alert($scope.data.wifi+"$scope.data"+flag);
   if(flag=='submit'){
-
-   // alert("1"+$scope.userReponse);
-   if($scope.userReponse===undefined){
+    //alert("$scope.mobileNoScreen"+$scope.mobileNoScreen);
+    if($scope.mobileNoScreen){
+     if(passwordResetResponse.userdetails.otp==$scope.data.wifi){
+       $scope.mobileNoScreen=false;
+       $scope.passwordScreen=true;
+     }
+   }else if($scope.userReponse===undefined){
    // alert("2"+$scope.guestReponse.guestregistration.otp);
     //alert("val "+$scope.guestReponse.guestregistration.otp  +"warfb  "+$scope.data.wifi);
     if($scope.guestReponse.guestregistration.otp==$scope.data.wifi){
@@ -302,6 +311,61 @@ $scope.showAlert = function(state,msg) {
  alertPopup.then(function(res) {
      //console.log('Thank you for not eating my delicious ice cream cone');
    });
+};
+
+$scope.forgotPasswordScreen=function(){
+ $scope.forgotPassword=! $scope.forgotPassword;
+ $scope.mobileNoScreen=true;
+};
+
+
+$scope.submitMobileNo=function(mobileNo){
+  $scope.showSpinner();
+  passwordReset.device_id=deviceId;
+  passwordReset.device_version=deviceVersion;
+  passwordReset.mobile_no=mobileNo.toString();
+  console.log("submitMobileNo",passwordReset);
+//$scope.showSpinner();
+$http({
+  url:'http://216.15.228.130:8083/NPasswordResetRequest.php', 
+  method: "post",
+  data: passwordReset
+}).then(function(response){
+ passwordResetResponse=response.data;
+ console.log("reponse passwordResetResponse",passwordResetResponse);
+ if(passwordResetResponse.userstatus=="Success"){
+  $scope.showPopup();
+}else{
+  $scope.hideSpinner();
+  $scope.showAlert('Mobile no does not exist','Register as new user');
+}
+});
+};
+
+$scope.resetPassword=function(password){
+ $scope.showSpinner();
+ passwordReset.login_password=password;
+ passwordReset.session_id=passwordResetResponse.userdetails.sessionid;
+ console.log("resetPassword",passwordReset);
+//$scope.showSpinner();
+$http({
+  url:'http://216.15.228.130:8083/NUserPasswordReset.php', 
+  method: "post",
+  data: passwordReset
+}).then(function(response){
+ passwordResetResponse=response.data;
+ console.log("reponse passwordResetResponse",passwordResetResponse);
+ if(passwordResetResponse.passwordchangedstatus=="success"){
+   $localStorageService.setUserStatus(1);
+   $localStorageService.setUserDetails(passwordResetResponse.userdetails);
+   $scope.forgotPassword=false;
+    $scope.passwordScreen=false;
+   $state.go('home');
+ }else{
+  $scope.hideSpinner();
+  $scope.showAlert('Something wrong happened','Please Try again');
+}
+});
 };
 
 });

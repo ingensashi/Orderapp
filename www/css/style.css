@@ -51,6 +51,15 @@
   transform: translate(-50%, -50%);
 }
 
+.center-form{
+  position: fixed;
+  top: 59%;
+  left: 50%;
+  width: 100%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 #rgister_form{
   position: fixed;
   top: 54%;

@@ -6,7 +6,7 @@ var user;
 // the 2nd parameter is an array of 'requires'
 var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova'])
 
-.run(function($ionicPlatform,$localStorage,$state,$timeout) {
+.run(function($ionicPlatform,$localStorage,$state,$timeout,$ionicScrollDelegate) {
   user=$localStorage.user;
   console.log("$localStorage app run",user);
 
@@ -24,6 +24,7 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova'])
     }
   }
   $ionicPlatform.ready(function() {
+    $ionicScrollDelegate.scrollTop();
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs).
     // The reason we default this to hidden is that native apps don't usually show an accessory bar, at

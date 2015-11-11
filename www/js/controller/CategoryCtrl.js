@@ -5,7 +5,7 @@ app.controller('CategoryCtrl', function($scope, $stateParams) {
  if($scope.categoryId==null){
   $scope.categoryId="pizza";
 }
-$scope.bannerModel={"Banner":["img/CAKE.png","img/PASTA.png","img/PIZZA.png","img/CALZONE.png"]};
+$scope.bannerModel={"Banner":["img/soiWebs/soi5.jpg","img/soiWebs/soi.jpg","img/soiWebs/soi1.jpg","img/soiWebs/soi3.jpg"]};
 
 //alert("categoryId"+$scope.categoryId);
 });
