@@ -36,7 +36,7 @@
 				</div>
 				
 			</div>
-			<div class="col" style="padding:0.8%">
+			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'calzone'})">
 				<div class="item item-image" style="height:155px" ><img src="img/CALZONE.png" class="img-responsive" style="height:150px;position:relative">
 					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Calzone</h2>
 					</div>
@@ -45,14 +45,14 @@
 			</div>
 		</div>
 		<div class="row" style="height:160px">
-			<div class="col" style="padding:0.8%">
+			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'dessert'})">
 				<div class="item item-image" style="height:155px" ><img src="img/DESSERT.jpg" class="img-responsive" style="height:150px;position:relative">
 					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Dessert</h2>
 					</div>
 				</div>
 				
 			</div>
-			<div class="col" style="padding:0.8%">
+			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'pasta'})">
 				<div class="item item-image" style="height:155px" ><img src="img/PASTA.png" class="img-responsive" style="height:150px;position:relative">
 					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pasta</h2>
 					</div>
@@ -61,14 +61,14 @@
 			</div>
 		</div>
 		<div class="row" style="height:165px;margin-bottom:3%;">
-			<div class="col" style="padding:0.8%">
+			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'submrine'})">
 				<div class="item item-image" style="height:155px" ><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:150px;position:relative">
 					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Submarine</h2>
 					</div>
 				</div>
 				
 			</div>
-			<div class="col" style="padding:0.8%">
+			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'salad'})">
 				<div class="item item-image" style="height:155px" ><img src="img/salad.JPG" class="img-responsive" style="height:150px;position:relative">
 					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Salad</h2>
 					</div>
@@ -103,15 +103,16 @@
 <ion-tabs class="tabs-light  tabs-icon-top tabs-icon-only">
 
 <!-- Tab 1 content -->
-<ion-tab title="ORDER" icon-on="ion-ios-cart" icon-off="ion-ios-cart-outline">
+<ion-tab title="ORDER" icon-on="ion-ios-cart" icon-off="ion-ios-cart-outline" ng-click="openModal()">
 </ion-tab>
 
 <ion-tab title="DELIVERY" icon-on="ion-android-bicycle" icon-off="ion-android-bicycle">
 <!-- Tab 2 content -->
 </ion-tab>
 
-<ion-tab title="REFERRAL"  ng-if="user.userStatus==1" icon-on="ion-ios-compose" icon-off="ion-ios-compose-outline">
-<!-- Tab 3 content -->
+<ion-tab title="REFERRAL"  ng-if="user.userStatus==1" icon-on="ion-ios-compose" icon-off="ion-ios-compose-outline" ng-click="openModal()">
+<!-0- Tab 3 content -->
+
 </ion-tab>
 <ion-tab title="E-WALLET" ng-if="user.userStatus==1" icon-on="ion-ios-briefcase" icon-off="ion-ios-briefcase-outline">
 <!-- Tab 3 content -->

@@ -6,25 +6,35 @@ var user;
 // the 2nd parameter is an array of 'requires'
 var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova'])
 
-.run(function($ionicPlatform,$localStorage,$state,$timeout,$ionicScrollDelegate) {
+.run(function($ionicPlatform,$localStorage,$state,$timeout,$ionicScrollDelegate,$cordovaSplashscreen) {
   user=$localStorage.user;
   console.log("$localStorage app run",user);
 
   if(user!==undefined && user.userStatus!=undefined){
    // alert("1");
-    if(user.userStatus==1){
+   if(user.userStatus==1){
      // alert("2");
     //  $state.go('home');
-      $timeout(function() {
-        $state.go('home');
-      });
-    }else{
+    $timeout(function() {
+      $state.go('home');
+    });
+  }else{
     //  alert("3")
-      $state.go('login');
-    }
+    $state.go('login');
   }
-  $ionicPlatform.ready(function() {
-    $ionicScrollDelegate.scrollTop();
+}
+$ionicPlatform.ready(function() {
+  $ionicScrollDelegate.scrollTop();
+  //alert("device.platform"+device.platform);
+  /*$timeout(function() {
+    if (device.platform == "Android") {
+      $cordovaSplashscreen.hide();
+      alert("hiding");
+    }
+    if (device.platform == "iPhone" || device.platform == "iOS") {
+      navigator.splashscreen.hide();
+    }
+  }, 500);*/
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs).
     // The reason we default this to hidden is that native apps don't usually show an accessory bar, at
@@ -67,7 +77,7 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
     controller: 'CategoryCtrl'
   });
  // alert("here");
-  $urlRouterProvider.otherwise('/login');
+ $urlRouterProvider.otherwise('/login');
        /*.state('user', {
         url: '/user',
         templateUrl: '/templates/login.html'

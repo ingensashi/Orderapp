@@ -1,0 +1,36 @@
+  <ion-modal-view style="margin-top:44px;max-height:83%;">
+  <ion-header-bar class="bar bar-header bar-light">
+  <h1 class="title">Referral</h1>
+  <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+</ion-header-bar>
+<div class="bar bar-subheader">
+	<div class="button-bar">
+		<button class="button button-small" ng-click="changeTab('guest')" ng-class="{'button-positive': activeTab == 'guest','button-light': activeTab == 'user'}">Add referral
+			<i class="ion-android-person-add" style="font-size:27px"></i></button>
+		</button>
+		<button  class="button button-small" ng-click="changeTab('user')" ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">My referral 
+			<i class="ion-android-contacts" style="font-size:27px"></i></button>
+			<button  class="button button-small" ng-click="changeTab('user')" ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">Referral bonus
+				<i class="ion-social-usd" style="font-size:27px"></i></button>
+			</button>
+		</div> 
+	</div>  
+
+	<ion-content class="padding" has-header="true" style="margin-top:50px;">
+	<div class="list">
+		<label class="item item-input">
+			<span class="input-label">Referral Name</span>
+			<input ng-model="newUser.firstName" type="text">
+		</label>
+		<label class="item item-input">
+			<span class="input-label">Mobile No</span>
+			<input ng-model="newUser.lastName" type="text">
+		</label>
+		<label class="item item-input">
+			<span class="input-label">Email</span>
+			<input ng-model="newUser.email" type="text">
+		</label>
+		<button class="button button-full button-positive" ng-click="createContact(newUser)">Create</button>
+	</div>
+</ion-content>
+</ion-modal-view>
