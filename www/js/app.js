@@ -20,7 +20,7 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
     });
   }else{
     //  alert("3")
-    $state.go('app.login');
+    $state.go('login');
   }
 }
 $ionicPlatform.ready(function() {
@@ -75,7 +75,7 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
     url: '/home',
     views:{
       'app-home':{
-        templateUrl: 'templates/categoryDesc.html',
+        templateUrl: 'templates/home.html',
         controller: 'AppCtrl'
       }
     }
@@ -89,7 +89,7 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
     
     
   })
-  .state('app.category', {
+/*  .state('app.category', {
     url: '/category',
     views:{
       'app-home':{
@@ -123,7 +123,7 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
    }
    
    
- });
+ })*/;
 
   $urlRouterProvider.otherwise("/login");
 

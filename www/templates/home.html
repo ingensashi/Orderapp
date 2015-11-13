@@ -2,9 +2,9 @@
 <ion-view>
 <ion-content>
 <div>
-	<ion-slide-box on-slide-changed="slideHasChanged($index)">
-	<ion-slide ng-repeat="bannerImg in bannerModel.Banner" style="margin-top: 2%;">
-	<div class="center-align"><img ng-src="{{bannerImg}}" class="img-responsive-banner" style="padding:2%"></div>
+	<ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
+	<ion-slide ng-repeat="bannerImg in bannerModel" style="margin-top: 2%;">
+	<div class="center-align"><img ng-src="{{bannerImg.imagepath}}" class="img-responsive-banner" style="padding:2%"></div>
 </ion-slide>
 </ion-slide-box>
 </div>
@@ -18,7 +18,7 @@
 				</div>
 				
 			</div>
-			<div class="col" style="padding:0.8%" ui-sref="app.category({categoryId: 'calzone'})">
+			<div class="col" style="padding:0.8%" ng-click="changeState()">
 				<div class="item item-image" style="height:155px" ><img src="img/CALZONE.png" class="img-responsive" style="height:150px;position:relative">
 					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Calzone</h2>
 					</div>
@@ -106,4 +106,4 @@
 </ion-tabs>
 </ion-footer-bar>
 </ion-view>
-<div ng-if="searchBar" ng-include="'templates/item.html'"></div>
+<div ng-if="goToCategory" ng-include="'templates/category.html'"></div>
