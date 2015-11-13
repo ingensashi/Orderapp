@@ -84,7 +84,7 @@ app.controller('LoginCtrl', function($scope, $ionicPopup,$ionicLoading,$http,$lo
 if($scope.userReponse.userstatus=="success"){
   $localStorageService.setUserStatus(1);
   $localStorageService.setUserDetails($scope.userReponse.userdetails);
- $state.go('home');/*.then(function() {
+ $state.go('app.home');/*.then(function() {
   $scope.hideSpinner();
 });*/
 }else{
@@ -232,18 +232,13 @@ $scope.hidePopup=function(flag){
        $scope.passwordScreen=true;
      }
    }else if($scope.userReponse===undefined){
-   // alert("2"+$scope.guestReponse.guestregistration.otp);
-    //alert("val "+$scope.guestReponse.guestregistration.otp  +"warfb  "+$scope.data.wifi);
     if($scope.guestReponse.guestregistration.otp==$scope.data.wifi){
       $scope.showSpinner();
-     //alert("3");
-    // console.log("localStorage before",$localStorage);
-  //  $localStorage.sessionId=$scope.guestReponse.guestregistration.sessionid;
-     //console.log("localStorage after",$localStorage);
+    
      $localStorageService.setUserStatus(0);
      $scope.guestReponse.mobileNo=mobileNo;
      $localStorageService.setUserDetails($scope.guestReponse.guestregistration);
-     $state.go('home');/*.then(function() {
+     $state.go('app.home');/*.then(function() {
       $scope.hideSpinner();
     });;*/
 }else{
@@ -272,7 +267,7 @@ $scope.hidePopup=function(flag){
     //  alert("valid request");
     $scope.userReponse=response.data;
      //   console.log("localStorage after",$localStorage);
-     $state.go('home');
+     $state.go('app.home');
      $localStorageService.setUserStatus(1);
      $localStorageService.setUserDetails($scope.userReponse.userdetails);
    }else{
@@ -360,7 +355,7 @@ $http({
    $localStorageService.setUserDetails(passwordResetResponse.userdetails);
    $scope.forgotPassword=false;
     $scope.passwordScreen=false;
-   $state.go('home');
+   $state.go('app.home');
  }else{
   $scope.hideSpinner();
   $scope.showAlert('Something wrong happened','Please Try again');

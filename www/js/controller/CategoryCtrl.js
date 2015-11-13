@@ -1,14 +1,14 @@
 'use strict';
 app.controller('CategoryCtrl', function($scope, $http) {
-	$scope.goToProductSreen=false;
+	//$scope.goToProductSreen=false;
 	/*$scope.categoryId=$stateParams.categoryId;
 	if($scope.categoryId==null){
 		$scope.categoryId="pizza";
 	}
 */
-	 $scope.goToProduct=function(){
+	/* $scope.goToProduct=function(){
 	 	$scope.goToProductSreen=true;
-  	};
+  	};*/
 
 	var bannerDetails;
 	var getBannerData = function(bannerDetails) {

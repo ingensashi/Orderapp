@@ -1,5 +1,6 @@
 
-<ion-view>
+<ion-view ng-if="activeScreenDetail.name==''">
+
 <ion-content>
 <div>
 	<ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
@@ -11,14 +12,14 @@
 <div>
 	<div class="item-card" style="margin:0px 0px">
 		<div class="row" style="height:165px">
-			<div class="col" style="padding:0.8%" ng-click="changeState()">
+			<div class="col" style="padding:0.8%" ng-click="moveToScreen('category')">
 				<div class="item item-image" style="height:155px" ><img src="img/PIZZA.png" class="img-responsive" style="height:150px;position:relative">
 					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
 					</div>
 				</div>
 				
 			</div>
-			<div class="col" style="padding:0.8%" ng-click="changeState()">
+			<div class="col" style="padding:0.8%" ng-click="moveToScreen('category')">
 				<div class="item item-image" style="height:155px" ><img src="img/CALZONE.png" class="img-responsive" style="height:150px;position:relative">
 					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Calzone</h2>
 					</div>
@@ -106,4 +107,6 @@
 </ion-tabs>
 </ion-footer-bar>
 </ion-view>
-<div ng-if="goToCategory" ng-include="'templates/category.html'"></div>
+<div ng-if="activeScreenDetail.name=='category'" ng-include="'templates/category.html'" ></div>
+<div ng-if="activeScreenDetail.name=='categoryDesc'" ng-include="'templates/categoryDesc.html'"></div>
+<div ng-if="activeScreenDetail.name=='addToppins'" ng-include="'templates/subCategory.html'"></div>

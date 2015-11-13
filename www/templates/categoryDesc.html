@@ -1,13 +1,42 @@
-<ion-view ng-controller="CategoryDescCtrl"> <ion-content style="margin-top:7%">
+<ion-view ng-controller="CategoryDescCtrl" > <ion-content style="margin-top:7%">
 
 
 <div class="list card" style="margin: 0" >
-	<div class="item item-body" style="padding: 0px" >
+	<div class="item item-body" style="padding: 0px" ng-repeat="product in productDetails">
 
 
 		<div class="item"
 			style="background-color: ghostWhite; border-width: 0px; padding: 2px;">
-			<img class="full-image" src="img/PIZZA.png"  ng-click="goToMenuScreen()">
+			<img class="full-image" ng-src="{{product.imagepath}}"  ng-click="moveToScreen('addToppins')">
+			<div class="row">
+				<div class="col" style="text-align: left">
+					<span class="ion-ionic" style="color: green;"></span>{{product.prodname}}
+
+				</div>
+				<div class="col" style="text-align: right; font-size: 14px">
+					{{product.rate}}</div>
+			</div>
+			<div class="row">
+				<div class="col"
+					style="text-align: left; margin-left: 5%; font-size: 12px">
+					<i><p>{{product.proddesc}}</p>
+					</i>
+				</div>
+				<div class="col" style="text-align: right">
+					<i class="pull-left icon ion-ios-minus-outline"
+						style="font-size: 1.3em;"></i> <span style="font-size: 1.2em;">1</span>
+					<i class=" pull-right icon ion-ios-plus-outline"
+						style="font-size: 1.3em;"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="item item-body" style="padding: 0px">
+
+
+		<div class="item"
+			style="background-color: ghostWhite; border-width: 0px; padding: 2px;">
+			<img class="full-image" src="img/PIZZA.png"  ng-click="moveToScreen('addToppins')">
 			<div class="row">
 				<div class="col" style="text-align: left">
 					<span class="ion-ionic" style="color: green;"></span> Mparghretic
@@ -31,37 +60,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="item item-body" style="padding: 0px">
-
-
-		<div class="item"
-			style="background-color: ghostWhite; border-width: 0px; padding: 2px;">
-			<img class="full-image" src="img/PIZZA.png"  ng-click="goToMenuScreen()">
-			<div class="row">
-				<div class="col" style="text-align: left">
-					<span class="ion-ionic" style="color: green;"></span> Mparghretic
-					Classic Pizza
-
-				</div>
-				<div class="col" style="text-align: right; font-size: 14px">
-					RS.74</div>
-			</div>
-			<div class="row">
-				<div class="col"
-					style="text-align: left; margin-left: 5%; font-size: 12px">
-					<i>Tomato pulp,Fresh Mozzerella<br> Basesl and mozzellz
-					</i>
-				</div>
-				<div class="col" style="text-align: right">
-					<i class="pull-left icon ion-ios-minus-outline"
-						style="font-size: 1.3em;"></i> <span style="font-size: 1.2em;">1</span>
-					<i class=" pull-right icon ion-ios-plus-outline"
-						style="font-size: 1.3em;"></i>
-				</div>
-			</div>
-		</div>
-	</div>
+	</div> -->
 
 </div>
 </ion-content> <ion-footer-bar> <ion-tabs
@@ -78,7 +77,6 @@
 </ion-tab> <ion-tab title="MORE" icon-on="ion-more" icon-off="ion-more">
 <!-- Tab 3 content --> </ion-tab> </ion-tabs> </ion-footer-bar> 
 <div ng-if="addToppinsSreen" ng-include="'templates/item.html'"></div>
-<div ng-if="addMenu" ng-include="'templates/subCategory.html'"></div>
 
 </ion-view>
 

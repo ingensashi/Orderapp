@@ -9,8 +9,11 @@ app.controller('AppCtrl',
   $scope.user = {};
   $scope.user.userStatus = $localStorageService.getUserStatus();
   $scope.user.userDetails = $localStorageService.getUserDetails();
-  $scope.goToCategory=false;
-  console.log("user details", $scope.user);
+  $scope.activeScreenDetail={};
+  $scope.tabSlideDetail={};
+  $scope.activeScreenDetail.name='';
+  $scope.activeScreenDetail.prevScreen=[];
+  //console.log("user details", $scope.user);
   $scope.expandSerachBar = function(event) {
     // alert("inside"+event);
     if (event == 'front') {
@@ -52,8 +55,11 @@ app.controller('AppCtrl',
     // function
   };*/
 
-  $scope.changeState=function(){
-     $scope.goToCategory=true;
+  $scope.moveToScreen=function(screen){
+    //alert("hetre");
+      $scope.activeScreenDetail.prevScreen.push($scope.activeScreenDetail.name);
+     $scope.activeScreenDetail.name=screen;
+    //console.log("screen",screen);
   };
 
   var bannerDetails;
