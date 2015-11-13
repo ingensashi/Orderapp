@@ -2,12 +2,13 @@
 <html ng-app="foodApp">
 <head>
   <meta charset="utf-8">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"> -->
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <title></title>
 
   <link href="lib/ionic/css/ionic.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
-
+  <link href="css/tabSlideBox.css" rel="stylesheet">
     <!-- IF using Sass (run gulp sass first), then remove the CSS include above
     <link href="css/ionic.app.css" rel="stylesheet">
   -->
@@ -28,13 +29,38 @@
   <script src="js/services/localStorageService.js"></script>
   <script src="js/controller/LoginCtrl.js"></script>
   <script src="js/controller/AppCtrl.js"></script>
-   <script src="js/controller/CategoryCtrl.js"></script>
+  <script src="js/controller/CategoryCtrl.js"></script>
+  <script src="js/tabSlideBox.js"></script>
 
 </head>
 
 <body>
 
+  <ion-nav-view>
 
- <ion-nav-view  class="view-container" nav-view-transition="none" nav-view-direction="none"></ion-nav-view>
+  <ion-nav-var class="bar-stable">
+  <div ng-if="searchBar" class="bar bar-header item-input-inset">
+    <i class="ion-ios-arrow-thin-left" style="font-size:27px" ng-click="expandSerachBar('back')"></i>
+    <img src="img/logo.jpg" class="img-responsive soi-logo-header" />
+    <label class="item-input-wrapper" style="margin-left:6%">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input type="search" placeholder="Search">
+      <button class="button button-clear">
+        <i class="ion-android-close" ></i>
+      </button>
+    </label>
+
+  </div>
+  <ion-header-bar class="bar-stable" ng-if="!searchBar">
+  <i><img src="img/logo.jpg" class="img-responsive soi-logo-header" /></i>
+  <h1 class="title pull-left">Home</h1>
+  <span  ng-click="expandSerachBar('front')"class="ion-android-search home-serach-button" style="font-size:25px;margin-left:75%;margin-right:3%" ></span> 
+
+  <span class="ion-bag" style="font-size:25px"></span>
+</ion-header-bar>
+
+</ion-nav-bar>
+
+<ion-nav-view name="app-home" nav-view-transition="none" nav-view-direction="none"></ion-nav-view></ion-nav-view>
 </body>
 </html>

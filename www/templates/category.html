@@ -1,24 +1,54 @@
 <ion-view>
-<ion-header-bar class="bar bar-stable">
-<i class="pull-left"><img src="img/logo.jpg" class="img-responsive soi-logo-header" /></i>
-<h1 class="title" style="text-align:center">Registration</h1>
-<!-- <div class="logo">
-	<img src="../img/sashikant.jpg"></div> -->
+<ion-content has-header="true">
+<tab-slide-box scroll="false">
 
+<div class="tsb-icons"  >
+	<div class="tsb-ic-wrp item-divider" >
+		<ion-scroll direction="x" class="tsb-hscroll" >
+		<a style="font-size:1em;line-height:3em" href="javascript:;" class="{{tab.icon}}" ng-repeat="tab in tabs" on-finish-render="test()">{{tab.text}}</a>
+	</ion-scroll>
 
-</ion-header-bar>
-<ion-content>
-<ion-slide-box on-slide-changed="slideHasChanged($index)">
+</div>
+</div>
+<div>
+<ion-slide-box >
 <ion-slide ng-repeat="bannerImg in bannerModel.Banner">
 <div class="center-align"><img src="{{bannerImg}}" class="img-responsive-banner"></div>
 </ion-slide>
-  <!-- <ion-slide>
-     <div class="center-align"><img src="../img/testPizza.png"></div>
-  </ion-slide>
-  <ion-slide>
-    <div class="center-align"><img src="../img/testPizza.png"></div>
-</ion-slide> -->
 </ion-slide-box>
+<div>
+<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+
+<ion-slide>
+
+<div class="item-card" style="height: 26%!important;margin-top: 3%;">
+	<div class="item item-image" style="width:48%;float:left;margin:1%;height:100%;border-width:0px;">
+		<img src="img/soiWebs/soi5.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
+		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		</div>
+	</div>
+	<div class="item item-image" style="width:48%;float:left;margin:1% 0% 0% 0%;height:100%;border-width:0px;">
+		<img src="img/soiWebs/soi1.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
+		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		</div>
+	</div>
+</div>
+<div class="item-card" style="height: 26%!important;margin-top: 2%;">
+	<div class="item item-image" style="width:48%;float:left;margin:1%;height:100%;border-width:0px;">
+		<img src="img/soiWebs/soi3.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
+		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		</div>
+	</div>
+	<div class="item item-image" style="width:48%;float:left;margin:1% 0% 0% 0%;height:100%;border-width:0px;">
+		<img src="img/CAKE.png" class="img-responsive" style="position:relative;width:100%;height: inherit;">
+		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		</div>
+	</div>
+</div>
+</ion-slide>
+
+<ion-slide>
+
 <div class="item-card" style="height: 26%!important;margin-top: 2%;">
 	<div class="item item-image" style="width:48%;float:left;margin:1%;height:100%;border-width:0px;">
 		<img src="img/soiWebs/soi5.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
@@ -43,6 +73,45 @@
 		</div>
 	</div>
 </div>
+</ion-slide>
+
+
+</ion-slide-box>
+</tab-slide-box>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="item-card" style="height: 26%!important;margin-top: 2%;">
+	<div class="item item-image" style="width:48%;float:left;margin:1%;height:100%;border-width:0px;">
+		<img src="img/soiWebs/soi5.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
+		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		</div>
+	</div>
+	<div class="item item-image" style="width:48%;float:left;margin:1% 0% 0% 0%;height:100%;border-width:0px;">
+		<img src="img/soiWebs/soi1.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
+		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		</div>
+	</div>
+</div>
+<div class="item-card" style="height: 26%!important;margin-top: 2%;">
+	<div class="item item-image" style="width:48%;float:left;margin:1%;height:100%;border-width:0px;">
+		<img src="img/soiWebs/soi3.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
+		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		</div>
+	</div>
+	<div class="item item-image" style="width:48%;float:left;margin:1% 0% 0% 0%;height:100%;border-width:0px;">
+		<img src="img/CAKE.png" class="img-responsive" style="position:relative;width:100%;height: inherit;">
+		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		</div>
+	</div>
+</div> -->
 
 
 

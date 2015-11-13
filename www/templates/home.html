@@ -1,42 +1,24 @@
+
 <ion-view>
-<div ng-if="searchBar" class="bar bar-header item-input-inset">
-	<i class="ion-ios-arrow-thin-left" style="font-size:27px" ng-click="expandSerachBar('back')"></i>
-	<img src="img/logo.jpg" class="img-responsive soi-logo-header" />
-	<label class="item-input-wrapper" style="margin-left:6%">
-		<i class="icon ion-ios-search placeholder-icon"></i>
-		<input type="search" placeholder="Search">
-		<button class="button button-clear">
-			<i class="ion-android-close" ></i>
-		</button>
-	</label>
-
-</div>
-<ion-header-bar class="bar-stable" ng-if="!searchBar">
-<i><img src="img/logo.jpg" class="img-responsive soi-logo-header" /></i>
-<h1 class="title pull-left">Home</h1>
-<span  ng-click="expandSerachBar('front')"class="ion-android-search home-serach-button" style="font-size:25px;margin-left:75%;margin-right:3%" ></span> 
-
-<span class="ion-bag" style="font-size:25px"></span>
-</ion-header-bar>
 <ion-content>
 <div>
 	<ion-slide-box on-slide-changed="slideHasChanged($index)">
 	<ion-slide ng-repeat="bannerImg in bannerModel.Banner" style="margin-top: 2%;">
-	<div class="center-align"><img src="{{bannerImg}}" class="img-responsive-banner" style="padding:2%"></div>
+	<div class="center-align"><img ng-src="{{bannerImg}}" class="img-responsive-banner" style="padding:2%"></div>
 </ion-slide>
 </ion-slide-box>
 </div>
 <div>
 	<div class="item-card" style="margin:0px 0px">
 		<div class="row" style="height:165px">
-			<div class="col" style="padding:0.8%"  ui-sref="category({categoryId: 'pizza'})">
+			<div class="col" style="padding:0.8%" ng-click="changeState()">
 				<div class="item item-image" style="height:155px" ><img src="img/PIZZA.png" class="img-responsive" style="height:150px;position:relative">
 					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
 					</div>
 				</div>
 				
 			</div>
-			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'calzone'})">
+			<div class="col" style="padding:0.8%" ui-sref="app.category({categoryId: 'calzone'})">
 				<div class="item item-image" style="height:155px" ><img src="img/CALZONE.png" class="img-responsive" style="height:150px;position:relative">
 					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Calzone</h2>
 					</div>
@@ -123,5 +105,5 @@
 
 </ion-tabs>
 </ion-footer-bar>
-
 </ion-view>
+<div ng-if="searchBar" ng-include="'templates/item.html'"></div>

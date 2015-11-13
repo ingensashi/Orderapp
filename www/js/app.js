@@ -4,7 +4,7 @@ var user;
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova'])
+var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'])
 
 .run(function($ionicPlatform,$localStorage,$state,$timeout,$ionicScrollDelegate,$cordovaSplashscreen) {
   user=$localStorage.user;
@@ -16,25 +16,15 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova'])
      // alert("2");
     //  $state.go('home');
     $timeout(function() {
-      $state.go('home');
+      $state.go('app.home');
     });
   }else{
     //  alert("3")
-    $state.go('login');
+    $state.go('app.login');
   }
 }
 $ionicPlatform.ready(function() {
   $ionicScrollDelegate.scrollTop();
-  //alert("device.platform"+device.platform);
-  /*$timeout(function() {
-    if (device.platform == "Android") {
-      $cordovaSplashscreen.hide();
-      alert("hiding");
-    }
-    if (device.platform == "iPhone" || device.platform == "iOS") {
-      navigator.splashscreen.hide();
-    }
-  }, 500);*/
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs).
     // The reason we default this to hidden is that native apps don't usually show an accessory bar, at
@@ -51,7 +41,22 @@ $ionicPlatform.ready(function() {
       StatusBar.styleDefault();
     }
   });
-})
+/*$rootScope.$on('$ionicView.loaded', function() {
+  ionic.Platform.ready( function() {
+    $timeout(function() {
+      if (device.platform == "Android") {
+        $cordovaSplashscreen.hide();
+        //alert("hiding");
+      }
+      if (device.platform == "iPhone" || device.platform == "iOS") {
+       if(navigator && navigator.splashscreen){
+         navigator.splashscreen.hide();
+       } 
+     }
+   }, 500);
+  })
+});*/
+});
 
 app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
 
@@ -60,29 +65,69 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
   } 
   $ionicConfigProvider.tabs.position('bottom'); 
   $stateProvider
-  .state('home', {
+  .state('app', {
+    url: '/app',
+    abstract: true,
+    templateUrl: 'index.html'
+  })
+
+  .state('app.home', {
     url: '/home',
-    templateUrl: 'templates/home.html',
-    controller: 'AppCtrl'
+    views:{
+      'app-home':{
+        templateUrl: 'templates/categoryDesc.html',
+        controller: 'AppCtrl'
+      }
+    }
+    
   })
 
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
-  }).state('category', {
+    
+    
+  })
+  .state('app.category', {
     url: '/category',
-    templateUrl: 'templates/category.html',
-    params : {categoryId: null},
-    controller: 'CategoryCtrl'
-  });
- // alert("here");
- $urlRouterProvider.otherwise('/login');
-       /*.state('user', {
-        url: '/user',
-        templateUrl: '/templates/login.html'
-      });
- */ /*$locationProvider.html5Mode({
+    views:{
+      'app-home':{
+        templateUrl: 'templates/category.html',
+        params : {categoryId: null},
+        controller: 'AppCtrl'
+      }
+    }
+    
+
+  })
+  .state('app.menu', {
+    url: '/menu',
+    views:{
+      'app-menu':{
+       templateUrl: 'templates/item.html',
+       controller: 'AppCtrl'
+     }
+   }
+   
+   
+ })
+
+  .state('app.subCategory', {
+    url: '/subCategory',
+    views:{
+      'app-subCategory':{
+       templateUrl: 'templates/subCategory.html',
+       controller: 'AppCtrl'
+     }
+   }
+   
+   
+ });
+
+  $urlRouterProvider.otherwise("/login");
+
+  /*$locationProvider.html5Mode({
   enabled: true,
   requireBase: false
 });*/
