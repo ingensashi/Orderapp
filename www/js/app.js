@@ -104,7 +104,7 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
   .state('app.menu', {
     url: '/menu',
     views:{
-      'app-menu':{
+    'app-home':{
        templateUrl: 'templates/item.html',
        controller: 'AppCtrl'
      }
@@ -116,7 +116,7 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
   .state('app.subCategory', {
     url: '/subCategory',
     views:{
-      'app-subCategory':{
+      'app-home':{
        templateUrl: 'templates/subCategory.html',
        controller: 'AppCtrl'
      }

@@ -188,13 +188,13 @@ $scope.comparePassword=function(password,conPassword){
 
   // An elaborate, custom popup
   myPopup = $ionicPopup.show({
-    template: ' <label class="item item-input"><input type="text" placeholder="one time password" ng-model="data.wifi"></label>'+
+    template: ' <label class="item item-input" style="border-left:0px;border-right:0px;margin-top:4px"><input type="text" placeholder="one time password" ng-model="data.wifi"></label>'+
     '<span ng-show="invalidOTP" class="help-block" style="text-align:center;">Enter valid OTP</span>'+
-    '<div style="text-align:center"><div class="button-bar"><button class="button  button-positive" style="margin-top:3%;" ng-click="hidePopup(\'submit\')" >Submit</button>'+
-    '<button class="button  button-assertive" style="margin-top:3%;" ng-click="hidePopup(\'cancel\')">Cancel</button></div><br>'+
-    '<label>Resend OTP</label></div>',
-    title: '<span style="text-align:center">Enter one time Password</span>',
-    subTitle: 'Four digit OTP number',
+    '<div style="text-align:right"><div class="button-bar"style="padding:13px">'+
+    '<button class=" button button-medium button-clear" style="margin-top:3%;background-color:greenyellow;color:green;right:10px" ng-click="hidePopup(\'submit\')" >Submit</button>'+
+    '<button class="button button-medium button-clear" style="margin-top:3%;background-color:greenyellow;color:green;" ng-click="hidePopup(\'cancel\')" >cancel</button></div></div>'+
+    '<h3 style="text-align:center;margin-top:0px">Resend SMS</h3>',
+    title: '<span style="text-align:center">Thanks! Did You get a SMS OTP?<br>Enter It here:</span>',
     cssClass:'full-width',
     scope: $scope,
     /*buttons: [

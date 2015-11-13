@@ -1,5 +1,5 @@
 <ion-view>
-<ion-content has-header="true">
+<ion-content style="margin-top:8%">
 <tab-slide-box scroll="false">
 
 <div class="tsb-icons"  >
@@ -21,59 +21,110 @@
 
 <ion-slide>
 
-<div class="item-card" style="height: 26%!important;margin-top: 3%;">
-	<div class="item item-image" style="width:48%;float:left;margin:1%;height:100%;border-width:0px;">
-		<img src="img/soiWebs/soi5.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
-		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+<div class="item-card" style="margin:0px 0px">
+		<div class="row" style="height:165px">
+			<div class="col" style="padding:0.8%" ng-click="changeState()">
+				<div class="item item-image" style="height:155px" ><img src="img/PIZZA.png" class="img-responsive" style="height:150px;position:relative">
+					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col" style="padding:0.8%" ui-sref="app.category({categoryId: 'calzone'})">
+				<div class="item item-image" style="height:155px" ><img src="img/CALZONE.png" class="img-responsive" style="height:150px;position:relative">
+					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Calzone</h2>
+					</div>
+				</div>
+				
+			</div>
 		</div>
-	</div>
-	<div class="item item-image" style="width:48%;float:left;margin:1% 0% 0% 0%;height:100%;border-width:0px;">
-		<img src="img/soiWebs/soi1.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
-		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		<div class="row" style="height:160px">
+			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'dessert'})">
+				<div class="item item-image" style="height:155px" ><img src="img/soiWebs/soi5.jpg" class="img-responsive" style="height:150px;position:relative">
+					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Dessert</h2>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'pasta'})">
+				<div class="item item-image" style="height:155px" ><img src="img/soiWebs/soi5.jpg" class="img-responsive" style="height:150px;position:relative">
+					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pasta</h2>
+					</div>
+				</div>
+				
+			</div>
 		</div>
+
+	<!-- <div class="row">
+	<div class="col">
+ <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
 	</div>
-</div>
-<div class="item-card" style="height: 26%!important;margin-top: 2%;">
-	<div class="item item-image" style="width:48%;float:left;margin:1%;height:100%;border-width:0px;">
-		<img src="img/soiWebs/soi3.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
-		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
-		</div>
+	<div class="col">
+		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
 	</div>
-	<div class="item item-image" style="width:48%;float:left;margin:1% 0% 0% 0%;height:100%;border-width:0px;">
-		<img src="img/CAKE.png" class="img-responsive" style="position:relative;width:100%;height: inherit;">
-		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
-		</div>
+</div> -->
+<!-- 	<div class="row" style="margin-bottom:10%;"> 
+	<div class="col">
+		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
 	</div>
-</div>
-</ion-slide>
+	<div class="col">
+		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
+	</div>
+</div> -->
+</div></ion-slide>
 
 <ion-slide>
 
-<div class="item-card" style="height: 26%!important;margin-top: 2%;">
-	<div class="item item-image" style="width:48%;float:left;margin:1%;height:100%;border-width:0px;">
-		<img src="img/soiWebs/soi5.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
-		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+<div class="item-card" style="margin:0px 0px">
+		<div class="row" style="height:165px">
+			<div class="col" style="padding:0.8%" ng-click="changeState()">
+				<div class="item item-image" style="height:155px" ><img src="img/soiWebs/soi5.jpg" class="img-responsive" style="height:150px;position:relative">
+					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col" style="padding:0.8%" ui-sref="app.category({categoryId: 'calzone'})">
+				<div class="item item-image" style="height:155px" ><img src="img/soiWebs/soi5.jpg" class="img-responsive" style="height:150px;position:relative">
+					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Calzone</h2>
+					</div>
+				</div>
+				
+			</div>
 		</div>
-	</div>
-	<div class="item item-image" style="width:48%;float:left;margin:1% 0% 0% 0%;height:100%;border-width:0px;">
-		<img src="img/soiWebs/soi1.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
-		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		<div class="row" style="height:160px">
+			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'dessert'})">
+				<div class="item item-image" style="height:155px" ><img src="img/DESSERT.jpg" class="img-responsive" style="height:150px;position:relative">
+					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Dessert</h2>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'pasta'})">
+				<div class="item item-image" style="height:155px" ><img src="img/PASTA.png" class="img-responsive" style="height:150px;position:relative">
+					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pasta</h2>
+					</div>
+				</div>
+				
+			</div>
 		</div>
+	<!-- <div class="row">
+	<div class="col">
+ <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
 	</div>
-</div>
-<div class="item-card" style="height: 26%!important;margin-top: 2%;">
-	<div class="item item-image" style="width:48%;float:left;margin:1%;height:100%;border-width:0px;">
-		<img src="img/soiWebs/soi3.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
-		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
-		</div>
+	<div class="col">
+		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
 	</div>
-	<div class="item item-image" style="width:48%;float:left;margin:1% 0% 0% 0%;height:100%;border-width:0px;">
-		<img src="img/CAKE.png" class="img-responsive" style="position:relative;width:100%;height: inherit;">
-		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
-		</div>
+</div> -->
+<!-- 	<div class="row" style="margin-bottom:10%;"> 
+	<div class="col">
+		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
 	</div>
-</div>
-</ion-slide>
+	<div class="col">
+		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
+	</div>
+</div> -->
+</div></ion-slide>
 
 
 </ion-slide-box>

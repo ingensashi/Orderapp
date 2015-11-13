@@ -73,9 +73,13 @@ class="bar bar-stable">
       </span>
       <!--  <span ng-show="((myForm.mobileNo.$error.minlength || myForm.mobileNo.$error.maxlength)&& myform.mobileNo.$dirty)">Mobile No. must be 10 digits.</span> -->
 
-      <button ng-disabled="guestForm.mobileNo.$invalid"
+      <!-- <button ng-disabled="guestForm.mobileNo.$invalid"
       class="button button-full button-calm" style="margin-top: 5%;"
-      ng-click="guestLogin(mobileNo)">Continue</button>
+      ng-click="guestLogin(mobileNo)">Continue</button> -->
+       <button ng-disabled="guestForm.mobileNo.$invalid"
+      class="button button-full button-calm" style="margin-top: 5%;"
+      ng-click="showPopup()">Continue</button>
+      
     </form>
   </div>
 </div>
