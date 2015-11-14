@@ -62,6 +62,9 @@
 	</div>
 	<button class="button button-full button-block button-calm"
 	 ng-disabled="register_form.name.$invalid || register_form.mobileNo.$invalid || register_form.password.$invalid || register_form.conPassword.$invalid || register_form.email.$invalid" style="margin-top:5%;" ng-click="registerUser(user)">Register</button>
+ <div style="margin-top: 18px; font-size: large; text-align: center;">
+          Existing User?<span style="color: green;" ng-click="gotoRegister()">Log
+          In</span></div>	 
 </ion-list>
 </form>
 
