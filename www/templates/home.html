@@ -2,8 +2,8 @@
 	<ion-view ng-if="activeScreenDetail.name=='home'"> <ion-content>
 	<div>
 		<ion-slide-box on-slide-changed="slideHasChanged($index)"
-			auto-play="true" does-continue="true"> <ion-slide
-			ng-repeat="bannerImg in bannerModel" style="margin-top: 2%;">
+			auto-play="true" does-continue="true" style="margin-top: 1%;"> <ion-slide
+			ng-repeat="bannerImg in bannerModel" style="margin-top: 1%;">
 		<div class="center-align">
 			<img ng-src="{{bannerImg.imagepath}}" class="img-responsive-banner"
 				style="padding: 2%">

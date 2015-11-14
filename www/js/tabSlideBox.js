@@ -83,7 +83,7 @@ angular.module('tabSlideBox', [])
 					//Initializing the middle tab
 					if(typeof attrs.tab === 'undefined' || (totalTabs <= initialIndex) || initialIndex < 0){
 						//initialIndex = Math.floor(icons.length/2);
-						initialIndex=1;
+						initialIndex=0;
 					}
 					
 					//If initial element is 0, set position of the tab to 0th tab 

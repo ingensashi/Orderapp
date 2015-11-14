@@ -1,6 +1,16 @@
 <ion-view ng-controller="CategoryDescCtrl" > <ion-content style="margin-top:7%">
+<tab-slide-box scroll="false">
+<div class="tsb-icons"  >
+	<div class="tsb-ic-wrp item-divider" >
+		<ion-scroll direction="x" class="tsb-hscroll" >
+		<a style="font-size:1em;line-height:3em" href="javascript:;" class="{{tab.icon}}" ng-repeat="tab in tabs" on-finish-render="test()">{{tab.text}}</a>
+	</ion-scroll>
 
-
+</div>
+</div>
+<div>
+<ion-slide-box>
+<ion-slide>
 <div class="list card" style="margin: 0" >
 	<div class="item item-body" style="padding: 0px" ng-repeat="product in productDetails">
 
@@ -63,6 +73,10 @@
 	</div> -->
 
 </div>
+</ion-slide>
+</ion-slide-box>
+</div>
+</tab-slide-box>
 </ion-content> 
 
 </ion-view>
