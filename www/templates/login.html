@@ -18,12 +18,10 @@ class="bar bar-stable">
 
 
   <ion-content>
-  <div id="form">
-
-    <ion-list>
-    <div>
+    
       <div ng-if="activeTab=='user' && !onRegister && !forgotPassword">
-        <form name="loginForm" novalidate>
+        <form name="loginForm" novalidate class="list" style="margin-top:66%">
+        <ion-list>
           <label class="item item-input"> <input type="number"
             name="mobileNo" ng-model="mobileNo"
             placeholder="Type your Mobile no" ng-maxlength="10"
@@ -54,13 +52,13 @@ class="bar bar-stable">
         <div style="margin-top: 18px; font-size: large; text-align: center;">
           Not a Member?<span style="color: green;" ng-click="gotoRegister()">REGISTER
           HERE</span></div>
+          </ion-list>
         </form>
 
       </div>
-    </div>
-
     <div ng-if="activeTab=='guest' && !onRegister">
-      <form name="guestForm" novalidate>
+      <form name="guestForm" novalidate style="margin-top:66%">
+      <ion-list >
         <label class="item item-input"> <input type="number"
           name="mobileNo" ng-model="mobileNo"
           placeholder="Type your Mobile no" ng-maxlength="10"
@@ -79,11 +77,10 @@ class="bar bar-stable">
      <!--   <button ng-disabled="guestForm.mobileNo.$invalid"
       class="button button-full button-calm" style="margin-top: 5%;"
       ng-click="showPopup()">Continue</button>
- -->      
+ -->   
+ </ion-list>
     </form>
   </div>
-</div>
-</ion-list>
 
 </ion-content>
 </ion-view>
