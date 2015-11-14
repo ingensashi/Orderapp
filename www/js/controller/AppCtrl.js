@@ -12,7 +12,7 @@ app.controller('AppCtrl',
 	$scope.headerTitle.name='Home';
 	$scope.tabSlideDetail={};
 	$scope.activeScreenDetail.name='home';
-	
+
 	//console.log("user details", $scope.user);
 	$scope.expandSerachBar = function(event) {
 		// alert("inside"+event);
@@ -56,11 +56,7 @@ app.controller('AppCtrl',
   };*/
 
 	$scope.moveToScreen=function(screen){
-		//alert("hetre");
-		if(screen=='category'){
-			$rootScope.stateArray.push('home');
-		}
-		$rootScope.stateArray.push(screen);
+		$rootScope.stateArray.push($scope.activeScreenDetail.name);
 		console.log("$rootScope.stateArray",$rootScope.stateArray);
 		$scope.activeScreenDetail.name=screen;
 		//console.log("screen",screen);
