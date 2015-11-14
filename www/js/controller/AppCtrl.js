@@ -2,7 +2,7 @@
 
 app.controller('AppCtrl',
 		function($scope, $http, $ionicHistory, $localStorageService,
-				$ionicModal, $ionicPopup, $ionicSlideBoxDelegate) {
+				$ionicModal, $ionicPopup, $ionicSlideBoxDelegate,$rootScope) {
 	// $ionicHistory.nextViewOptions({disableBack: true});
 	$scope.bannerModel = {};
 	$scope.searchBar = false;
@@ -11,8 +11,8 @@ app.controller('AppCtrl',
 	$scope.activeScreenDetail={};
 	$scope.headerTitle.name='Home';
 	$scope.tabSlideDetail={};
-	$scope.activeScreenDetail.name='';
-	$scope.activeScreenDetail.prevScreen=[];
+	$scope.activeScreenDetail.name='home';
+	
 	//console.log("user details", $scope.user);
 	$scope.expandSerachBar = function(event) {
 		// alert("inside"+event);
@@ -57,7 +57,11 @@ app.controller('AppCtrl',
 
 	$scope.moveToScreen=function(screen){
 		//alert("hetre");
-		$scope.activeScreenDetail.prevScreen.push($scope.activeScreenDetail.name);
+		if(screen=='category'){
+			$rootScope.stateArray.push('home');
+		}
+		$rootScope.stateArray.push(screen);
+		console.log("$rootScope.stateArray",$rootScope.stateArray);
 		$scope.activeScreenDetail.name=screen;
 		//console.log("screen",screen);
 	};

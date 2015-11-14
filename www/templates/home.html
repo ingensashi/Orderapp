@@ -1,66 +1,97 @@
-
-<ion-view ng-if="activeScreenDetail.name==''">
-
-<ion-content>
-<div>
-	<ion-slide-box on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true">
-	<ion-slide ng-repeat="bannerImg in bannerModel" style="margin-top: 2%;">
-	<div class="center-align"><img ng-src="{{bannerImg.imagepath}}" class="img-responsive-banner" style="padding:2%"></div>
-</ion-slide>
-</ion-slide-box>
-</div>
-<div>
-	<div class="item-card" style="margin:0px 0px">
-		<div class="row" style="height:165px">
-			<div class="col" style="padding:0.8%" ng-click="moveToScreen('category')">
-				<div class="item item-image" style="height:155px" ><img src="img/PIZZA.png" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
-					</div>
-				</div>
-				
-			</div>
-			<div class="col" style="padding:0.8%" ng-click="moveToScreen('category')">
-				<div class="item item-image" style="height:155px" ><img src="img/CALZONE.png" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Calzone</h2>
-					</div>
-				</div>
-				
-			</div>
+<div id="homeView">
+	<ion-view ng-if="activeScreenDetail.name=='home'"> <ion-content>
+	<div>
+		<ion-slide-box on-slide-changed="slideHasChanged($index)"
+			auto-play="true" does-continue="true"> <ion-slide
+			ng-repeat="bannerImg in bannerModel" style="margin-top: 2%;">
+		<div class="center-align">
+			<img ng-src="{{bannerImg.imagepath}}" class="img-responsive-banner"
+				style="padding: 2%">
 		</div>
-		<div class="row" style="height:160px">
-			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'dessert'})">
-				<div class="item item-image" style="height:155px" ><img src="img/DESSERT.jpg" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Dessert</h2>
+		</ion-slide> </ion-slide-box>
+	</div>
+	<div>
+		<div class="item-card" style="margin: 0px 0px">
+			<div class="row" style="height: 165px">
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('category')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/PIZZA.png" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Pizza</h2>
+						</div>
 					</div>
-				</div>
-				
-			</div>
-			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'pasta'})">
-				<div class="item item-image" style="height:155px" ><img src="img/PASTA.png" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pasta</h2>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		<div class="row" style="height:165px;margin-bottom:3%;">
-			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'submrine'})">
-				<div class="item item-image" style="height:155px" ><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Submarine</h2>
-					</div>
-				</div>
-				
-			</div>
-			<div class="col" style="padding:0.8%" ui-sref="category({categoryId: 'salad'})">
-				<div class="item item-image" style="height:155px" ><img src="img/salad.JPG" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Salad</h2>
-					</div>
-				</div>
-				
-			</div>
-		</div>
 
-	<!-- <div class="row">
+				</div>
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('category')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/CALZONE.png" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Calzone</h2>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="row" style="height: 160px">
+				<div class="col" style="padding: 0.8%"
+					ui-sref="category({categoryId: 'dessert'})">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/DESSERT.jpg" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Dessert</h2>
+						</div>
+					</div>
+
+				</div>
+				<div class="col" style="padding: 0.8%"
+					ui-sref="category({categoryId: 'pasta'})">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/PASTA.png" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Pasta</h2>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="row" style="height: 165px; margin-bottom: 3%;">
+				<div class="col" style="padding: 0.8%"
+					ui-sref="category({categoryId: 'submrine'})">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/SUBMARINE.jpg" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Submarine</h2>
+						</div>
+					</div>
+
+				</div>
+				<div class="col" style="padding: 0.8%"
+					ui-sref="category({categoryId: 'salad'})">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/salad.JPG" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Salad</h2>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- <div class="row">
 	<div class="col">
  <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
 	</div>
@@ -68,7 +99,7 @@
 		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
 	</div>
 </div> -->
-<!-- 	<div class="row" style="margin-bottom:10%;"> 
+			<!-- 	<div class="row" style="margin-bottom:10%;"> 
 	<div class="col">
 		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
 	</div>
@@ -76,11 +107,14 @@
 		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
 	</div>
 </div> -->
-</div>
-</div>
+		</div>
+	</div>
 
-</ion-content>
-</ion-view>
-<div ng-if="activeScreenDetail.name=='category'" ng-include="'templates/category.html'" ></div>
-<div ng-if="activeScreenDetail.name=='categoryDesc'" ng-include="'templates/categoryDesc.html'"></div>
-<div ng-if="activeScreenDetail.name=='addToppins'" ng-include="'templates/subCategory.html'"></div>
+	</ion-content> </ion-view>
+	<div ng-if="activeScreenDetail.name=='category'"
+		ng-include="'templates/category.html'"></div>
+	<div ng-if="activeScreenDetail.name=='categoryDesc'"
+		ng-include="'templates/categoryDesc.html'"></div>
+	<div ng-if="activeScreenDetail.name=='addToppins'"
+		ng-include="'templates/subCategory.html'"></div>
+</div>
