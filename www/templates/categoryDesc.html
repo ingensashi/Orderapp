@@ -1,4 +1,4 @@
-<ion-view ng-controller="CategoryDescCtrl" > <ion-content style="margin-top:7%">
+<ion-view ng-controller="CategoryDescCtrl" > <ion-content class="footer-margin">
 <tab-slide-box scroll="false">
 <div class="tsb-icons"  >
 	<div class="tsb-ic-wrp item-divider" >
@@ -11,13 +11,13 @@
 <div>
 <ion-slide-box>
 <ion-slide>
-<div class="list card" style="margin: 0" >
-	<div class="item item-body" style="padding: 0px" ng-repeat="product in productDetails">
+<div class="list card" style="margin: 0">
+	<div class="item item-body" style="padding: 0px" ng-repeat="product in productDetails track by $index">
 
 
-		<div class="item"
+		<div class="item"  ng-click="moveToScreen('addToppins')"
 			style="background-color: ghostWhite; border-width: 0px; padding: 2px;">
-			<img class="full-image" ng-src="{{product.imagepath}}"  ng-click="moveToScreen('addToppins')">
+			<img class="full-image" ng-src="{{product.imagepath}}" >
 			<div class="row">
 				<div class="col" style="text-align: left">
 					<span class="ion-ionic" style="color: green;"></span>{{product.prodname}}

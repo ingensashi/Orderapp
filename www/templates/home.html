@@ -1,6 +1,7 @@
-<div id="homeView">
-	<ion-view ng-if="activeScreenDetail.name=='home'"> <ion-content>
-	<div>
+<div id="homeView"">
+	<ion-view ng-if="activeScreenDetail.name=='home'"> 
+	<ion-content class="has-footer">
+	<div style="margin-bottom:10px">
 		<ion-slide-box on-slide-changed="slideHasChanged($index)"
 			auto-play="true" does-continue="true" style="margin-top: 1%;"> <ion-slide
 			ng-repeat="bannerImg in bannerModel" style="margin-top: 1%;">
@@ -11,7 +12,7 @@
 		</ion-slide> </ion-slide-box>
 	</div>
 	<div>
-		<div class="item-card" style="margin: 0px 0px">
+		<div class="list card" style="margin: 0px 0px">
 			<div class="row" style="height: 165px">
 				<div class="col" style="padding: 0.8%"
 					ng-click="moveToScreen('category')">
@@ -90,27 +91,11 @@
 
 				</div>
 			</div>
-
-			<!-- <div class="row">
-	<div class="col">
- <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-	<div class="col">
-		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-</div> -->
-			<!-- 	<div class="row" style="margin-bottom:10%;"> 
-	<div class="col">
-		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-	<div class="col">
-		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-</div> -->
 		</div>
 	</div>
 
-	</ion-content> </ion-view>
+	</ion-content> 
+	</ion-view>
 	<div ng-if="activeScreenDetail.name=='category'"
 		ng-include="'templates/category.html'"></div>
 	<div ng-if="activeScreenDetail.name=='categoryDesc'"

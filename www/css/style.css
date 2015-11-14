@@ -96,8 +96,21 @@
 .soi-logo-header{
  width: 32px;
  height: 33px;
- margin-left: 5px;
+ margin-left: 8px;
 }
+
+.footer-margin{
+	margin-bottom: 44px;
+}
+
+.tabs .tab-item .icon.mcfly {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 100%;
+  background-image: url('/img/ordericon.png');
+  background-size:contain;
+}
+
 
 .popup-container .popup {
   width: 94%;

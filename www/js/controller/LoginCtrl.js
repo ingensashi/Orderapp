@@ -225,7 +225,6 @@ $scope.hidePopup=function(flag){
   }
   //alert($scope.data.wifi+"$scope.data"+flag);
   if(flag=='submit'){
-    //alert("$scope.mobileNoScreen"+$scope.mobileNoScreen);
     if($scope.mobileNoScreen){
      if(passwordResetResponse.userdetails.otp==$scope.data.wifi){
        $scope.mobileNoScreen=false;
@@ -290,7 +289,7 @@ myPopup.close();
 
 $scope.showSpinner = function() {
   $ionicLoading.show({
-   template: '<ion-spinner icon="android"  class="spinner-light"></ion-spinner>',
+   template: /*'<img src="img/loading.gif">'*/'<ion-spinner icon="spiral"></ion-spinner>',
   //  template: 'Loading....',
   duration : 4000
 });
