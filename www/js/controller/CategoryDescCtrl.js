@@ -2,6 +2,7 @@
 app.controller('CategoryDescCtrl', function($scope, $http) {
 	//alert("CategoryDescCtrl");
 	$scope.productDetails={};
+	$scope.headerTitle.name='CategoryDesc';
 	var bannerDetails={
 		"device_id": "1234",
 		"session_id" : "dgdfg",

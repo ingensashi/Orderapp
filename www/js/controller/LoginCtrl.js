@@ -47,12 +47,12 @@ app.controller('LoginCtrl', function($scope, $ionicPopup,$ionicLoading,$http,$lo
   deviceName='XT1022';
   deviceVersion='4.4.4';
 
-  var init=function(){
+  /*var init=function(){
     if($localStorageService.getUser()==null){
       $localStorageService.setUser();
     }
   };
-  init();
+  init();*/
 
 
   $scope.changeTab=function(tab){

@@ -1,67 +1,83 @@
 <!DOCTYPE html>
 <html ng-app="foodApp">
 <head>
-  <meta charset="utf-8">
-  <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"> -->
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-  <title></title>
+<meta charset="utf-8">
+<!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"> -->
+<meta name="viewport"
+	content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+<title></title>
 
-  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/tabSlideBox.css" rel="stylesheet">
-    <!-- IF using Sass (run gulp sass first), then remove the CSS include above
+<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/tabSlideBox.css" rel="stylesheet">
+<!-- IF using Sass (run gulp sass first), then remove the CSS include above
     <link href="css/ionic.app.css" rel="stylesheet">
   -->
 
-  <!-- ionic/angularjs js -->
-  <script src="lib/ionic/js/ionic.bundle.js"></script>
+<!-- ionic/angularjs js -->
+<script src="lib/ionic/js/ionic.bundle.js"></script>
 
 
-  <!-- for localStorage-->
-  <script src="lib/ngStorage.min.js"></script>
-  <script src="lib/ng-cordova.min.js"></script>
+<!-- for localStorage-->
+<script src="lib/ngStorage.min.js"></script>
+<script src="lib/ng-cordova.min.js"></script>
 
-  <!-- cordova script (this will be a 404 during development) -->
-  <script src="cordova.js"></script>
+<!-- cordova script (this will be a 404 during development) -->
+<script src="cordova.js"></script>
 
-  <!-- your app's js -->
-  <script src="js/app.js"></script>
-  <script src="js/services/localStorageService.js"></script>
-  <script src="js/controller/LoginCtrl.js"></script>
-  <script src="js/controller/AppCtrl.js"></script>
-  <script src="js/controller/CategoryCtrl.js"></script>
-  <script src="js/controller/CategoryDescCtrl.js"></script>
-  <script src="js/tabSlideBox.js"></script>
+<!-- your app's js -->
+<script src="js/app.js"></script>
+<script src="js/services/localStorageService.js"></script>
+<script src="js/controller/ParentCtrl.js"></script>
+<script src="js/controller/LoginCtrl.js"></script>
+<script src="js/controller/AppCtrl.js"></script>
+<script src="js/controller/CategoryCtrl.js"></script>
+<script src="js/controller/CategoryDescCtrl.js"></script>
+<script src="js/tabSlideBox.js"></script>
 
 </head>
 
-<body>
+<body ng-controller="ParentCtrl">
 
-  <ion-nav-view>
+	<ion-nav-view> <ion-nav-var class="bar-stable">
+	<div ng-if="searchBar" class="bar bar-header item-input-inset">
+		<i class="ion-ios-arrow-thin-left" style="font-size: 27px"
+			ng-click="expandSerachBar('back')"></i> <img src="img/logo.jpg"
+			class="img-responsive soi-logo-header" /> <label
+			class="item-input-wrapper" style="margin-left: 6%"> <i
+			class="icon ion-ios-search placeholder-icon"></i> <input
+			type="search" placeholder="Search">
+			<button class="button button-clear">
+				<i class="ion-android-close"></i>
+			</button>
+		</label>
 
-  <ion-nav-var class="bar-stable">
-  <div ng-if="searchBar" class="bar bar-header item-input-inset">
-    <i class="ion-ios-arrow-thin-left" style="font-size:27px" ng-click="expandSerachBar('back')"></i>
-    <img src="img/logo.jpg" class="img-responsive soi-logo-header" />
-    <label class="item-input-wrapper" style="margin-left:6%">
-      <i class="icon ion-ios-search placeholder-icon"></i>
-      <input type="search" placeholder="Search">
-      <button class="button button-clear">
-        <i class="ion-android-close" ></i>
-      </button>
-    </label>
-
-  </div>
-  <ion-header-bar class="bar-stable" ng-if="!searchBar">
-  <i><img src="img/logo.jpg" class="img-responsive soi-logo-header" /></i>
-  <h1 class="title pull-left">Home</h1>
-  <span  ng-click="expandSerachBar('front')"class="ion-android-search home-serach-button" style="font-size:25px;margin-left:75%;margin-right:3%" ></span> 
-
-  <span class="ion-bag" style="font-size:25px"></span>
-</ion-header-bar>
-
-</ion-nav-bar>
-
-<ion-nav-view name="app-home" nav-view-transition="none" nav-view-direction="none"></ion-nav-view></ion-nav-view>
+	</div>
+	<ion-header-bar class="bar-stable"
+		ng-if="stateDetails.current.name=='login'"> <i><img
+		src="img/logo.jpg" class="img-responsive soi-logo-header" /></i>
+	<h1 class="title pull-left">Registration</h1>
+	</ion-header-bar> <ion-header-bar class="bar-stable"
+		ng-if="stateDetails.current.name!='login'"> <i><img
+		src="img/logo.jpg" class="img-responsive soi-logo-header" /></i>
+	<h1 class="title pull-left">{{headerTitle.name}}</h1>
+	<span ng-click="expandSerachBar('front')"
+		class="ion-android-search home-serach-button"
+		style="font-size: 25px; margin-left: 75%; margin-right: 3%"></span> <span
+		class="ion-bag" style="font-size: 25px"></span> </ion-header-bar> <ion-footer-bar
+		ng-if="stateDetails.current.name!='login'"> <ion-tabs
+		class="tabs-light  tabs-icon-top tabs-icon-only"> <!-- Tab 1 content -->
+	<ion-tab title="ORDER" icon-on="ion-ios-cart"
+		icon-off="ion-ios-cart-outline"> </ion-tab> <ion-tab title="DELIVERY"
+		icon-on="ion-android-bicycle" icon-off="ion-android-bicycle">
+	<!-- Tab 2 content --> </ion-tab> <ion-tab title="REFERRAL"
+		ng-if="user!=undefined && user.userStatus==1"
+		icon-on="ion-ios-compose" icon-off="ion-ios-compose-outline">
+	<!-- Tab 3 content --> </ion-tab> <ion-tab title="E-WALLET"
+		ng-if="user!=undefined && user.userStatus==1"
+		icon-on="ion-ios-briefcase" icon-off="ion-ios-briefcase-outline">
+	<!-- Tab 3 content --> </ion-tab> <ion-tab title="MORE" icon-on="ion-more"
+		icon-off="ion-more"> <!-- Tab 3 content --> </ion-tab> </ion-tabs> </ion-footer-bar> </ion-nav-bar> <ion-nav-view
+		name="app-home" nav-view-transition="none" nav-view-direction="none"></ion-nav-view></ion-nav-view>
 </body>
 </html>
