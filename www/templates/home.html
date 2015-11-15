@@ -1,10 +1,11 @@
 <div id="homeView"">
-	<ion-view ng-if="activeScreenDetail.name=='home'"> 
-	<ion-content class="has-footer">
-	<div style="margin-bottom:10px">
+	<ion-view ng-if="activeScreenDetail.name=='home'"> <ion-content
+		class="has-footer">
+	<div style="margin-bottom: 10px">
 		<ion-slide-box on-slide-changed="slideHasChanged($index)"
-			auto-play="true" does-continue="true" style="margin-top: 1%;"> <ion-slide
-			ng-repeat="bannerImg in bannerModel" style="margin-top: 1%;">
+			auto-play="true" does-continue="true" style="margin-top: 1%;">
+		<ion-slide ng-repeat="bannerImg in bannerModel"
+			style="margin-top: 1%;">
 		<div class="center-align">
 			<img ng-src="{{bannerImg.imagepath}}" class="img-responsive-banner"
 				style="padding: 2%">
@@ -15,25 +16,25 @@
 		<div class="list card" style="margin: 0px 0px">
 			<div class="row" style="height: 165px">
 				<div class="col" style="padding: 0.8%"
-					ng-click="moveToScreen('category')">
+					ng-click="moveToScreen('category',1,'Pizzas')">
 					<div class="item item-image" style="height: 155px">
 						<img src="img/PIZZA.png" class="img-responsive"
 							style="height: 150px; position: relative">
 						<div
 							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
-							<h2 style="color: white; margin-top: 3%">Pizza</h2>
+							<h2 style="color: white; margin-top: 3%">Pizzas</h2>
 						</div>
 					</div>
 
 				</div>
 				<div class="col" style="padding: 0.8%"
-					ng-click="moveToScreen('category')">
+					ng-click="moveToScreen('category',8,'Calazones')">
 					<div class="item item-image" style="height: 155px">
 						<img src="img/CALZONE.png" class="img-responsive"
 							style="height: 150px; position: relative">
 						<div
 							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
-							<h2 style="color: white; margin-top: 3%">Calzone</h2>
+							<h2 style="color: white; margin-top: 3%">Calazones</h2>
 						</div>
 					</div>
 
@@ -41,51 +42,105 @@
 			</div>
 			<div class="row" style="height: 160px">
 				<div class="col" style="padding: 0.8%"
-					ui-sref="category({categoryId: 'dessert'})">
+					ng-click="moveToScreen('category',5,'Desserts')">
 					<div class="item item-image" style="height: 155px">
 						<img src="img/DESSERT.jpg" class="img-responsive"
 							style="height: 150px; position: relative">
 						<div
 							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
-							<h2 style="color: white; margin-top: 3%">Dessert</h2>
+							<h2 style="color: white; margin-top: 3%">Desserts</h2>
 						</div>
 					</div>
 
 				</div>
 				<div class="col" style="padding: 0.8%"
-					ui-sref="category({categoryId: 'pasta'})">
+					ng-click="moveToScreen('category',3,'Pastas')">
 					<div class="item item-image" style="height: 155px">
 						<img src="img/PASTA.png" class="img-responsive"
 							style="height: 150px; position: relative">
 						<div
 							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
-							<h2 style="color: white; margin-top: 3%">Pasta</h2>
+							<h2 style="color: white; margin-top: 3%">Pastas</h2>
 						</div>
 					</div>
 
 				</div>
 			</div>
-			<div class="row" style="height: 165px; margin-bottom: 3%;">
+			<div class="row" style="height: 165px">
 				<div class="col" style="padding: 0.8%"
-					ui-sref="category({categoryId: 'submrine'})">
+					ng-click="moveToScreen('category',42,'Beverages')">
 					<div class="item item-image" style="height: 155px">
-						<img src="img/SUBMARINE.jpg" class="img-responsive"
+						<img src="img/PIZZA.png" class="img-responsive"
 							style="height: 150px; position: relative">
 						<div
 							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
-							<h2 style="color: white; margin-top: 3%">Submarine</h2>
+							<h2 style="color: white; margin-top: 3%">Beverages</h2>
 						</div>
 					</div>
 
 				</div>
 				<div class="col" style="padding: 0.8%"
-					ui-sref="category({categoryId: 'salad'})">
+					ng-click="moveToScreen('category',43,'Cakes')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/CALZONE.png" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Cakes</h2>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row" style="height: 165px">
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('category',6,'Escalators')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/PIZZA.png" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Escalators</h2>
+						</div>
+					</div>
+
+				</div>
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('category',73,'Shoulders')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/CALZONE.png" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Shoulders</h2>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row" style="height: 165px; margin-bottom: 3%;">
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('category',9,'Submarines')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/SUBMARINE.jpg" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Submarines</h2>
+						</div>
+					</div>
+
+				</div>
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('category',7,'Salads')">
 					<div class="item item-image" style="height: 155px">
 						<img src="img/salad.JPG" class="img-responsive"
 							style="height: 150px; position: relative">
 						<div
 							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
-							<h2 style="color: white; margin-top: 3%">Salad</h2>
+							<h2 style="color: white; margin-top: 3%">Salads</h2>
 						</div>
 					</div>
 
@@ -94,8 +149,7 @@
 		</div>
 	</div>
 
-	</ion-content> 
-	</ion-view>
+	</ion-content> </ion-view>
 	<div ng-if="activeScreenDetail.name=='category'"
 		ng-include="'templates/category.html'"></div>
 	<div ng-if="activeScreenDetail.name=='categoryDesc'"

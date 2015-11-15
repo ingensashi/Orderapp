@@ -1,77 +1,67 @@
-<div class="header"><h4>{{event1}}</h4></div>
+<div class="header">
+	<h4>{{event1}}</h4>
+</div>
 <div class="list" ng-if="event1=='Size'">
-   <div class="item" style="border:0px;padding:7px">
-      <div class="row">
-         <div class="col" style="margin-top:20px  ">Handspun</div>
-         <div class="col" style="text-align:right">
-            Rs.78
-            <label class="checkbox" style="top:16px"><input type="checkbox"></label>
-         </div>
-      </div>
-   </div>
-   <div class="item" style="border:0px;padding:7px">
-      <div class="row">
-         <div class="col" style="margin-top:20px">Super Thin Crust</div>
-         <div class="col" style="text-align:right">Rs.79
-            <label class="checkbox" style="top:16px"><input type="checkbox"></label>
-         </div>
-      </div>
-   </div>
-   <div class="item" style="border:0px;padding:7px;">
-      <div class="row">
-         <div class="col" style="margin-top:20px">Super Thin Crust
-         </div>
-         <div class="col" style="text-align:right">
-            Rs.79
-            <label class="checkbox" style="top:16px">
-               <input type="checkbox"></label>
-            </div>
-         </div>
-      </div>
-      <div style="text-align:right">
-         <button class="button button-clear" style="margin-top:3%;background-color:greenyellow;color:green" ng-click="hidePopup('submit')" >Ok
-         </button>
-      </div>
-   </div>
-   <div class="list" ng-if="event1=='Choose Your Base'">
-      <div class="item" style="border:0px;padding:0px">
-         <div class="row">
-            <div class="col" style="margin-top:20px">Handspun</div>
-            <div class="col" style="text-align:right">Rs.78
-               <label class="checkbox" style="top:16px">
-                  <input type="checkbox"></label>
-               </div>
-            </div>
-         </div>
-         <div class="item" style="border:0px;padding:0px">
-            <div class="row">
-               <div class="col" style="margin-top:20px">
-                  Super Thin Crust
-               </div>
-               <div class="col" style="text-align:right">
-                  Rs.79
-                  <label class="checkbox" style="top:16px">
-                     <input type="checkbox">
-                  </label>
-               </div>
-            </div>
-         </div>
-         <div style="text-align:right">
-            <div class="button-bar" style="padding:17px">
-               <button class=" button button-medium button-clear" style="margin-top:3%;background-color:greenyellow;color:green;right:10px" ng-click="hidePopup('submit')" >RESET</button>
-               <button class="button button-medium button-clear" style="margin-top:3%;background-color:greenyellow;color:green;" ng-click="hidePopup('submit')" >Ok
-               </button>
-            </div>
-         </div>
-      </div>
-      <div class="content" scroll="true" ng-if="event1=='Veg Toppins'"><div class="list"><div class="item" style="border:0px;padding:0px"><div class="row"><div class="col" style="margin-top:20px">Handspun</div>
-      <div class="col" style="text-align:right">Rs.78<label class="checkbox" style="top:16px"><input type="checkbox"></label></div></div></div>
-      <div class="item" style="border:0px;padding:0px"><div class="row"><div class="col" style="margin-top:20px">Super Thin Crust</div><div class="col" style="text-align:right">Rs.79<label class="checkbox" style="top:16px"><input type="checkbox"></label></ion-checkbox></div></div></div>
-      <div class="item" style="border:0px;padding:0px"><div class="row"><div class="col" style="margin-top:20px">Super Thin Crust</div><div class="col" style="text-align:right">Rs.79<label class="checkbox" style="top:16px"><input type="checkbox"></label></ion-checkbox></div></div></div>
-      <div class="item" style="border:0px;padding:0px"><div class="row"><div class="col" style="margin-top:20px">Super Thin Crust</div><div class="col" style="text-align:right">Rs.79<label class="checkbox" style="top:16px"><input type="checkbox"></label></ion-checkbox></div></div></div>
-      <div class="item" style="border:0px;padding:0px"><div class="row"><div class="col" style="margin-top:20px">Super Thin Crust</div><div class="col" style="text-align:right">Rs.79<label class="checkbox" style="top:16px"><input type="checkbox"></label></ion-checkbox></div></div></div>
-      <div class="item" style="border:0px;padding:0px"><div class="row"><div class="col" style="margin-top:20px">Super Thin Crust</div><div class="col" style="text-align:right">Rs.79<label class="checkbox" style="top:16px"><input type="checkbox"></label></ion-checkbox></div></div></div>
-      <div class="item" style="border:0px;padding:0px"><div class="row"><div class="col" style="margin-top:20px">Super Thin Crust</div><div class="col" style="text-align:right">Rs.79<label class="checkbox" style="top:16px"><input type="checkbox"></label></ion-checkbox></div></div></div>
-      <div class="item" style="border:0px;padding:0px"><div class="row"><div class="col" style="margin-top:20px">Super Thin Crust</div><div class="col" style="text-align:right">Rs.79<label class="checkbox" style="top:16px"><input type="checkbox"></label></ion-checkbox></div></div></div>
-      <div style="text-align:right"><div class="button-bar" style="padding:17px"><button class=" button button-medium button-clear" style="margin-top:3%;background-color:greenyellow;color:green;right:10px" ng-click="hidePopup('submit')" >CLEAR</button>
-         <button class="button button-medium button-clear" style="margin-top:3%;background-color:greenyellow;color:green;" ng-click="hidePopup('submit')" >Ok</button></div></div></div></div>
+	<div class="item" style="border: 0px; padding: 7px"
+		ng-repeat="size in productSize">
+		<div class="row">
+			<div class="col" style="margin-top: 20px">{{size.prodsize}}</div>
+			<div class="col" style="text-align: right">
+				Rs.{{size.sizerate}} <label class="checkbox" style="top: 16px"><input
+					name="size" type="radio"></label>
+			</div>
+		</div>
+	</div>
+	<div style="text-align: right">
+		<button class="button button-clear"
+			style="margin-top: 3%; background-color: greenyellow; color: green"
+			ng-click="hidePopup('ok')">Ok</button>
+	</div>
+</div>
+<div class="list" ng-if="event1=='Base'">
+	<div class="item" style="border: 0px; padding: 0px"
+		ng-repeat="base in productBase">
+		<div class="row">
+			<div class="col" style="margin-top: 20px">{{base.prodcrust}}</div>
+			<div class="col" style="text-align: right">
+				Rs.{{base.crustrate}} <label class="checkbox" style="top: 16px">
+					<input type="checkbox">
+				</label>
+			</div>
+		</div>
+	</div>
+	<div style="text-align: right">
+		<div class="button-bar" style="padding: 17px">
+			<button class=" button button-medium button-clear"
+				style="margin-top: 3%; background-color: greenyellow; color: green; right: 10px"
+				ng-click="hidePopup('reset')">RESET</button>
+			<button class="button button-medium button-clear"
+				style="margin-top: 3%; background-color: greenyellow; color: green;"
+				ng-click="hidePopup('ok')">Ok</button>
+		</div>
+	</div>
+</div>
+<div class="content" scroll="true" ng-if="event1=='Toppins'">
+	<div class="list">
+		<div class="item" style="border: 0px; padding: 0px"
+			ng-repeat="toppins in productToppins">
+			<div class="row">
+				<div class="col" style="margin-top: 20px">{{toppins.toppingname}}</div>
+				<div class="col" style="text-align: right">
+					Rs.{{toppins.toppingrate}}<label class="checkbox" style="top: 16px"><input
+						type="checkbox"></label>
+				</div>
+			</div>
+		</div>
+		<div style="text-align: right">
+			<div class="button-bar" style="padding: 17px">
+				<button class=" button button-medium button-clear"
+					style="margin-top: 3%; background-color: greenyellow; color: green; right: 10px"
+					ng-click="hidePopup('clear')">CLEAR</button>
+				<button class="button button-medium button-clear"
+					style="margin-top: 3%; background-color: greenyellow; color: green;"
+					ng-click="hidePopup('ok')">Ok</button>
+			</div>
+		</div>
+	</div>
+</div>

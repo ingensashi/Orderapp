@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view ng-controller="SubCategoryCtrl">
 <div class="bar bar-subheader">
 	<div class="button-bar">
 		<button class="button button-small" ng-click="changeTab('guest')" ng-class="{'button-positive': activeTab == 'guest','button-light': activeTab == 'user'}">Main</button>
@@ -58,7 +58,7 @@
 								<div class="col" style="text-align:left">
 									<p style="color:white">Veg Toppins</p>
 									<h2 style="color:yellow;">None</h2></div>
-									<div class="col" style="text-align:right" ng-click="showPopup('Veg Toppins')">
+									<div class="col" style="text-align:right" ng-click="showPopup('Toppins')">
 										<button   style="padding:0px;min-height:0px;line-height:14px;color:white;background-color:green;width:40%;height:28px" class="button-small button-clear">Add</button></div>
 									</div>
 								</div>
@@ -67,7 +67,7 @@
 										<div class="col" style="text-align:left">
 											<h3 style="color:white;">Choose Your Base</h3>
 											<p style="color:yellow;">Handspun</p></div>
-											<div class="col" style="text-align:right" ng-click="showPopup('Choose Your Base')">
+											<div class="col" style="text-align:right" ng-click="showPopup('Base')">
 												<button   style="padding:0px;min-height:0px;line-height:14px;color:white;background-color:green;width:40%;height:28px" class="button-small button-clear">Edit</button></div>
 											</div>
 										</div>

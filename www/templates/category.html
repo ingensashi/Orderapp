@@ -1,146 +1,114 @@
-<ion-view  ng-controller="CategoryCtrl">
-<ion-content style="margin-top:8%;" class="footer-margin">
-<tab-slide-box scroll="false">
+<ion-view ng-controller="CategoryCtrl"> <ion-content
+	style="margin-top:8%;margin-bottom:50px;"> <tab-slide-box
+	scroll="false">
 
-<div class="tsb-icons"  >
-	<div class="tsb-ic-wrp item-divider" >
-		<ion-scroll direction="x" class="tsb-hscroll" >
-		<a style="font-size:1em;line-height:3em" href="javascript:;" class="{{tab.icon}}" ng-repeat="tab in tabs" on-finish-render="test()">{{tab.text}}</a>
-	</ion-scroll>
+<div class="tsb-icons">
+	<div class="tsb-ic-wrp item-divider">
+		<ion-scroll direction="x" class="tsb-hscroll"> <a
+			style="font-size: 1em; line-height: 3em" href="javascript:;"
+			class="{{tab.icon}}" ng-repeat="tab in tabs"
+			on-finish-render="test()" >{{tab.text}}</a> </ion-scroll>
 
-</div>
+	</div>
 </div>
 <div>
-<ion-slide-box auto-play="true" does-continue="true">
-<ion-slide ng-repeat="bannerImg in bannerModel"  >
-<div class="center-align"><img ng-src="{{bannerImg}}" class="img-responsive-banner"></div>
-</ion-slide>
-</ion-slide-box>
-<div>
-<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
-
-<ion-slide>
-
-<div class="item-card" style="margin:0px 0px">
-<div class="row" style="height:160px">
-			<div class="col" style="padding:0.8%" ng-click="moveToScreen('categoryDesc')">
-				<div class="item item-image" style="height:155px" ><img src="img/soiWebs/soi5.jpg" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Dessert</h2>
-					</div>
-				</div>
-				
-			</div>
-			<div class="col" style="padding:0.8%" ng-click="moveToScreen('categoryDesc')">
-				<div class="item item-image" style="height:155px" ><img src="img/soiWebs/soi5.jpg" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pasta</h2>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		<div class="row" style="height:165px">
-			<div class="col" style="padding:0.8%"   ng-click="moveToScreen('categoryDesc')">
-				<div class="item item-image" style="height:155px" ><img src="img/PIZZA.png" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
-					</div>
-				</div>
-				
-			</div>
-			<div class="col" style="padding:0.8%" ng-click="moveToScreen('categoryDesc')">
-				<div class="item item-image" style="height:155px" ><img src="img/CALZONE.png" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Calzone</h2>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		
-
-	<!-- <div class="row">
-	<div class="col">
- <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
+	<ion-slide-box auto-play="true" does-continue="true"> <ion-slide
+		ng-repeat="bannerImg in catBannerModel">
+	<div class="center-align">
+		<img ng-src="{{bannerImg.imagepath}}" class="img-responsive-banner">
 	</div>
-	<div class="col">
-		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-</div> -->
-<!-- 	<div class="row" style="margin-bottom:10%;"> 
-	<div class="col">
-		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-	<div class="col">
-		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-</div> -->
-</div></ion-slide>
+	</ion-slide> </ion-slide-box>
+	<div>
+		<ion-slide-box show-pager="false"
+			on-slide-changed="slideHasChanged($index)"> <ion-slide ng-repeat="tab in tabs">
 
-<ion-slide>
-
-<div class="item-card" style="margin:0px 0px">
-<div class="row" style="height:160px">
-			<div class="col" style="padding:0.8%" ng-click="moveToScreen('categoryDesc')">
-				<div class="item item-image" style="height:155px" ><img src="img/DESSERT.jpg" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Dessert</h2>
+		<div class="item-card" style="margin: 0px 0px">
+			<div class="row" style="height: 160px" ng-if="subCategoryDetail.name.length>=2">
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('categoryDesc',subCategoryDetail.name[0])">
+					<div class="item item-image" style="height: 155px">
+						<img ng-src="{{subCategoryDetail.images[0]}}" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">{{subCategoryDetail.name[0]}}</h2>
+						</div>
 					</div>
+
 				</div>
-				
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('categoryDesc',subCategoryDetail.name[1])">
+					<div class="item item-image" style="height: 155px">
+						<img ng-src="{{subCategoryDetail.images[1]}}" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">{{subCategoryDetail.name[1]}}</h2>
+						</div>
+					</div>
+
+				</div>
 			</div>
-			<div class="col" style="padding:0.8%" ng-click="moveToScreen('categoryDesc')">
-				<div class="item item-image" style="height:155px" ><img src="img/PASTA.png" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pasta</h2>
+			<div class="row" style="height: 160px" ng-if="subCategoryDetail.name.length>2">
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('categoryDesc')">
+					<div class="item item-image" style="height: 155px">
+						<img ng-src="{{subCategoryDetail.images[2]}}" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">{{subCategoryDetail.name[2]}}</h2>
+						</div>
 					</div>
+
 				</div>
-				
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('categoryDesc')" ng-if="subCategoryDetail.name.length>3">
+					<div class="item item-image" style="height: 155px">
+						<img ng-src="{{subCategoryDetail.images[3]}}" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">{{subCategoryDetail.name[3]}}</h2>
+						</div>
+					</div>
+
+				</div>
 			</div>
 		</div>
-		<div class="row" style="height:165px">
-			<div class="col" style="padding:0.8%" ng-click="moveToScreen('categoryDesc')">
-				<div class="item item-image" style="height:155px" ><img src="img/soiWebs/soi5.jpg" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
+		</ion-slide> <!-- <ion-slide>
+
+		<div class="item-card" style="margin: 0px 0px">
+			<div class="row" style="height: 165px">
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('categoryDesc')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/soiWebs/soi5.jpg" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Pizza</h2>
+						</div>
 					</div>
+
 				</div>
-				
-			</div>
-			<div class="col" style="padding:0.8%" ng-click="moveToScreen('categoryDesc')">
-				<div class="item item-image" style="height:155px" ><img src="img/soiWebs/soi5.jpg" class="img-responsive" style="height:150px;position:relative">
-					<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Calzone</h2>
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('categoryDesc')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/soiWebs/soi5.jpg" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">Calzone</h2>
+						</div>
 					</div>
+
 				</div>
-				
 			</div>
+
 		</div>
-	<!-- <div class="row">
-	<div class="col">
- <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-	<div class="col">
-		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-</div> -->
-<!-- 	<div class="row" style="margin-bottom:10%;"> 
-	<div class="col">
-		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-	<div class="col">
-		 <div><img src="img/SUBMARINE.jpg" class="img-responsive" style="height:121px"></div>
-	</div>
-</div> -->
-</div></ion-slide>
-
-
-</ion-slide-box>
-</tab-slide-box>
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="item-card" style="height: 26%!important;margin-top: 2%;">
+		</ion-slide> --> </ion-slide-box>
+</tab-slide-box> <!-- <div class="item-card" style="height: 26%!important;margin-top: 2%;">
 	<div class="item item-image" style="width:48%;float:left;margin:1%;height:100%;border-width:0px;">
 		<img src="img/soiWebs/soi5.jpg" class="img-responsive" style="position:relative;width:100%;height: inherit;">
 		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
@@ -163,13 +131,6 @@
 		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
 		</div>
 	</div>
-</div> -->
-
-
-
-
-
-</ion-content>
-</ion-view>
+</div> --> </ion-content> </ion-view>
 <!-- <div ng-if="activeScreenDetail.name=='categoryDesc'" ng-include="'templates/categoryDesc.html'"></div> -->
 
