@@ -6,10 +6,15 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 		if($localStorageService.getUser()==null){
 			$localStorageService.setUser();
 		}
+		/*if($localStorageService.getCartDetails()!=null){
+			$scope.cartDetails=$localStorageService.getCartDetails();
+			console.log("cart details",$scope.cartDetails.productCount);
+		}*/
 	};
 	init();
 	$scope.user = {};
 	$scope.stateDetails=$state;
+	$scope.cartDetails={};
 	$scope.headerTitle={};
 	
 	$scope.moveToBackScreen=function(){

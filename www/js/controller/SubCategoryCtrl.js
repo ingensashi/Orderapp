@@ -1,11 +1,17 @@
 'use strict';
-app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup) {
+app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStorageService) {
+	//$controller('CategoryDescCtrl', {$scope: $scope}); //making CategoryDescCtrlparent of this controller
 	$scope.productSize={};
 	$scope.productToppins={};
 	$scope.productBase={};
 	var myPopup=null;
-
-	 var getProductDetails=function(event){
+	var init=function(){
+		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId].properties)){
+			$scope.cartDetails.nodeDetails[productId].properties={};
+			$scope.cartDetails.nodeDetails[productId].properties.toppins=[];
+		}
+	};
+	var getProductDetails=function(event){
 		switch(event){
 		case 'Size':
 			var productDetails={
@@ -59,6 +65,30 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup) {
 		}
 	};
 
+	$scope.addvarietyToProduct=function(event,data,rate){
+		var activeProduct=$scope.cartDetails.activeProduct;
+		console.log("addvarietyToProduct",activeProduct);
+		var productId=activeProduct.prodid;
+		switch(event){
+		case 'Size':
+			$scope.cartDetails.nodeDetails[productId].properties[event]=data;
+			break;
+		case 'Toppins':
+			$scope.cartDetails.nodeDetails[productId].properties.toppins.push(data);
+			break;
+		case 'Base':
+			$scope.cartDetails.nodeDetails[productId].properties[event]=data;
+			break;
+		case 'cheesy':
+			$scope.cartDetails.nodeDetails[productId].properties[event]=true;
+			break;
+		}
+
+		$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)+ parseFloat(rate)).toFixed(2);
+		console.log("$scope.cartDetails",$scope.cartDetails);
+		$localStorageService.setCardDetails($scope.cartDetails);
+	};
+
 
 	$scope.showPopup = function(popupItem) {
 		$scope.event1 = popupItem;
@@ -66,7 +96,7 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup) {
 		getProductDetails($scope.event1);
 
 		// An elaborate, custom popup
-		 myPopup = $ionicPopup.show({
+		myPopup = $ionicPopup.show({
 			templateUrl : 'templates/itemPopup.html',
 			cssClass : 'full-width;',
 			scope : $scope,
@@ -83,7 +113,7 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup) {
 			// console.log('Tapped!', res);
 		});
 	};
-$scope.hidePopup=function(flag){
-	myPopup.close();
-}
+	$scope.hidePopup=function(flag){
+		myPopup.close();
+	}
 });

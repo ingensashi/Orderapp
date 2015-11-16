@@ -49,7 +49,8 @@
 			class="icon ion-ios-search placeholder-icon"></i> <input
 			type="search" placeholder="Search">
 			<button class="button button-clear">
-				<i class="ion-android-close"></i>
+				<i class="ion-android-close"></i></button>
+				<span ng-if="cartDetails.productCount>0" class="badge">{{cartDetails.productCount}}</span>
 			</button>
 		</label>
 
@@ -67,7 +68,7 @@
 	<span ng-click="expandSerachBar('front')"
 		class="ion-android-search home-serach-button"
 		style="font-size: 25px; margin-left: 75%; margin-right: 3%"></span> <span
-		class="ion-bag" style="font-size: 25px"></span> </ion-header-bar> </ion-nav-bar> <ion-nav-view
+		class="ion-bag" style="font-size: 25px"><span ng-if="cartDetails.productCount>0" class="valcart">{{cartDetails.productCount}}</span></span> </ion-header-bar> </ion-nav-bar> <ion-nav-view
 		name="app-home" nav-view-transition="none" nav-view-direction="none">
 	</ion-nav-view> <ion-footer-bar ng-if="stateDetails.current.name!='login'">
 	<ion-tabs class="tabs-light  tabs-icon-top tabs-icon-only">

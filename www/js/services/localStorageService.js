@@ -59,4 +59,14 @@ app.service('$localStorageService', function($localStorage) {
 		console.log("user initialized");
 		$localStorage.user={};
 	};
+	this.getCartDetails=function(){
+		var cart=$localStorage.cartDetails;
+		if(angular.isUndefined(cart) || cart==null){
+			return null;
+		}
+		return cart; 
+	};
+	this.setCardDetails=function(cart){
+		$localStorage.cartDetails=cart;
+	};
 });

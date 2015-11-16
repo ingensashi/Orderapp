@@ -18,9 +18,9 @@
 			ng-repeat="product in productDetails track by $index">
 
 
-			<div class="item" ng-click="moveToScreen('addToppins')"
+			<div class="item" 
 				style="background-color: ghostWhite; border-width: 0px; padding: 2px;">
-				<img class="full-image" ng-src="{{product.imagepath}}">
+				<img class="full-image" ng-src="{{product.imagepath}}" ng-click="moveToScreen('addToppins','','',product)">
 				<div class="row">
 					<div class="col" style="text-align: left">
 						<span class="ion-ionic" style="color: green;"></span>{{product.prodname}}
@@ -35,9 +35,9 @@
 						<i><p>{{product.proddesc}}</p> </i>
 					</div>
 					<div class="col" style="text-align: right">
-						<i class="pull-left icon ion-ios-minus-outline"
-							style="font-size: 1.3em;"></i> <span style="font-size: 1.2em;">1</span>
-						<i class=" pull-right icon ion-ios-plus-outline"
+						<i class="pull-left icon ion-ios-minus-outline" ng-click="removeItemFromCart(product)"
+							style="font-size: 1.3em;"></i> <span style="font-size: 1.2em;">{{cartDetails.nodeDetails[product.prodid].count}}</span>
+						<i class=" pull-right icon ion-ios-plus-outline" ng-click="addItemToCart(product)"
 							style="font-size: 1.3em;"></i>
 					</div>
 				</div>

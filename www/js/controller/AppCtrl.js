@@ -6,6 +6,7 @@ app.controller('AppCtrl',
 	// $ionicHistory.nextViewOptions({disableBack: true});
 	$scope.bannerModel = {};
 	$scope.searchBar = false;
+	//$scope.user={};
 	$scope.user.userStatus = $localStorageService.getUserStatus();
 	$scope.user.userDetails = $localStorageService.getUserDetails();
 	$scope.activeScreenDetail={};
@@ -56,7 +57,7 @@ app.controller('AppCtrl',
     // function
   };*/
 
-	$scope.moveToScreen=function(screen,catId,catName){
+	$scope.moveToScreen=function(screen,catId,catName,product){
 		console.log("catName ::"+catName +"  catId ::"+catId);
 		$rootScope.stateArray.push($scope.activeScreenDetail.name);
 		console.log("$rootScope.stateArray",$rootScope.stateArray);
@@ -69,6 +70,10 @@ app.controller('AppCtrl',
 			break;
 		case 'categoryDesc':
 			$scope.categoryDetails.catType=catId;
+			break;
+		case 'addToppins' :
+			$scope.cartDetails.activeProduct=product;
+			console.log("$scope.cartDetails.activeProduct",$scope.cartDetails.activeProduct);
 			break;
 		}
 	};
