@@ -28,6 +28,7 @@
 <!-- your app's js -->
 <script src="js/app.js"></script>
 <script src="js/services/localStorageService.js"></script>
+<script src="js/services/locationService.js"></script>
 <script src="js/controller/ParentCtrl.js"></script>
 <script src="js/controller/LoginCtrl.js"></script>
 <script src="js/controller/AppCtrl.js"></script>
@@ -35,6 +36,8 @@
 <script src="js/controller/SubCategoryCtrl.js"></script>
 <script src="js/controller/CategoryDescCtrl.js"></script>
 <script src="js/tabSlideBox.js"></script>
+<script src="js/ngautocomplete.js"></script>
+ <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
 
 </head>
 
@@ -50,7 +53,7 @@
 			type="search" placeholder="Search">
 			<button class="button button-clear">
 				<i class="ion-android-close"></i></button>
-				<span ng-if="cartDetails.productCount>0" class="badge">{{cartDetails.productCount}}</span>
+				<span ng-if="cartDetails.productCount>0" class="valcart">{{cartDetails.productCount}}</span>
 			</button>
 		</label>
 
@@ -72,8 +75,15 @@
 		name="app-home" nav-view-transition="none" nav-view-direction="none">
 	</ion-nav-view> <ion-footer-bar ng-if="stateDetails.current.name!='login'">
 	<ion-tabs class="tabs-light  tabs-icon-top tabs-icon-only">
+	<span>
+	 <span ng-if="user.userStatus!=1 && cartDetails.amount>0" class="valcart-footer">{{cartDetails.amount}}</span>
+	 <span ng-if="user.userStatus==1 && cartDetails.amount>0" class="valcart-footer" style="left:8px;">{{cartDetails.amount}}</span>
 	<ion-tab title="ORDER" icon-on="ion-ios-cart"
-		icon-off="ion-ios-cart-outline"> </ion-tab> <ion-tab title="DELIVERY"
+		icon-off="ion-ios-cart-outline">
+		
+		 </ion-tab> 
+		</span>
+		 <ion-tab title="DELIVERY" ng-click="showLocation()"
 		icon-on="ion-android-bicycle" icon-off="ion-android-bicycle">
 	</ion-tab> <ion-tab title="REFERRAL"
 		ng-if="user!=undefined && user.userStatus==1"

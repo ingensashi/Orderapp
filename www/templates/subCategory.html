@@ -1,82 +1,106 @@
 <ion-view ng-controller="SubCategoryCtrl">
 <div class="bar bar-subheader">
 	<div class="button-bar">
-		<button class="button button-small" ng-click="changeTab('guest')" ng-class="{'button-positive': activeTab == 'guest','button-light': activeTab == 'user'}">Main</button>
-		<button  class="button button-small" ng-click="changeTab('user')" ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">Recent</button>
-	</div> 
+		<button class="button button-small" ng-click="changeTab('guest')"
+			ng-class="{'button-positive': activeTab == 'guest','button-light': activeTab == 'user'}">Main</button>
+		<button class="button button-small" ng-click="changeTab('user')"
+			ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">Recent</button>
+	</div>
 </div>
 <ion-content style="margin-top:21%" class="footer-margin">
-<div class="list" style="background color:gray">
-	<div class="item" style="background-color:ghostWhite;border-width:0px">
+<div class="list" style="background color: gray">
+	<div class="item"
+		style="background-color: ghostWhite; border-width: 0px">
 		<div class="row">
-			<div class="col" style="text-align:left">
-				<span class="ion-ionic" style="color:green;margin-right:3px;margin-left:-7%"></span>
+			<div class="col" style="text-align: left">
+				<span class="ion-ionic"
+					style="color: green; margin-right: 3px; margin-left: -7%"></span>
 				Mparghretic Classic Pizza
-				
+
 			</div>
-			<div class="col" style="text-align:right;font-size:14px">
-				RS.74
-			</div>
+			<div class="col" style="text-align: right; font-size: 14px">
+				RS.74</div>
 		</div>
 		<div class="row">
-			<div class="col" style="text-align:left;font-size:10px">
-				Tomato pulp,Fresh Mozzerella<br>
-				Basesl and mozzellz
+			<div class="col" style="text-align: left; font-size: 10px">
+				Tomato pulp,Fresh Mozzerella<br> Basesl and mozzellz
 			</div>
-			<div class="col" style="text-align:right">
-				<i  class="pull-left icon ion-ios-minus" style="font-size:1.3em;color:green"></i>
-				<span  style="font-size:1.2em;">1</span> 
-				<i  class=" pull-right icon ion-ios-plus" style="font-size:1.3em;color:green"></i>
+			<div class="col" style="text-align: right">
+				<i class="pull-left icon ion-ios-minus"
+					style="font-size: 1.3em; color: green"></i> <span
+					style="font-size: 1.2em;">1</span> <i
+					class=" pull-right icon ion-ios-plus"
+					style="font-size: 1.3em; color: green"></i>
 			</div>
 		</div>
 
-		<div class="item" style="background-color:#3F3D3D;border-width:0px;border-style:none;">
+		<div class="item"
+			style="background-color: #3F3D3D; border-width: 0px; border-style: none;">
 
-			<div class="item item-divider" style="background-color:#3F3D3D;border-left:0px;border-right:0px;border-top:0px">
+			<div class="item item-divider"
+				style="background-color: #3F3D3D; border-left: 0px; border-right: 0px; border-top: 0px">
 				<div class="row">
-					<div class="col" style="text-align:left">
-						<p style="color:white">size</p>
-						<h2 style="color:yellow;">Regular</h2>
+					<div class="col" style="text-align: left">
+						<p style="color: white">size</p>
+						<h2 style="color: yellow;">Regular</h2>
 					</div>
-					<div class="col" style="text-align:right" ng-click="showPopup('Size')">
-						<button   style="padding:0px;min-height:0px;line-height:14px;color:white;background-color:green;width:40%;height:28px" class="button-small button-clear">Edit</button></div>
+					<div class="col" style="text-align: right"
+						ng-click="showPopup('Size')">
+						<button
+							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
+							class="button-small button-clear">Edit</button>
 					</div>
 				</div>
-				<div class="item item-divider" style="background-color:#3F3D3D;border-left:0px;border-right:0px">
-					<div class="row">
-						<div class="col" style="text-align:left">
-							<p style="color:white;">Make it Chezzy</p>
-							<h2 style="color:yellow;">Chezze(RS.35)</h2></div>
-							<div class="col" style="text-align:right">
-								<label class="checkbox">
-									<input type="checkbox">
-								</label></div>
-							</div>
-						</div>
-						<div class="item item-divider" style="background-color:#3F3D3D;border-left:0px;border-right:0px;">
-							<div class="row">
-								<div class="col" style="text-align:left">
-									<p style="color:white">Veg Toppins</p>
-									<h2 style="color:yellow;">None</h2></div>
-									<div class="col" style="text-align:right" ng-click="showPopup('Toppins')">
-										<button   style="padding:0px;min-height:0px;line-height:14px;color:white;background-color:green;width:40%;height:28px" class="button-small button-clear">Add</button></div>
-									</div>
-								</div>
-								<div class="item item-divider" style="background-color:#3F3D3D;border-left:0px;border-right:0px; border-bottom:0px">
-									<div class="row">
-										<div class="col" style="text-align:left">
-											<h3 style="color:white;">Choose Your Base</h3>
-											<p style="color:yellow;">Handspun</p></div>
-											<div class="col" style="text-align:right" ng-click="showPopup('Base')">
-												<button   style="padding:0px;min-height:0px;line-height:14px;color:white;background-color:green;width:40%;height:28px" class="button-small button-clear">Edit</button></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+			</div>
+			<div class="item item-divider"
+				style="background-color: #3F3D3D; border-left: 0px; border-right: 0px; border-bottom: 0px">
+				<div class="row">
+					<div class="col" style="text-align: left">
+						<h3 style="color: white;">Choose Your Base</h3>
+						<p style="color: yellow;">Handspun</p>
+					</div>
+					<div class="col" style="text-align: right"
+						ng-click="showPopup('Base')">
+						<button
+							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
+							class="button-small button-clear">Edit</button>
+					</div>
+				</div>
+			</div>
+			<div class="item item-divider"
+				style="background-color: #3F3D3D; border-left: 0px; border-right: 0px;">
+				<div class="row">
+					<div class="col" style="text-align: left">
+						<p style="color: white">Veg Toppins</p>
+						<h2 style="color: yellow;">None</h2>
+					</div>
+					<div class="col" style="text-align: right"
+						ng-click="showPopup('Toppins')">
+						<button
+							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
+							class="button-small button-clear">Add</button>
+					</div>
+				</div>
+			</div>
+			<div class="item item-divider"
+				style="background-color: #3F3D3D; border-left: 0px; border-right: 0px">
+				<div class="row">
+					<div class="col" style="text-align: left">
+						<p style="color: white;">Make it Chezzy</p>
+						<h2 style="color: yellow;">Chezze(RS.35)</h2>
+					</div>
+					<div class="col" style="text-align: right">
+						<label class="checkbox"> <input type="checkbox">
+						</label>
+					</div>
+				</div>
+			</div>
 
-						
-				
-					
-</ion-content>
-</ion-view>
+		</div>
+	</div>
+</div>
+
+
+
+
+</ion-content> </ion-view>

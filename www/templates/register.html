@@ -31,6 +31,7 @@
 
       <span ng-show="register_form.mobileNo.$error.required || register_form.mobileNo.$error.number" class="help-block">valid Mobile NO. is required.</span>
     </span>
+     <span class="help-block" ng-show="((register_form.mobileNo.$error.minlength || register_form.mobileNo.$error.maxlength) && register_form.mobileNo.$dirty) ">phone number should be 10 digits</span>
 
 
 <label class="item item-input label-item">

@@ -4,7 +4,7 @@ var user;
 //angular.module is a global place for creating, registering and retrieving Angular modules
 //'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 //the 2nd parameter is an array of 'requires'
-var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'])
+var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox','ngAutocomplete'])
 
 .run(function($ionicPlatform,$localStorage,$state,$timeout,$ionicScrollDelegate,$rootScope,$ionicPopup) {
 	user=$localStorage.user;
@@ -54,14 +54,6 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 			// remove the status bar on iOS or change it to use white instead of dark colors.
 			StatusBar.styleDefault();
 		}
-		
-		cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
-		    alert("Location is " + (enabled ? "enabled" : "disabled"));
-		}, function(error){
-		    alert("The following error occurred: "+error);
-		});
-		
-		cordova.plugins.diagnostic.switchToLocationSettings();
 		
 		cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
 		    alert("GPS location is " + (enabled ? "enabled" : "disabled"));

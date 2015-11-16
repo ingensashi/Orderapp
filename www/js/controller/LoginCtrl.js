@@ -223,7 +223,7 @@ $scope.comparePassword=function(password,conPassword){
       ]*/
 
     });
-myPopup.success(function(res) {
+myPopup.then(function(res) {
  //console.log('Tapped!', res);
 });
 };
