@@ -11,59 +11,75 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 			$scope.cartDetails.nodeDetails[productId].properties.toppins=[];
 		}
 	};
-	var getProductDetails=function(event){
-		switch(event){
-		case 'Size':
-			var productDetails={
-				"device_id": "1234",
-				"session_id" : "dgdfg",
-				"prodid" : "M01"  	};
-			console.log("banner",productDetails);
-			$http({
-				url : 'http://216.15.228.130:8083/NProductSize.php',
-				method : "post",
-				data : productDetails
-			}).then(function(response) {
-				console.log("reponse response.data", response.data);
-				$scope.productSize=response.data.productsizedetails;
+	 var getProductDetails=function(event){
+			switch(event){
+			case 'Size':
+				 $scope.showSpinner();
+				var productDetails={
+					"device_id": "1234",
+					"session_id" : "dgdfg",
+					"prodid" : "M01"  	};
+				console.log("banner",productDetails);
+				$http({
+					url : 'http://216.15.228.130:8083/NProductSize.php',
+					method : "post",
+					data : productDetails
+				}).success(function(response) {
+					console.log("reponse response.data", response);
+					$scope.productSize=response.productsizedetails;
+					 $scope.hideSpinner();
+				}).error(function (data, status, headers, config) {
+			        console.log("error",status);
+			        return status;
 			});
-			break;
-		case 'Toppins':
-			var productDetails= {
-				"device_id": "1234",
-				"session_id" : "dgdfg",
-				"prodid" : "M001"  ,
-				"prodsize":"DOUBLE"
-		};
-			console.log("banner",productDetails);
-			$http({
-				url : 'http://216.15.228.130:8083/NProductToppings.php',
-				method : "post",
-				data : productDetails
-			}).then(function(response) {
-				console.log("reponse response.data", response.data);
-				$scope.productToppins=response.data.producttoppingsdetails;
+				break;
+			case 'Toppins':
+				 $scope.showSpinner();
+				var productDetails= {
+					"device_id": "1234",
+					"session_id" : "dgdfg",
+					"prodid" : "M001"  ,
+					"prodsize":"DOUBLE"
+			};
+				console.log("banner",productDetails);
+				$http({
+					url : 'http://216.15.228.130:8083/NProductToppings.php',
+					method : "post",
+					data : productDetails
+				}).success(function(response) {
+					console.log("reponse response.data", response);
+					$scope.productToppins=response.producttoppingsdetails;
+					 $scope.hideSpinner();
+				}).error(function (data, status, headers, config) {
+			        console.log("error",status);
+			        return status;
 			});
-			break;
-		case 'Base':
-			var productDetails={
-				"device_id": "1234",
-				"session_id" : "dgdfg",
-				"prodid" : "M01"  
+				break;
+			case 'Base':
+				 $scope.showSpinner();
+				var productDetails={
+					"device_id": "1234",
+					"session_id" : "dgdfg",
+					"prodid" : "M01"  
+			};
+
+				console.log("banner",productDetails);
+				$http({
+					url : 'http://216.15.228.130:8083/NProductCrust.php',
+					method : "post",
+					data : productDetails
+				}).success(function(response) {
+					console.log("reponse response.data", response);
+					$scope.productBase=response.productcrustdetails;
+					 $scope.hideSpinner();
+				}).error(function (data, status, headers, config) {
+			        console.log("error",status);
+			        return status;
+			});
+				break;
+			}
 		};
 
-			console.log("banner",productDetails);
-			$http({
-				url : 'http://216.15.228.130:8083/NProductCrust.php',
-				method : "post",
-				data : productDetails
-			}).then(function(response) {
-				console.log("reponse response.data", response.data);
-				$scope.productBase=response.data.productcrustdetails;
-			});
-			break;
-		}
-	};
 
 	$scope.addvarietyToProduct=function(event,data,rate){
 		var activeProduct=$scope.cartDetails.activeProduct;

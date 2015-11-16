@@ -6,7 +6,7 @@ var user;
 //the 2nd parameter is an array of 'requires'
 var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'])
 
-.run(function($ionicPlatform,$localStorage,$state,$timeout,$ionicScrollDelegate,$rootScope,$q) {
+.run(function($ionicPlatform,$localStorage,$state,$timeout,$ionicScrollDelegate,$rootScope,$ionicPopup) {
 	user=$localStorage.user;
 	$rootScope.stateArray=[];
 	console.log("$localStorage app run",user);
@@ -24,8 +24,21 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 			$state.go('login');
 		}
 	}
+	$rootScope.showConfirm = function() {
+		   var confirmPopup = $ionicPopup.confirm({
+		     title: 'Alert',
+		     template: 'Are you sure you want Exit App?'
+		   });
+		   confirmPopup.then(function(res) {
+		     if(res) {
+		    	 navigator.app.exitApp();
+		     } else {
+		       console.log('You are not sure');
+		     }
+		   });
+		 };
 	$ionicPlatform.ready(function() {
-		$ionicScrollDelegate.scrollTop();
+	$ionicScrollDelegate.scrollTop();
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs).
 		// The reason we default this to hidden is that native apps don't usually show an accessory bar, at
@@ -41,13 +54,42 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 			// remove the status bar on iOS or change it to use white instead of dark colors.
 			StatusBar.styleDefault();
 		}
+		
+		cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
+		    alert("Location is " + (enabled ? "enabled" : "disabled"));
+		}, function(error){
+		    alert("The following error occurred: "+error);
+		});
+		
+		cordova.plugins.diagnostic.switchToLocationSettings();
+		
+		cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+		    alert("GPS location is " + (enabled ? "enabled" : "disabled"));
+		}, function(error){
+		    alert("The following gps error occurred: "+error);
+		});
+		cordova.plugins.diagnostic.isNetworkLocationEnabled(function(enabled){
+		    alert("Network location is " + (enabled ? "enabled" : "disabled"));
+		}, function(error){
+		    alert("The following net error occurred: "+error);
+		});
+		cordova.plugins.diagnostic.getLocationMode(function(mode){
+		    alert("Current location mode is: " + mode);
+		}, function(error){
+		    alert("The following error occurred: "+error);
+		});
+		
+
 	});
+	
+	
 
 	$ionicPlatform.registerBackButtonAction(function () {
 		if ($state.current.name!='login') {
 			if($rootScope.stateArray.length==0){
-				alert("exiting app");
-				navigator.app.exitApp();
+				/*alert("exiting app");
+				navigator.app.exitApp();*/
+				$rootScope.showConfirm();
 			}else{
 				var popElement=$rootScope.stateArray.pop();
 				console.log("$rootScope.stateArray.pop() after  " +$rootScope.stateArray);
@@ -55,8 +97,7 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 				angular.element(document.querySelector('#homeView')).scope().$apply();
 			}
 		} else {
-			alert("exiting app");
-			navigator.app.exitApp();
+			$rootScope.showConfirm();
 			//handle back action!
 		}
 	}, 100);
@@ -98,6 +139,7 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
 				controller: 'AppCtrl'
 			}
 		}
+
 	})
 
 	.state('login', {
@@ -106,7 +148,43 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
 		controller: 'LoginCtrl'
 
 
-	});
+	})
+	/*  .state('app.category', {
+    url: '/category',
+    views:{
+      'app-home':{
+        templateUrl: 'templates/category.html',
+        params : {categoryId: null},
+        controller: 'AppCtrl'
+      }
+    }
+
+
+  })
+  .state('app.menu', {
+    url: '/menu',
+    views:{
+    'app-home':{
+       templateUrl: 'templates/item.html',
+       controller: 'AppCtrl'
+     }
+   }
+
+
+ })
+
+  .state('app.subCategory', {
+    url: '/subCategory',
+    views:{
+      'app-home':{
+       templateUrl: 'templates/subCategory.html',
+       controller: 'AppCtrl'
+     }
+   }
+
+
+ })*/;
+
 	$urlRouterProvider.otherwise("/login");
 
 	/*$locationProvider.html5Mode({
@@ -135,6 +213,4 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
 
 
 });
-
-
 

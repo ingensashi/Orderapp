@@ -25,14 +25,16 @@ class="bar bar-stable">
           <label class="item item-input"> <input type="number"
             name="mobileNo" ng-model="mobileNo"
             placeholder="Type your Mobile no" ng-maxlength="10"
-            ng-minlength="10" class="center-align" ng-required="true">
+            ng-minlength="10" maxlength=10 class="center-align" ng-required="true">
           </label> <span class="help-block"
           ng-show="loginForm.mobileNo.$dirty && loginForm.mobileNo.$invalid">
 
           <span
           ng-show="loginForm.mobileNo.$error.required || loginForm.mobileNo.$error.number">valid
           Mobile NO. is required.</span>
-        </span> <label class="item item-input" style="margin-top: 2%;"> <input
+        </span>
+         <span class="help-block" ng-show="((loginForm.mobileNo.$error.minlength || loginForm.mobileNo.$error.maxlength) && loginForm.mobileNo.$dirty) ">phone number should be 10 digits</span>
+         <label class="item item-input" style="margin-top: 2%;"> <input
         type="password" name="password" ng-model="password"
         placeholder="Password" class="center-align" ng-required="true"
         ng-minlength="6">
@@ -61,15 +63,15 @@ class="bar bar-stable">
       <ion-list >
         <label class="item item-input"> <input type="number"
           name="mobileNo" ng-model="mobileNo"
-          placeholder="Type your Mobile no" ng-maxlength="10"
-          ng-minlength="10" class="center-align" ng-required="true">
+          placeholder="Type your Mobile no" ng-maxlength="10" id="mobileNo"
+          ng-minlength="10" maxlength="10"  class="center-align form-control"  ng-pattern="/[1-9]{1}[0-9]{9}$/" ng-required="true">
         </label> <span class="help-block"
         ng-show="guestForm.mobileNo.$dirty && guestForm.mobileNo.$invalid">
-        <span
+        <span class="help-block"
         ng-show="guestForm.mobileNo.$error.required || guestForm.mobileNo.$error.number">valid
         Mobile NO. is required.</span>
       </span>
-      <!--  <span ng-show="((myForm.mobileNo.$error.minlength || myForm.mobileNo.$error.maxlength)&& myform.mobileNo.$dirty)">Mobile No. must be 10 digits.</span> -->
+       <span class="help-block" ng-show="((guestForm.mobileNo.$error.minlength || guestForm.mobileNo.$error.maxlength) && guestForm.mobileNo.$dirty) ">phone number should be 10 digits</span>
 
       <button ng-disabled="guestForm.mobileNo.$invalid"
       class="button button-full button-calm" style="margin-top: 5%;"

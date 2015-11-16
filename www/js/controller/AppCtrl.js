@@ -2,7 +2,7 @@
 
 app.controller('AppCtrl',
 		function($scope, $http, $ionicHistory, $localStorageService,
-				$ionicModal, $ionicPopup, $ionicSlideBoxDelegate,$rootScope) {
+				$ionicModal, $ionicPopup, $ionicSlideBoxDelegate,$rootScope,$ionicLoading) {
 	// $ionicHistory.nextViewOptions({disableBack: true});
 	$scope.bannerModel = {};
 	$scope.searchBar = false;
@@ -30,13 +30,16 @@ app.controller('AppCtrl',
 			url : 'http://216.15.228.130:8083/NBanner.php',
 			method : "post",
 			data : bannerDetails
-		}).then(function(response) {
-			$scope.bannerModel = response.data.bannerimages;
+		}).success(function(response) {
+			$scope.bannerModel = response.bannerimages;
 			// alert("here");
 			//  setTimeout(function() {
 			$ionicSlideBoxDelegate.update();
 			//  }, 5000);
-			//	console.log("reponse response.data", response.data);
+			console.log("reponse response.data", response);
+		}).error(function (data, status, headers, config) {
+			console.log("error",status);
+
 		});
 		// $scope.bannerModel={"Banner":["img/CAKE.png","img/PASTA.png","img/PIZZA.png","img/CALZONE.png"]};
 	};
@@ -140,6 +143,17 @@ app.controller('AppCtrl',
 		"catId":7
 	} ];
 
+
+	$scope.showSpinner = function() {
+		$ionicLoading.show({
+			template: /*'<img src="img/loading.gif">'*/'<ion-spinner icon="spiral"></ion-spinner>',
+			//  template: 'Loading....',
+			duration : 4000
+		});
+	};
+	$scope.hideSpinner = function(){
+		$ionicLoading.hide();
+	};
 
 
 });

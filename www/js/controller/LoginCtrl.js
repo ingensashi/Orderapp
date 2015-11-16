@@ -77,14 +77,14 @@ app.controller('LoginCtrl', function($scope, $ionicPopup,$ionicLoading,$http,$lo
     url:'http://216.15.228.130:8083/NUserLoginRequestwithPassword.php', 
     method: "post",
     data: user
-  }).then(function(response){
+  }).success(function(response){
     console.log("reponse userLogin",response);
-    $scope.userReponse=response.data;
+    $scope.userReponse=response;
 //$scope.hideSpinner();
 if($scope.userReponse.userstatus=="success"){
   $localStorageService.setUserStatus(1);
   $localStorageService.setUserDetails($scope.userReponse.userdetails);
- $state.go('app.home');/*.then(function() {
+ $state.go('app.home');/*.success(function() {
   $scope.hideSpinner();
 });*/
 }else{
@@ -94,6 +94,9 @@ if($scope.userReponse.userstatus=="success"){
  }
 
  //   $localStorage.sessionId=response.data.UserDetails.SessionId;
+}).error(function (data, status, headers, config) {
+    console.log("error",status);
+    return status;
 });
 
 }
@@ -111,8 +114,8 @@ $http({
   url:'http://216.15.228.130:8083/NGuestRequest.php', 
   method: "post",
   data: guest
-}).then(function(response){
- $scope.guestReponse=response.data;
+}).success(function(response){
+ $scope.guestReponse=response;
   // console.log("reponse guestLogin",$scope.guestReponse);
   if($scope.guestReponse.gueststatus=="success"){
     $scope.showPopup();
@@ -121,6 +124,9 @@ $http({
     $scope.hideSpinner();
     $scope.showAlert('Something wrong happened','Try again');
   }
+}).error(function (data, status, headers, config) {
+    console.log("error",status);
+    return status;
 });
 };
 
@@ -149,9 +155,9 @@ $scope.registerUser=function(registerUser){
     url:'http://216.15.228.130:8083/NUserRegistration.php', 
     method: "post",
     data: tempUser
-  }).then(function(response){
+  }).success(function(response){
   //  console.log("reponse registerUser",response);
-  $scope.userReponse=response.data;
+  $scope.userReponse=response;
   console.log("userReponse registerUser",response);
   if($scope.userReponse.userstatus=="otp verified required" || $scope.userReponse.userstatus=="success"){
     $scope.showPopup();
@@ -160,6 +166,9 @@ $scope.registerUser=function(registerUser){
     $scope.hideSpinner();
     $scope.showAlert('Existing user',$scope.userReponse.userregistration.resultstring);
   }
+}).error(function (data, status, headers, config) {
+    console.log("error",status);
+    return status;
 });
 };
 
@@ -214,7 +223,7 @@ $scope.comparePassword=function(password,conPassword){
       ]*/
 
     });
-myPopup.then(function(res) {
+myPopup.success(function(res) {
  //console.log('Tapped!', res);
 });
 };
@@ -237,7 +246,7 @@ $scope.hidePopup=function(flag){
      $localStorageService.setUserStatus(0);
      $scope.guestReponse.mobileNo=mobileNo;
      $localStorageService.setUserDetails($scope.guestReponse.guestregistration);
-     $state.go('app.home');/*.then(function() {
+     $state.go('app.home');/*.success(function() {
       $scope.hideSpinner();
     });;*/
 }else{
@@ -259,12 +268,12 @@ $scope.hidePopup=function(flag){
       url:'http://216.15.228.130:8083/NUserRegistrationVerify.php', 
       method: "post",
       data: reqData
-    }).then(function(response){
+    }).success(function(response){
      console.log("reponse userregistration response",response);
    //  console.log("response.data.userdetails.userstatus"+response.data.userstatus);
-   if(response.data.userstatus!="Invalid"){
+   if(response.userstatus!="Invalid"){
     //  alert("valid request");
-    $scope.userReponse=response.data;
+    $scope.userReponse=response;
      //   console.log("localStorage after",$localStorage);
      $state.go('app.home');
      $localStorageService.setUserStatus(1);
@@ -273,10 +282,13 @@ $scope.hidePopup=function(flag){
      $scope.hideSpinner();
      $scope.showAlert('Invalid request',"please try again");
    }
-     /*.then(function() {
+     /*.success(function() {
       $scope.hideSpinner();
     });;*/
-  });
+  }).error(function (data, status, headers, config) {
+      console.log("error",status);
+      return status;
+});
 
   }else{
     $scope.invalidOTP=true;
@@ -302,7 +314,7 @@ $scope.showAlert = function(state,msg) {
    title: state,
    template: msg
  });
- alertPopup.then(function(res) {
+ alertPopup.success(function(res) {
      //console.log('Thank you for not eating my delicious ice cream cone');
    });
 };
@@ -324,8 +336,8 @@ $http({
   url:'http://216.15.228.130:8083/NPasswordResetRequest.php', 
   method: "post",
   data: passwordReset
-}).then(function(response){
- passwordResetResponse=response.data;
+}).success(function(response){
+ passwordResetResponse=response;
  console.log("reponse passwordResetResponse",passwordResetResponse);
  if(passwordResetResponse.userstatus=="Success"){
   $scope.showPopup();
@@ -333,6 +345,9 @@ $http({
   $scope.hideSpinner();
   $scope.showAlert('Mobile no does not exist','Register as new user');
 }
+}).error(function (data, status, headers, config) {
+    console.log("error",status);
+    return status;
 });
 };
 
@@ -346,8 +361,8 @@ $http({
   url:'http://216.15.228.130:8083/NUserPasswordReset.php', 
   method: "post",
   data: passwordReset
-}).then(function(response){
- passwordResetResponse=response.data;
+}).success(function(response){
+ passwordResetResponse=response;
  console.log("reponse passwordResetResponse",passwordResetResponse);
  if(passwordResetResponse.passwordchangedstatus=="success"){
    $localStorageService.setUserStatus(1);
@@ -359,6 +374,9 @@ $http({
   $scope.hideSpinner();
   $scope.showAlert('Something wrong happened','Please Try again');
 }
+}).error(function (data, status, headers, config) {
+    console.log("error",status);
+    return status;
 });
 };
 

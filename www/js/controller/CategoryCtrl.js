@@ -21,6 +21,7 @@ app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate) {
 
 	var bannerDetails;
 	var getBannerData = function(catId) {
+		$scope.showSpinner();
 		$scope.catBannerModel={bannerimages:{imagepath:"img/PIZZA.png"}};
 		bannerDetails = {
 				"device_id" : "1234",
@@ -34,14 +35,18 @@ app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate) {
 			url : 'http://216.15.228.130:8083/NBanner.php',
 			method : "post",
 			data : bannerDetails
-		}).then(function(response) {
+		}).success(function(response) {
 			console.log("response",response);
-			$scope.catBannerModel = response.data.bannerimages;
+			$scope.catBannerModel = response.bannerimages;
 			// alert("here");
 			/*setTimeout(function() {*/
 			$ionicSlideBoxDelegate.update();
+			$scope.hideSpinner();
 			/*   }, 5000);*/
-		});
+		}).error(function (data, status, headers, config) {
+	        console.log("error",status);
+	        return status;
+	});
 		//$scope.bannerModel=["img/CAKE.png","img/PASTA.png","img/PIZZA.png","img/CALZONE.png"];
 	};
 	var init = function() {

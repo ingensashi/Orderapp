@@ -4,6 +4,7 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService) 
 	$scope.headerTitle.name=$scope.categoryDetails.catType;
 
 	var getProductDetails=function(catName,catType){
+		$scope.showSpinner();
 		var tempType='';
 		if(catType.indexOf('Non')>-1){
 			tempType="nonveg";
@@ -22,20 +23,26 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService) 
 			url : 'http://216.15.228.130:8083/NProduct.php',
 			method : "post",
 			data : bannerDetails
-		}).then(function(response) {
+		}).success(function(response) {
 			if(catType.indexOf('Non')>-1){
-				$scope.productDetails = response.data.productdetails.nonveg;
+				$scope.productDetails = response.productdetails.nonveg;
 			}else{
-				$scope.productDetails = response.data.productdetails.Veg;
+				$scope.productDetails = response.productdetails.Veg;
 			}
-
+			
+			
 //			alert("here");
 			/*setTimeout(function() {
 $ionicSlideBoxDelegate.update();
 }, 5000);*/
-			console.log("reponse response.data", response.data);
-		});
+			console.log("reponse response.data", response);
+			$scope.hideSpinner();
+		}).error(function (data, status, headers, config) {
+	        console.log("error",status);
+	        return status;
+	});
 	};
+
 
 	var init=function(){
 		getProductDetails($scope.categoryDetails.name,$scope.categoryDetails.catType);
