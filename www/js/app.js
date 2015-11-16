@@ -6,7 +6,7 @@ var user;
 //the 2nd parameter is an array of 'requires'
 var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'])
 
-.run(function($ionicPlatform,$localStorage,$state,$timeout,$ionicScrollDelegate,$rootScope) {
+.run(function($ionicPlatform,$localStorage,$state,$timeout,$ionicScrollDelegate,$rootScope,$q) {
 	user=$localStorage.user;
 	$rootScope.stateArray=[];
 	console.log("$localStorage app run",user);
@@ -25,7 +25,7 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 		}
 	}
 	$ionicPlatform.ready(function() {
-	$ionicScrollDelegate.scrollTop();
+		$ionicScrollDelegate.scrollTop();
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs).
 		// The reason we default this to hidden is that native apps don't usually show an accessory bar, at
@@ -98,7 +98,6 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
 				controller: 'AppCtrl'
 			}
 		}
-
 	})
 
 	.state('login', {
@@ -107,48 +106,35 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
 		controller: 'LoginCtrl'
 
 
-	})
-	/*  .state('app.category', {
-    url: '/category',
-    views:{
-      'app-home':{
-        templateUrl: 'templates/category.html',
-        params : {categoryId: null},
-        controller: 'AppCtrl'
-      }
-    }
-
-
-  })
-  .state('app.menu', {
-    url: '/menu',
-    views:{
-    'app-home':{
-       templateUrl: 'templates/item.html',
-       controller: 'AppCtrl'
-     }
-   }
-
-
- })
-
-  .state('app.subCategory', {
-    url: '/subCategory',
-    views:{
-      'app-home':{
-       templateUrl: 'templates/subCategory.html',
-       controller: 'AppCtrl'
-     }
-   }
-
-
- })*/;
-
+	});
 	$urlRouterProvider.otherwise("/login");
 
 	/*$locationProvider.html5Mode({
   enabled: true,
   requireBase: false
 });*/
+})
+.config(function($httpProvider) {
+	$httpProvider.interceptors.push(function() {
+		return {
+			'response': function(response) {
+				var status = response.status; // error code
+				//alert("status"+status);
+				if ((status >= 400) && (status < 500)) {
+					alert("AuthError", status);
+					return;
+				}
+				if ( (status >= 500) && (status < 600) ) {
+					alert("ServerError", status);
+					return;
+				}
+				return response;
+			}
+		};
+	});
+
+
 });
+
+
 

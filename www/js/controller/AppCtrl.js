@@ -15,6 +15,35 @@ app.controller('AppCtrl',
 	$scope.activeScreenDetail.name='home';
 	$scope.categoryDetails={};
 
+	var bannerDetails;
+	var getBannerData = function(bannerDetails) {
+		$scope.bannerModel={bannerimages:{imagepath:"img/PIZZA.png"}};
+		bannerDetails = {
+				"device_id" : "1234",
+				"session_id" : "dgdfg",
+				"banner_type" : "HOME",
+				"image_type" : "LDPI",
+				"cat_id" : "0"
+		};
+		console.log("bannerDetails", bannerDetails);
+		$http({
+			url : 'http://216.15.228.130:8083/NBanner.php',
+			method : "post",
+			data : bannerDetails
+		}).then(function(response) {
+			$scope.bannerModel = response.data.bannerimages;
+			// alert("here");
+			//  setTimeout(function() {
+			$ionicSlideBoxDelegate.update();
+			//  }, 5000);
+			//	console.log("reponse response.data", response.data);
+		});
+		// $scope.bannerModel={"Banner":["img/CAKE.png","img/PASTA.png","img/PIZZA.png","img/CALZONE.png"]};
+	};
+	var init = function() {
+		getBannerData();
+	}
+	init();
 	//console.log("user details", $scope.user);
 	$scope.expandSerachBar = function(event) {
 		// alert("inside"+event);
@@ -78,36 +107,6 @@ app.controller('AppCtrl',
 		}
 	};
 
-	var bannerDetails;
-	var getBannerData = function(bannerDetails) {
-		$scope.bannerModel={bannerimages:{imagepath:"img/PIZZA.png"}};
-		bannerDetails = {
-				"device_id" : "1234",
-				"session_id" : "dgdfg",
-				"banner_type" : "HOME",
-				"image_type" : "LDPI",
-				"cat_id" : "0"
-		};
-		console.log("bannerDetails", bannerDetails);
-		$http({
-			url : 'http://216.15.228.130:8083/NBanner.php',
-			method : "post",
-			data : bannerDetails
-		}).then(function(response) {
-			$scope.bannerModel = response.data.bannerimages;
-			// alert("here");
-			//  setTimeout(function() {
-			$ionicSlideBoxDelegate.update();
-			//  }, 5000);
-			console.log("reponse response.data", response.data);
-		});
-		// $scope.bannerModel={"Banner":["img/CAKE.png","img/PASTA.png","img/PIZZA.png","img/CALZONE.png"]};
-	};
-	var init = function() {
-		getBannerData();
-	}
-	init();
-
 
 	$scope.tabs = [ {
 		"text" : "Pizzas",
@@ -141,6 +140,6 @@ app.controller('AppCtrl',
 		"catId":7
 	} ];
 
-	
-	
+
+
 });
