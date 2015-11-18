@@ -56,19 +56,19 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 		}
 		
 		cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
-		    alert("GPS location is " + (enabled ? "enabled" : "disabled"));
+		   // alert("GPS location is " + (enabled ? "enabled" : "disabled"));
 		}, function(error){
-		    alert("The following gps error occurred: "+error);
+		    //alert("The following gps error occurred: "+error);
 		});
 		cordova.plugins.diagnostic.isNetworkLocationEnabled(function(enabled){
-		    alert("Network location is " + (enabled ? "enabled" : "disabled"));
+		    //alert("Network location is " + (enabled ? "enabled" : "disabled"));
 		}, function(error){
-		    alert("The following net error occurred: "+error);
+		    //alert("The following net error occurred: "+error);
 		});
 		cordova.plugins.diagnostic.getLocationMode(function(mode){
-		    alert("Current location mode is: " + mode);
+		    //alert("Current location mode is: " + mode);
 		}, function(error){
-		    alert("The following error occurred: "+error);
+		   // alert("The following error occurred: "+error);
 		});
 		
 

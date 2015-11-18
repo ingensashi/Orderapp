@@ -1,5 +1,5 @@
 'use strict';
-app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService) {
+app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$CartService) {
 	$scope.productDetails={};
 	$scope.headerTitle.name=$scope.categoryDetails.catType;
 
@@ -67,51 +67,11 @@ $ionicSlideBoxDelegate.update();
 	};
 
 	$scope.addItemToCart=function(product){
-		//	console.log("product addItemToCart",product.prodid);
-		var isDuplicate=false;
-		var productId=product.prodid;
-		for(var i=0;i<$scope.cartDetails.itemList.length;i++){
-			if($scope.cartDetails.itemList[i]==productId){
-				isDuplicate=true;
-			}
-		}
-		if(!isDuplicate){
-			$scope.cartDetails.itemList.push(productId);
-		}
-		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId])){
-			$scope.cartDetails.nodeDetails[productId]={};
-			$scope.cartDetails.nodeDetails[productId].count=0;
-		}
-		$scope.cartDetails.nodeDetails[productId].product=product;
-		$scope.cartDetails.nodeDetails[productId].count=$scope.cartDetails.nodeDetails[productId].count+1;
-		console.log($scope.cartDetails.amount+"$scope.cartDetails.amount");
-		$scope.cartDetails.productCount=$scope.cartDetails.productCount+1;
-		$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)+ parseFloat(product.rate)).toFixed(2);
-		//	console.log("$scope.cartDetails",$scope.cartDetails);
-		$localStorageService.setCardDetails($scope.cartDetails);
+		$CartService.addItemToCart(product,$scope.cartDetails);
 	};
 
 	$scope.removeItemFromCart=function(product){
-		//console.log("product addItemToCart",product.prodid);
-		var productId=product.prodid;
-		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId]) || $scope.cartDetails.nodeDetails[productId].count==0){
-			alert("please add atleast one time");
-			return;
-		}
-		$scope.cartDetails.nodeDetails[productId].count=$scope.cartDetails.nodeDetails[productId].count-1;
-		if($scope.cartDetails.nodeDetails[productId].count==0){
-			for(var i=0;i<$scope.cartDetails.itemList.length;i++){
-				if($scope.cartDetails.itemList[i]==productId){
-					$scope.cartDetails.itemList.splice(i, 1);
-				}
-			}
-			delete $scope.cartDetails.nodeDetails[productId].product;
-		}
-		$scope.cartDetails.productCount=$scope.cartDetails.productCount-1;
-		//console.log($scope.cartDetails.amount+"$scope.cartDetails.amount");
-		$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)- parseFloat(product.rate)).toFixed(2);
-		//	console.log("$scope.cartDetails",$scope.cartDetails);
-		$localStorageService.setCardDetails($scope.cartDetails);
+		$CartService.removeItemFromCart(product,$scope.cartDetails);
 	};
 
 });

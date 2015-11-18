@@ -15,22 +15,23 @@
 			<div class="col" style="text-align: left">
 				<span class="ion-ionic"
 					style="color: green; margin-right: 3px; margin-left: -7%"></span>
-				Mparghretic Classic Pizza
+				{{cartDetails.activeProduct.product_name}}
 
 			</div>
 			<div class="col" style="text-align: right; font-size: 14px">
-				RS.74</div>
+				RS.{{cartDetails.activeProduct.rate}}</div>
 		</div>
 		<div class="row">
 			<div class="col" style="text-align: left; font-size: 10px">
-				Tomato pulp,Fresh Mozzerella<br> Basesl and mozzellz
-			</div>
+				{{cartDetails.activeProduct.proddesc}}</div>
 			<div class="col" style="text-align: right">
 				<i class="pull-left icon ion-ios-minus"
-					style="font-size: 1.3em; color: green"></i> <span
-					style="font-size: 1.2em;">1</span> <i
+					style="font-size: 1.8em; color: green"
+					ng-click="removeItemFromCart(cartDetails.activeProduct)"></i> <span
+					style="font-size: 1.6em;">{{cartDetails.nodeDetails[cartDetails.activeProduct.prodid].count}}</span> <i
 					class=" pull-right icon ion-ios-plus"
-					style="font-size: 1.3em; color: green"></i>
+					style="font-size: 1.8em; color: green"
+					ng-click="addItemToCart(cartDetails.activeProduct)"></i>
 			</div>
 		</div>
 

@@ -3,7 +3,7 @@
 </div>
 <div class="list" ng-if="event1=='Size'">
 	<div class="item" style="border: 0px; padding: 7px"
-		ng-repeat="size in productSize">
+		ng-repeat="size in productSize | orderBy:'sizerate'">
 		<div class="row">
 			<div class="col" style="margin-top: 20px">{{size.prodsize}}</div>
 			<div class="col" style="text-align: right">
@@ -24,7 +24,7 @@
 		<div class="row">
 			<div class="col" style="margin-top: 20px">{{base.prodcrust}}</div>
 			<div class="col" style="text-align: right">
-				Rs.{{base.crustrate}} <label class="checkbox" style="top: 16px">
+				<span ng-if="base.crustrate>0">Rs.{{base.crustrate}} </span><label class="checkbox" style="top: 16px">
 					<input type="checkbox">
 				</label>
 			</div>
