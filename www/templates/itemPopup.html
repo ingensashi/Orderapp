@@ -1,6 +1,7 @@
 <div class="header">
 	<h4>{{event1}}</h4>
 </div>
+<div>
 <div class="list" ng-if="event1=='Size'">
 	<div class="item" style="border: 0px; padding: 7px"
 		ng-repeat="size in productSize | orderBy:'sizerate'">
@@ -18,7 +19,9 @@
 			ng-click="hidePopup('ok')">Ok</button>
 	</div>
 </div>
-<div class="list" ng-if="event1=='Base'">
+<div ng-if="event1=='Base'">
+<div class="content" scroll="true" >
+<div class="list">
 	<div class="item" style="border: 0px; padding: 0px"
 		ng-repeat="base in productBase">
 		<div class="row">
@@ -30,18 +33,21 @@
 			</div>
 		</div>
 	</div>
-	<div style="text-align: right">
-		<div class="button-bar" style="padding: 17px">
-			<button class=" button button-medium button-clear"
-				style="margin-top: 3%; background-color: greenyellow; color: green; right: 10px"
+</div>
+</div>
+<ion-footer-bar style="background-position:bottom">
+<div class="button-bar">
+			<button class=" button button-small  button-clear"
+				style="background-color: greenyellow; color: green; right: 3px"
 				ng-click="hidePopup('reset')">RESET</button>
-			<button class="button button-medium button-clear"
-				style="margin-top: 3%; background-color: greenyellow; color: green;"
+			<button class="button button-small button-clear"
+				style="background-color: greenyellow; color: green;"
 				ng-click="hidePopup('ok')">Ok</button>
 		</div>
-	</div>
+</ion-footer-bar>
 </div>
-<div class="content" scroll="true" ng-if="event1=='Toppins'">
+<div ng-if="event1=='Toppins'">
+<div class="content" scroll="true" >
 	<div class="list">
 		<div class="item" style="border: 0px; padding: 0px"
 			ng-repeat="toppins in productToppins">
@@ -54,14 +60,18 @@
 			</div>
 		</div>
 		<div style="text-align: right">
-			<div class="button-bar" style="padding: 17px">
-				<button class=" button button-medium button-clear"
-					style="margin-top: 3%; background-color: greenyellow; color: green; right: 10px"
-					ng-click="hidePopup('clear')">CLEAR</button>
-				<button class="button button-medium button-clear"
-					style="margin-top: 3%; background-color: greenyellow; color: green;"
-					ng-click="hidePopup('ok')">Ok</button>
-			</div>
+			
 		</div>
 	</div>
+</div>
+<ion-footer-bar style="background-position:bottom">
+<div class="button-bar">
+				<button class=" button button-medium button-clear"
+					style="background-color: greenyellow; color: green; right: 3px"
+					ng-click="hidePopup('clear')">CLEAR</button>
+				<button class="button button-medium button-clear"
+					style="background-color: greenyellow; color: green;"
+					ng-click="hidePopup('ok')">Ok</button>
+			</div>
+</ion-footer-bar>
 </div>
