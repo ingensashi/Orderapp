@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootScope,$ionicScrollDelegate,$cordovaGeolocation,$http) {
+app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootScope,$ionicModal,$ionicScrollDelegate,$cordovaGeolocation,$http) {
 	$ionicScrollDelegate.scrollTop();
 	var init=function(){
 		if($localStorageService.getUser()==null){
@@ -68,4 +68,21 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 		getCurrentLocation(positionTracker);
 	};
 
+	
+	//TOdo: This is common for both model
+	$ionicModal.fromTemplateUrl('templates/order.html', {
+		scope : $scope,
+		animation : 'slide-in-up'
+	}).then(function(modal1) {
+		// modal.show();
+		$scope.modal1 = modal1;
+	});
+	$scope.openModal1 = function() {
+		console.log("open modal", $scope.modal1);
+		$scope.modal1.show();
+	};
+	$scope.closeModal1 = function() {
+		$scope.modal1.hide();
+	};
+	
 });
