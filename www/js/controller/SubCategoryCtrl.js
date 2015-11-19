@@ -4,11 +4,24 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 	$scope.productSize={};
 	$scope.productToppins={};
 	$scope.productBase={};
+	$scope.sizeChecked=false;
+	$scope.baseChecked=false;
+	$scope.toppinsChecked={};
+	$scope.cheesyChecked=false;
 	var myPopup=null;
 	var init=function(){
+		var activeProduct=$scope.cartDetails.activeProduct;
+		console.log("init",activeProduct);
+		var productId=activeProduct.prodid;
+		if(angular.isUndefined(cartDetails.nodeDetails[productId])){
+			cartDetails.nodeDetails[productId]={};
+			cartDetails.nodeDetails[productId].count=0;
+		}
 		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId].properties)){
 			$scope.cartDetails.nodeDetails[productId].properties={};
 			$scope.cartDetails.nodeDetails[productId].properties.toppins=[];
+
+			$scope.cartDetails.nodeDetails[productId].properties.sizeRate=0;
 		}
 	};
 	var getProductDetails=function(event){
@@ -49,6 +62,9 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 			}).success(function(response) {
 				console.log("reponse response.data", response);
 				$scope.productToppins=response.producttoppingsdetails;
+				for(var i=0;i<$scope.productToppins.length;i++){
+					$scope.toppinsChecked[$scope.productToppins.toppingid].checked=false;
+				}
 				$scope.hideSpinner();
 			}).error(function (data, status, headers, config) {
 				console.log("error",status);
@@ -81,28 +97,66 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 	};
 
 
-	$scope.addvarietyToProduct=function(event,data,rate){
+	$scope.addPropertiesToProduct=function(event,data,rate){
 		var activeProduct=$scope.cartDetails.activeProduct;
 		console.log("addvarietyToProduct",activeProduct);
 		var productId=activeProduct.prodid;
 		switch(event){
 		case 'Size':
 			$scope.cartDetails.nodeDetails[productId].properties[event]=data;
+			if($scope.cartDetails.nodeDetails[productId].properties.sizeRate>0){
+				$scope.cartDetails.nodeDetails[productId].properties.sizeRate=rate;
+			}else{
+				$scope.removePropertiesFromProduct(event,data,$scope.cartDetails.nodeDetails[productId].properties.sizeRate);
+			}
+			$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)+ parseFloat(rate)).toFixed(2);
 			break;
 		case 'Toppins':
-			$scope.cartDetails.nodeDetails[productId].properties.toppins.push(data);
+			if($scope.toppinsChecked[$scope.productToppins.toppingid].checked){
+				$scope.cartDetails.nodeDetails[productId].properties.toppins.push(data);
+				$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)+ parseFloat(rate)).toFixed(2);
+			}else{
+				$scope.removePropertiesFromProduct(event,data,rate);
+			}
 			break;
 		case 'Base':
 			$scope.cartDetails.nodeDetails[productId].properties[event]=data;
+			if(rate>0){
+				alert("handle this");
+			}
 			break;
 		case 'cheesy':
-			$scope.cartDetails.nodeDetails[productId].properties[event]=true;
+			if($scope.cheesyChecked){
+				$scope.cartDetails.nodeDetails[productId].properties[event]=true;
+				$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)+ parseFloat(rate)).toFixed(2);
+			}else{
+				$scope.cartDetails.nodeDetails[productId].properties[event]=false;
+				$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)- parseFloat(rate)).toFixed(2);
+			}
 			break;
 		}
 
-		$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)+ parseFloat(rate)).toFixed(2);
 		console.log("$scope.cartDetails",$scope.cartDetails);
 		$localStorageService.setCardDetails($scope.cartDetails);
+	};
+
+	$scope.removePropertiesFromProduct=function(event,data,rate){
+		var activeProduct=$scope.cartDetails.activeProduct;
+		console.log("addvarietyToProduct",activeProduct);
+		var productId=activeProduct.prodid;
+		switch(event){
+		case 'Size':
+			$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)- parseFloat(rate)).toFixed(2);
+			break;
+		case 'Toppins':
+			for(var i=0;i<$scope.cartDetails.nodeDetails[productId].properties.toppins.length;i++){
+				if($scope.cartDetails.nodeDetails[productId].properties.toppins[i]==data){
+					$scope.cartDetails.nodeDetails[productId].properties.toppins.splice(i, 1);
+					$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)- parseFloat(rate)).toFixed(2);
+				}
+			}
+			break;
+		}
 	};
 
 

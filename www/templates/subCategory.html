@@ -91,7 +91,8 @@
 						<h2 style="color: yellow;">Chezze(RS.35)</h2>
 					</div>
 					<div class="col" style="text-align: right">
-						<label class="checkbox"> <input type="checkbox">
+						<label class="checkbox"> <input type="checkbox" ng-model="cheesyChecked" 
+						ng-change="addPropertiesToProduct('cheesy',cheesyChecked,35)">
 						</label>
 					</div>
 				</div>
