@@ -8,8 +8,8 @@
 		<div class="row">
 			<div class="col" style="margin-top: 20px">{{size.prodsize}}</div>
 			<div class="col" style="text-align: right">
-				Rs.{{size.sizerate}} <label class="checkbox" style="top: 16px"><input
-					name="size" type="radio" ng-model="sizeChecked" ng-change="addPropertiesToProduct('Size',size.prodsize,size.sizerate)"></label>
+				Rs.{{size.sizerate}} <label class="checkbox" style="top: 16px"><input value="true"
+					name="size" type="radio" ng-model="sizeChecked" ng-change="addPropertiesToProduct('Size',size.prodsize,size.sizerate,sizeChecked)"></label>
 			</div>
 		</div>
 	</div>
@@ -28,7 +28,8 @@
 			<div class="col" style="margin-top: 20px">{{base.prodcrust}}</div>
 			<div class="col" style="text-align: right">
 				<span ng-if="base.crustrate>0">Rs.{{base.crustrate}} </span><label class="checkbox" style="top: 16px">
-					<input type="radio"  ng-model="baseChecked" ng-change="addPropertiesToProduct('Base',base.prodcrust,base.crustrate)">
+					<input type="radio" name="base" ng-model="baseChecked" value="true" 
+					ng-change="addPropertiesToProduct('Base',base.prodcrust,base.crustrate,baseChecked)">
 				</label>
 			</div>
 		</div>
@@ -55,7 +56,8 @@
 				<div class="col" style="margin-top: 20px">{{toppins.toppingname}}</div>
 				<div class="col" style="text-align: right">
 					Rs.{{toppins.toppingrate}}<label class="checkbox" style="top: 16px"><input
-						type="checkbox" ng-model="toppinsChecked[productToppins.toppingid].checked" ng-change="addPropertiesToProduct('Toppins',toppins.toppingid,toppins.toppingrate)"></label>
+						type="checkbox" ng-model="toppinsChecked[toppins.toppingid].checked"  value="true"
+						ng-change="addPropertiesToProduct('Toppins',toppins.toppingid,toppins.toppingrate,toppinsChecked[toppins.toppingid].checked)"></label>
 				</div>
 			</div>
 		</div>

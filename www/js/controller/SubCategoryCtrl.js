@@ -7,23 +7,23 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 	$scope.sizeChecked=false;
 	$scope.baseChecked=false;
 	$scope.toppinsChecked={};
-	$scope.cheesyChecked=false;
+	var activeProduct=$scope.cartDetails.activeProduct;
+	console.log("init",activeProduct);
+	var productId=activeProduct.prodid;
+	//$scope.cheesyChecked=false;
 	var myPopup=null;
 	var init=function(){
-		var activeProduct=$scope.cartDetails.activeProduct;
-		console.log("init",activeProduct);
-		var productId=activeProduct.prodid;
-		if(angular.isUndefined(cartDetails.nodeDetails[productId])){
-			cartDetails.nodeDetails[productId]={};
-			cartDetails.nodeDetails[productId].count=0;
+		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId])){
+			$scope.cartDetails.nodeDetails[productId]={};
+			$scope.cartDetails.nodeDetails[productId].count=0;
 		}
 		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId].properties)){
 			$scope.cartDetails.nodeDetails[productId].properties={};
 			$scope.cartDetails.nodeDetails[productId].properties.toppins=[];
-
 			$scope.cartDetails.nodeDetails[productId].properties.sizeRate=0;
 		}
 	};
+	init();
 	var getProductDetails=function(event){
 		switch(event){
 		case 'Size':
@@ -60,10 +60,11 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 				method : "post",
 				data : productDetails
 			}).success(function(response) {
-				console.log("reponse response.data", response);
 				$scope.productToppins=response.producttoppingsdetails;
+				console.log("$scope.productToppins ",$scope.productToppins[0].toppingid);
 				for(var i=0;i<$scope.productToppins.length;i++){
-					$scope.toppinsChecked[$scope.productToppins.toppingid].checked=false;
+					$scope.toppinsChecked[$scope.productToppins[i].toppingid]={};
+					$scope.toppinsChecked[$scope.productToppins[i].toppingid].checked=false;
 				}
 				$scope.hideSpinner();
 			}).error(function (data, status, headers, config) {
@@ -97,22 +98,23 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 	};
 
 
-	$scope.addPropertiesToProduct=function(event,data,rate){
-		var activeProduct=$scope.cartDetails.activeProduct;
-		console.log("addvarietyToProduct",activeProduct);
-		var productId=activeProduct.prodid;
+	$scope.addPropertiesToProduct=function(event,data,rate,checked){
+		//alert("checked"+checked);
 		switch(event){
 		case 'Size':
 			$scope.cartDetails.nodeDetails[productId].properties[event]=data;
-			if($scope.cartDetails.nodeDetails[productId].properties.sizeRate>0){
+			//alert("$scope.cartDetails.nodeDetails[productId].properties.sizeRate"+$scope.cartDetails.nodeDetails[productId].properties.sizeRate);
+			if($scope.cartDetails.nodeDetails[productId].properties.sizeRate==0){
 				$scope.cartDetails.nodeDetails[productId].properties.sizeRate=rate;
+				$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)+ parseFloat(rate)).toFixed(2);
 			}else{
-				$scope.removePropertiesFromProduct(event,data,$scope.cartDetails.nodeDetails[productId].properties.sizeRate);
+				$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)- $scope.cartDetails.nodeDetails[productId].properties.sizeRate+
+						parseFloat(rate)).toFixed(2);
+				$scope.cartDetails.nodeDetails[productId].properties.sizeRate=rate;
 			}
-			$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)+ parseFloat(rate)).toFixed(2);
 			break;
 		case 'Toppins':
-			if($scope.toppinsChecked[$scope.productToppins.toppingid].checked){
+			if(checked){
 				$scope.cartDetails.nodeDetails[productId].properties.toppins.push(data);
 				$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)+ parseFloat(rate)).toFixed(2);
 			}else{
@@ -126,7 +128,7 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 			}
 			break;
 		case 'cheesy':
-			if($scope.cheesyChecked){
+			if(checked){
 				$scope.cartDetails.nodeDetails[productId].properties[event]=true;
 				$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)+ parseFloat(rate)).toFixed(2);
 			}else{
@@ -146,6 +148,7 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 		var productId=activeProduct.prodid;
 		switch(event){
 		case 'Size':
+			$scope.cartDetails.nodeDetails[productId].properties.sizeRate=0;
 			$scope.cartDetails.amount= (parseFloat( $scope.cartDetails.amount)- parseFloat(rate)).toFixed(2);
 			break;
 		case 'Toppins':
