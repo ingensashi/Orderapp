@@ -79,10 +79,13 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 	});
 	$scope.openModal1 = function() {
 		console.log("open modal", $scope.modal1);
+		$scope.cart=$localStorageService.getCartDetails();
+		console.log("cart",$scope.cart)
 		$scope.modal1.show();
 	};
 	$scope.closeModal1 = function() {
 		$scope.modal1.hide();
 	};
+	
 	
 });

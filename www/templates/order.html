@@ -1,150 +1,112 @@
-  <ion-modal-view;">
-  
-<ion-header-bar class="bar bar-stable">
-  <h3>Your-order</h3>
-  <button class="button button-clear button-primary"  style="text-align:right;margin-left:94px;font-size:30px" ng-click="modal1.hide()"><i class="ion-android-close"></i></button>
-</ion-header-bar>
-	<ion-content class="padding" has-header="true" style="margin-top:75px">
-	
-	<div class="list-card" style="background-color: gray;">
-	<div class="row" style="font-size:14px">
-	<div class="col">
-	<p>Product Name</p>
+
+<ion-modal-view> <ion-header-bar
+	class="bar bar-stable">
+<h3>Your-order</h3>
+<button class="button button-clear button-primary"
+	style="text-align: right; margin-left: 94px; font-size: 30px"
+	ng-click="modal1.hide()">
+	<i class="ion-android-close"></i>
+</button>
+</ion-header-bar> <ion-content class="padding" has-header="true" style="margin-top:75px">
+
+<div class="list-card" style="background-color: gray;">
+	<div class="row" style="font-size: 14px">
+		<div class="col">
+			<p>Product Name</p>
+		</div>
+		<div class="col">
+			<p>Type</p>
+		</div>
+		<div class="col">
+			<p>Qty</p>
+		</div>
+		<div class="col">
+			<p>Net Price</p>
+		</div>
+		<div class="col">
+			<p>Action</p>
+		</div>
 	</div>
-	<div class="col">
-	<p>Type</p>
-	</div>
-	<div class="col">
-	<p>Qty</p>
-	</div>
-	<div class="col">
-	<p>Net Price</p>
-	</div>
-	<div class="col">
-	<p>Action</p>
-	</div>
-	</div>
-	</div>
-	<div class="list-card" style="background-color:gainsboro;margin-top:2px">
+</div>
+<div class="list-card" ng-repeat="crt in cart.itemList"
+	style="background-color: gainsboro; margin-top: 2px">
 	<div class="row">
-	<div class="col">
-	Pizza
+		<div class="col">{{cart.nodeDetails[crt].product.product_name}}</div>{{crt.rate}}
+		<div class="col">{{cart.nodeDetails[crt].product.itemtype}}</div>
+		<div class="col">{{cart.nodeDetails[crt].count}}</div>
+		<div class="col">{{cart.amount}}</div>
+		<div class="col">
+			<i style="font-size: 25px; color: blue;" class="ion-trash-b"></i> <i
+				style="font-size: 21px; color: green;" class="ion-edit"></i>
+		</div>
 	</div>
-	<div class="col">
-	Veg
-	</div>
-	<div class="col">
-	1
-	</div>
-	<div class="col">
-	RS.87
-	</div>
-	<div class="col">
-	<i style="font-size: 25px;color: blue;" class="ion-trash-b"></i>
-	<i style="font-size: 21px;color: green;" class="ion-edit"></i>
-	</div>
-	</div>
-	</div>
-	<div class="list-card" style="background-color:gainsboro;margin-top:2px">
+</div>
+<!-- div class="list-card"
+	style="background-color: gainsboro; margin-top: 2px">
 	<div class="row">
-	<div class="col">
-	Pizza
+		<div class="col">Pizza</div>
+		<div class="col">Veg</div>
+		<div class="col">1</div>
+		<div class="col">RS.87</div>
+		<div class="col">
+			<i style="font-size: 25px; color: blue;" class="ion-trash-b"></i> <i
+				style="font-size: 21px; color: green;" class="ion-edit"></i>
+		</div>
+
 	</div>
-	<div class="col">
-	Veg
-	</div>
-	<div class="col">
-	1
-	</div>
-	<div class="col">
-	RS.87
-	</div>
-	<div class="col">
-	<i style="font-size: 25px;color: blue;" class="ion-trash-b"></i>
-	<i style="font-size: 21px;color: green;" class="ion-edit"></i>
-	</div>
-	
-	</div>
-	</div>
-	<div class="list-card" style="background-color:gainsboro;margin-top:2px">
+</div>
+<div class="list-card"
+	style="background-color: gainsboro; margin-top: 2px">
 	<div class="row">
-	<div class="col">
-	Pizza
-	</div>
-	<div class="col">
-	Veg
-	</div>
-	<div class="col">
-	1
-	</div>
-	<div class="col">
-	RS.87
-	</div>
-	<div class="col">
-	<i style="font-size: 25px;color: blue;" class="ion-trash-b"></i>
-	<i style="font-size: 21px;color: green;" class="ion-edit"></i>
-	</div>
-	
-	
-	</div>
-	</div>
-	<div class="list-card" style="background-color:gainsboro;margin-top:2px">
-	<div class="row">
-	<div class="col">
-	Pizza
-	</div>
-	<div class="col">
-	Veg
-	</div>
-	<div class="col">
-	1
-	</div>
-	<div class="col">
-	RS.87
-	</div>
-	<div class="col">
-	<i style="font-size: 25px;color: blue;" class="ion-trash-b"></i>
-	<i style="font-size: 21px;color: green;" class="ion-edit"></i>
-	</div>
-	
-	</div>
-	</div>
-	<div class="list-card" style="background-color:gainsboro;margin-top:2px">
-	<div class="row">
-	<div class="col">
-	Pizza 
-	</div>
-	<div class="col">
-	Veg
-	</div>
-	<div class="col">
-	1
-	</div>
-	<div class="col">
-	RS.87
-	</div>
-	<div class="col">
-	<i style="font-size: 25px;color: blue;" class="ion-trash-b"></i>
-	<i style="font-size: 21px;color: green;" class="ion-edit"></i>
-	</div>
-	
-	</div>
-	</div>
-	<div class="row" style="background-color:#a4258d;margin-top:6px ">
-	<div class="col">
-	*Taxes are also applicable.
-	</div>
-	<div class="col">
-	Total Price: `  1,478.00
-	</div>
-	<div class="col">
-	<button class="button-clear button-energized">Continue Shopping</button>
-	</div>
-	<div class="col">
-	<button class="button-clear">Confirm Order</button>
-	</div>
-	</div>
-</ion-content>
+		<div class="col">Pizza</div>
+		<div class="col">Veg</div>
+		<div class="col">1</div>
+		<div class="col">RS.87</div>
+		<div class="col">
+			<i style="font-size: 25px; color: blue;" class="ion-trash-b"></i> <i
+				style="font-size: 21px; color: green;" class="ion-edit"></i>
+		</div>
 
 
-</ion-modal-view>
+	</div>
+</div>
+<div class="list-card"
+	style="background-color: gainsboro; margin-top: 2px">
+	<div class="row">
+		<div class="col">Pizza</div>
+		<div class="col">Veg</div>
+		<div class="col">1</div>
+		<div class="col">RS.87</div>
+		<div class="col">
+			<i style="font-size: 25px; color: blue;" class="ion-trash-b"></i> <i
+				style="font-size: 21px; color: green;" class="ion-edit"></i>
+		</div>
+
+	</div>
+</div>
+<div class="list-card"
+	style="background-color: gainsboro; margin-top: 2px">
+	<div class="row">
+		<div class="col">Pizza</div>
+		<div class="col">Veg</div>
+		<div class="col">1</div>
+		<div class="col">RS.87</div>
+		<div class="col">
+			<i style="font-size: 25px; color: blue;" class="ion-trash-b"></i> <i
+				style="font-size: 21px; color: green;" class="ion-edit"></i>
+		</div>
+
+	</div>
+</div> -->
+<div class="row" style="background-color:gray; margin-top: 6px">
+	<div class="col">*Taxes are also applicable.</div>
+	<div class="col">Total Price: ` 1,478.00</div>
+	<div class="col">
+		<button class="button-clear button-energized">Continue
+			Shopping</button>
+	</div>
+	<div class="col">
+		<button class="button-clear">Confirm Order</button>
+	</div>
+</div>
+</ion-content> </ion-modal-view>
