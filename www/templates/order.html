@@ -1,104 +1,50 @@
 
-<ion-modal-view> <ion-header-bar
-	class="bar bar-stable">
-<h3>Your-order</h3>
+<ion-modal-view> <ion-header-bar class="bar bar-light">
+<p style="font-size: 19px;white-space: nowrap">Order Detail</p>
 <button class="button button-clear button-primary"
-	style="text-align: right; margin-left: 94px; font-size: 30px"
+	style="text-align: right; margin-left: 94px; font-size: 21px"
 	ng-click="modal1.hide()">
 	<i class="ion-android-close"></i>
 </button>
-</ion-header-bar> <ion-content class="padding" has-header="true" style="margin-top:75px">
+</ion-header-bar> <ion-content class="padding" has-header="true" style="padding:2px">
 
-<div class="list-card" style="background-color: gray;">
-	<div class="row" style="font-size: 14px">
-		<div class="col">
-			<p>Product Name</p>
-		</div>
-		<div class="col">
-			<p>Type</p>
-		</div>
-		<div class="col">
-			<p>Qty</p>
-		</div>
-		<div class="col">
-			<p>Net Price</p>
-		</div>
-		<div class="col">
+<ion-list> <ion-item
+	style="background-color:gainsboro;padding:0px">
+<div class="row" style="font-size: 14px">
+	<div class="col">
+		<p>Name</p>
+	</div>
+	<div class="col" style="text-align: center">
+		<p>Qty</p>
+	</div>
+	<div class="col" style="text-align: right">
+		<p>Price</p>
+	</div>
+	<!-- <div class="col" style="text-align:right">
 			<p>Action</p>
-		</div>
-	</div>
+		</div> -->
 </div>
-<div class="list-card" ng-repeat="crt in cart.itemList"
-	style="background-color: gainsboro; margin-top: 2px">
-	<div class="row">
-		<div class="col">{{cart.nodeDetails[crt].product.product_name}}</div>{{crt.rate}}
-		<div class="col">{{cart.nodeDetails[crt].product.itemtype}}</div>
-		<div class="col">{{cart.nodeDetails[crt].count}}</div>
-		<div class="col">{{cart.amount}}</div>
-		<div class="col">
-			<i style="font-size: 25px; color: blue;" class="ion-trash-b"></i> <i
-				style="font-size: 21px; color: green;" class="ion-edit"></i>
-		</div>
-	</div>
-</div>
-<!-- div class="list-card"
-	style="background-color: gainsboro; margin-top: 2px">
-	<div class="row">
-		<div class="col">Pizza</div>
-		<div class="col">Veg</div>
-		<div class="col">1</div>
-		<div class="col">RS.87</div>
-		<div class="col">
-			<i style="font-size: 25px; color: blue;" class="ion-trash-b"></i> <i
-				style="font-size: 21px; color: green;" class="ion-edit"></i>
-		</div>
+</ion-item> </ion-list> <ion-list ng-repeat="crt in cart.itemList"> <ion-item
+	style="padding:3px">
+<div class="row">
+	<div class="col" style="font-size: 13px; text-align: left;">
+		<span class="ion-ionic"
+			style="color: red; margin-right: 3px; margin-left: -7%"></span>
+		{{cart.nodeDetails[crt].product.product_name}}
 
 	</div>
+	<!-- <div class="col">{{cart.nodeDetails[crt].product.itemtype}}</div> -->
+	<div class="col" style="text-align: center">{{cart.nodeDetails[crt].count}}</div>
+	<div class="col" style="text-align: right; font-size: 13px">{{cart.amount}}</div>
+
 </div>
-<div class="list-card"
-	style="background-color: gainsboro; margin-top: 2px">
-	<div class="row">
-		<div class="col">Pizza</div>
-		<div class="col">Veg</div>
-		<div class="col">1</div>
-		<div class="col">RS.87</div>
-		<div class="col">
-			<i style="font-size: 25px; color: blue;" class="ion-trash-b"></i> <i
-				style="font-size: 21px; color: green;" class="ion-edit"></i>
-		</div>
-
-
-	</div>
+<div style="text-align: right">
+	<i style="font-size: 25px; color: black; margin: 4%"
+		class="ion-trash-b"></i> <i style="font-size: 21px; color: red;"
+		class="ion-edit"></i>
 </div>
-<div class="list-card"
-	style="background-color: gainsboro; margin-top: 2px">
-	<div class="row">
-		<div class="col">Pizza</div>
-		<div class="col">Veg</div>
-		<div class="col">1</div>
-		<div class="col">RS.87</div>
-		<div class="col">
-			<i style="font-size: 25px; color: blue;" class="ion-trash-b"></i> <i
-				style="font-size: 21px; color: green;" class="ion-edit"></i>
-		</div>
 
-	</div>
-</div>
-<div class="list-card"
-	style="background-color: gainsboro; margin-top: 2px">
-	<div class="row">
-		<div class="col">Pizza</div>
-		<div class="col">Veg</div>
-		<div class="col">1</div>
-		<div class="col">RS.87</div>
-		<div class="col">
-			<i style="font-size: 25px; color: blue;" class="ion-trash-b"></i> <i
-				style="font-size: 21px; color: green;" class="ion-edit"></i>
-		</div>
-
-	</div>
-</div> -->
-<div class="row" style="background-color:gray; margin-top: 6px">
+</ion-item> </ion-list> <!-- <div class="row" style="background-color: gray; margin-top: 6px">
 	<div class="col">*Taxes are also applicable.</div>
 	<div class="col">Total Price: ` 1,478.00</div>
 	<div class="col">
@@ -108,5 +54,13 @@
 	<div class="col">
 		<button class="button-clear">Confirm Order</button>
 	</div>
+</div> --> </ion-content> <ion-footer-bar class="bar-light">
+<div class="button-bar">
+	<button class="button button-light button-clear"
+		style="color: black; font-size: 20px;">
+		<i class="ion-ios-cart"> | RS.2345</i>
+	</button>
+	<button class="button button-light button-clear "
+		style="color: black; font-size: 17px;">CHECKOUT</button>
 </div>
-</ion-content> </ion-modal-view>
+</ion-footer-bar> </ion-modal-view>
