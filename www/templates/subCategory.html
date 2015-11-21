@@ -18,7 +18,9 @@
 				{{cartDetails.activeProduct.product_name}}
 
 			</div>
-			<div class="col" style="text-align: right; font-size: 14px">
+			<div class="col" style="text-align: right; font-size: 14px" ng-if="cartDetails.nodeDetails[cartDetails.activeProduct.prodid].product.rate">
+				RS.{{cartDetails.nodeDetails[cartDetails.activeProduct.prodid].product.rate}}</div>
+				<div class="col" style="text-align: right; font-size: 14px" ng-if="!cartDetails.nodeDetails[cartDetails.activeProduct.prodid].product.rate">
 				RS.{{cartDetails.activeProduct.rate}}</div>
 		</div>
 		<div class="row">
@@ -43,7 +45,7 @@
 				<div class="row">
 					<div class="col" style="text-align: left">
 						<p style="color: white">size</p>
-						<h2 style="color: yellow;">Regular</h2>
+						<h2 style="color: yellow;">{{checked.size}}</h2>
 					</div>
 					<div class="col" style="text-align: right"
 						ng-click="showPopup('Size')">
@@ -58,7 +60,7 @@
 				<div class="row">
 					<div class="col" style="text-align: left">
 						<h3 style="color: white;">Choose Your Base</h3>
-						<p style="color: yellow;">Handspun</p>
+						<p style="color: yellow;">{{checked.baseChecked}}</p>
 					</div>
 					<div class="col" style="text-align: right"
 						ng-click="showPopup('Base')">

@@ -24,7 +24,7 @@
 
 			<div class="item" 
 				style="background-color: ghostWhite; border-width: 0px; padding: 2px;">
-				<img class="full-image" ng-src="{{product.imagepath}}" ng-click="moveToScreen('addToppins','','',product)">
+				<img class="full-image" ng-src="{{product.imagepath}}" >
 				<div class="row">
 					<div class="col" style="text-align: left">
 						<span class="ion-ionic" style="color: green;"></span>{{product.product_name}}
@@ -39,10 +39,13 @@
 						<i><p>{{product.proddesc}}</p> </i>
 					</div>
 					<div class="col" style="text-align: right;z-index:10;">
-						<i class="pull-left icon ion-ios-minus-outline" ng-click="removeItemFromCart(product)"
+					<button
+							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
+							class="button-small button-clear" ng-click="addItemToCart(product)">Add</button>
+						<!-- <i class="pull-left icon ion-ios-minus-outline" ng-click="removeItemFromCart(product)"
 							style="font-size: 1.8em;"></i> <span style="font-size: 1.3em;">{{cartDetails.nodeDetails[product.prodid].count}}</span>
 						<i class=" pull-right icon ion-ios-plus-outline" ng-click="addItemToCart(product)"
-							style="font-size: 1.8em;"></i>
+							style="font-size: 1.8em;"></i> -->
 					</div>
 				</div>
 			</div>

@@ -14,12 +14,33 @@ app.service('$CartService', function($localStorageService) {
 		if(angular.isUndefined(cartDetails.nodeDetails[productId])){
 			cartDetails.nodeDetails[productId]={};
 			cartDetails.nodeDetails[productId].count=0;
+			cartDetails.nodeDetails[productId].amount=0;
+			cartDetails.nodeDetails[productId].sizeRate=0;
 		}
 		cartDetails.nodeDetails[productId].product=product;
 		cartDetails.nodeDetails[productId].count=cartDetails.nodeDetails[productId].count+1;
 		console.log(cartDetails.amount+"cartDetails.amount");
+		var properties=cartDetails.nodeDetails[productId].properties;
+		var toppinsRate=0.00;
+		if(angular.isDefined(properties) ){
+			if(angular.isDefined(properties)){
+				if(angular.isDefined(properties.toppins.toppinsRate)){
+					toppinsRate=properties.toppins.toppinsRate;
+				}
+				if(angular.isDefined(properties.cheesyRate)){
+					toppinsRate=toppinsRate+properties.cheesyRate;
+				}
+			}
+		}
+		console.log("toppinsRate"+toppinsRate);
+		//total product count
 		cartDetails.productCount=cartDetails.productCount+1;
-		cartDetails.amount= (parseFloat( cartDetails.amount)+ parseFloat(product.rate)).toFixed(2);
+		//total rate of product including toppinsRate
+		cartDetails.nodeDetails[productId].amount=(parseFloat(cartDetails.nodeDetails[productId].amount)+parseFloat(product.rate)+parseFloat(toppinsRate)).toFixed(2) ;
+		//total amount for all products
+		cartDetails.amount= (parseFloat( cartDetails.amount)+ parseFloat(product.rate)+parseFloat(toppinsRate)).toFixed(2);
+		//size of single product to display on ui when size of product will change excluding rate of toppins
+		cartDetails.nodeDetails[productId].sizeRate=parseFloat(product.rate).toFixed(2);
 		//	console.log("cartDetails",cartDetails);
 		$localStorageService.setCardDetails(cartDetails);
 	};
@@ -31,7 +52,20 @@ app.service('$CartService', function($localStorageService) {
 			alert("please add atleast one time");
 			return;
 		}
+		var properties=cartDetails.nodeDetails[productId].properties;
+		var toppinsRate=0.00;
+		if(angular.isDefined(properties)){
+			if(angular.isDefined(properties.toppins.toppinsRate)){
+				toppinsRate=properties.toppins.toppinsRate;
+			}
+			if(angular.isDefined(properties.cheesyRate)){
+				toppinsRate=toppinsRate+properties.cheesyRate;
+			}
+		}
 		cartDetails.nodeDetails[productId].count=cartDetails.nodeDetails[productId].count-1;
+		//total rate of product including toppinsRate
+		cartDetails.nodeDetails[productId].amount=(parseFloat(cartDetails.nodeDetails[productId].amount)-parseFloat(product.rate)-parseFloat(toppinsRate)).toFixed(2) ;
+
 		if(cartDetails.nodeDetails[productId].count==0){
 			for(var i=0;i<cartDetails.itemList.length;i++){
 				if(cartDetails.itemList[i]==productId){
@@ -42,7 +76,7 @@ app.service('$CartService', function($localStorageService) {
 		}
 		cartDetails.productCount=cartDetails.productCount-1;
 		//console.log(cartDetails.amount+"cartDetails.amount");
-		cartDetails.amount= (parseFloat( cartDetails.amount)- parseFloat(product.rate)).toFixed(2);
+		cartDetails.amount= (parseFloat( cartDetails.amount)- parseFloat(product.rate)-parseFloat(toppinsRate)).toFixed(2);
 		//	console.log("cartDetails",cartDetails);
 		$localStorageService.setCardDetails(cartDetails);
 	};

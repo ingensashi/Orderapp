@@ -2,7 +2,6 @@
 app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$CartService) {
 	$scope.productDetails={};
 	$scope.headerTitle.name=$scope.categoryDetails.catType;
-
 	var getProductDetails=function(catName,catType){
 		$scope.showSpinner();
 		var tempType='';
@@ -68,6 +67,7 @@ $ionicSlideBoxDelegate.update();
 
 	$scope.addItemToCart=function(product){
 		$CartService.addItemToCart(product,$scope.cartDetails);
+		$scope.moveToScreen('addToppins','','',product);
 	};
 
 	$scope.removeItemFromCart=function(product){
