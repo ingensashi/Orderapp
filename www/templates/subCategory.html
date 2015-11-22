@@ -75,7 +75,11 @@
 				<div class="row">
 					<div class="col" style="text-align: left">
 						<p style="color: white">Veg Toppins</p>
-						<h2 style="color: yellow;">None</h2>
+						<h2 style="color: yellow;" ng-if="cartDetails.nodeDetails[cartDetails.activeProduct.prodid].properties.toppins.length==0">None</h2>
+						<h2 style="color: yellow;"
+						 ng-if="cartDetails.nodeDetails[cartDetails.activeProduct.prodid].properties.toppins.length>0"
+						 ng-repeat="toppinId in cartDetails.nodeDetails[cartDetails.activeProduct.prodid].properties.toppins">
+						 {{cartDetails.nodeDetails[toppinId].toppingname}}</h2>
 					</div>
 					<div class="col" style="text-align: right"
 						ng-click="showPopup('Toppins')">
