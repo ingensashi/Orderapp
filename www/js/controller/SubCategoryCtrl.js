@@ -118,21 +118,25 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 
 	$scope.addPropertiesToProduct=function(event,data,rate,checked){
 		//alert("checked"+checked);
+		console.log("rate",rate);
 		switch(event){
 		case 'Size':
 			$scope.cartDetails.nodeDetails[productId].properties[event]=data;
 			//alert("$scope.cartDetails.nodeDetails[productId].properties.sizeRate"+$scope.cartDetails.nodeDetails[productId].properties.sizeRate);
 			var nodeDetails=$scope.cartDetails.nodeDetails[productId];
 			$scope.cartDetails.productCount=$scope.cartDetails.productCount-$scope.cartDetails.nodeDetails[productId].count+1;
+			//get toppins data again as toppins rate changes with size of product
+			
+			
 			var toppinsRate=$scope.cartDetails.nodeDetails[productId].properties.toppins.toppinsRate;
 
-			$scope.cartDetails.amount=(parseFloat( $scope.cartDetails.amount)+toppinsRate+ parseFloat(rate)-parseFloat(nodeDetails.amount)).toFixed(2);
+			$scope.cartDetails.amount=(parseFloat( $scope.cartDetails.amount)+parseFloat(toppinsRate)+ parseFloat(rate)-parseFloat(nodeDetails.amount)).toFixed(2);
 			//rate of product in json of cart details 
 			$scope.cartDetails.nodeDetails[productId].product.rate=rate;
 			//rate of active product updated because size of product changed
 			$scope.cartDetails.activeProduct.rate=rate;
 			//total rate of product including toppinsRate
-			nodeDetails.amount=rate+toppinsRate;
+			nodeDetails.amount=(parseFloat(rate)+parseFloat(toppinsRate)).toFixed(2);
 			//size of single product to display on ui when size of product will change excluding rate of toppins
 			nodeDetails.sizeRate=rate;
 			$scope.cartDetails.nodeDetails[productId].count=1;

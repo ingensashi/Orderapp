@@ -19,24 +19,24 @@
 
 		<div class="list card" style="margin: 0">
 		<div class="item item-body" style="padding: 0px"
-			ng-repeat="product in productDetails track by $index">
+			ng-repeat="productId in productDetails.vegList track by $index">
 
 
 			<div class="item" 
 				style="background-color: ghostWhite; border-width: 0px; padding: 2px;">
-				<img class="full-image" ng-src="{{product.imagepath}}" >
+				<img class="full-image" ng-src="{{productDetails.prodDetails[productId].imagepath}}" >
 				<div class="row">
 					<div class="col" style="text-align: left">
-						<span class="ion-ionic" style="color: green;"></span>{{product.product_name}}
+						<span class="ion-ionic" style="color: green;"></span>{{productDetails.prodDetails[productId].product_name}}
 
 					</div>
 					<div class="col" style="text-align: right; font-size: 14px">
-						Rs. {{product.rate}}</div>
+						Rs. {{productDetails.prodDetails[productId].rate}}</div>
 				</div>
 				<div class="row">
 					<div class="col"
 						style="text-align: left; margin-left: 5%; font-size: 12px">
-						<i><p>{{product.proddesc}}</p> </i>
+						<i><p>{{productDetails.prodDetails[productId].proddesc}}</p> </i>
 					</div>
 					<div class="col" style="text-align: right;z-index:10;">
 					<button

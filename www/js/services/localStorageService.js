@@ -1,9 +1,9 @@
 app.service('$localStorageService', function($localStorage) {
 	/*
-	*  -1 :inactive status
-	*   0 :guest status
-	*   1 :active user
-	*/
+	 *  -1 :inactive status
+	 *   0 :guest status
+	 *   1 :active user
+	 */
 	this.getUserDetails= function() { 
 		var user=$localStorage.user;
 		if(angular.isUndefined(user.userDetails) || user.userDetails==null){
@@ -68,5 +68,33 @@ app.service('$localStorageService', function($localStorage) {
 	};
 	this.setCardDetails=function(cart){
 		$localStorage.cartDetails=cart;
+	};
+	this.initializeProductdetails=function(){
+		if(angular.isUndefined($localStorage.productDetails)){
+			alert("inside");
+			$localStorage.productDetails={};
+		}	
+	};
+	this.setProductDetails=function(catName,product){
+		console.log("product in serviec",product);
+		console.log("catName"+catName);
+		if(angular.isUndefined($localStorage.productDetails[catName])){
+			$localStorage.productDetails[catName]={};
+		}	
+		$localStorage.productDetails[catName]=product;
+		console.log("$localStorage.productDetails",$localStorage.productDetails);
+	}
+	this.getProductDetails=function(catName){
+		var productDetails=$localStorage.productDetails[catName];
+		if(angular.isUndefined(productDetails) || productDetails==null){
+			return null;
+		}
+		return productDetails; 
+	};
+	this.setSingleProduct=function(catName,prodId,product){
+
+	};
+	this.getSingleProduct=function(catName,prodid){
+
 	};
 });

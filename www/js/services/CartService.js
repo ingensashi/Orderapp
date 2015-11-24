@@ -28,7 +28,7 @@ app.service('$CartService', function($localStorageService) {
 					toppinsRate=properties.toppins.toppinsRate;
 				}
 				if(angular.isDefined(properties.cheesyRate)){
-					toppinsRate=toppinsRate+properties.cheesyRate;
+					toppinsRate=(parseFloat(toppinsRate)+parseFloat(properties.cheesyRate)).toFixed(2);
 				}
 			}
 		}
