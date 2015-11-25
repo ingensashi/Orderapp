@@ -59,6 +59,7 @@ app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate) {
 		$scope.categoryDetails.name=$scope.tabs[data.index].text;
 		$scope.categoryDetails.catId=$scope.tabs[data.index].catId;
 		getSubCategoryName($scope.categoryDetails.name);
+		$scope.headerTitle.name=$scope.categoryDetails.name;
 		getBannerData($scope.categoryDetails.catId);
 	};
 

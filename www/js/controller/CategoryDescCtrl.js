@@ -1,7 +1,9 @@
 'use strict';
-app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$CartService) {
+app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$CartService,$ionicScrollDelegate) {
 	$scope.headerTitle.name=$scope.categoryDetails.catType;
 	$scope.productDetails={};
+	$scope.productList='';
+	$scope.passiveCategory='';
 	var getProductDetailsByCatType=function(catName,catType){
 		$scope.showSpinner();
 		var tempType='';
@@ -80,11 +82,52 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 		//	console.log("in else $scope.productDetails",$scope.productDetails);
 		}
 	};
+	
+	$scope.changeCatType=function(){
+		$ionicScrollDelegate.scrollTop();
+		var catType=$scope.categoryDetails.catType;
+		if(catType.indexOf('Non')<0 || catType.indexOf('less')>0){
+			$scope.categoryDetails.catType="Non Veg";
+			$scope.headerTitle.name="Non Veg";
+			$scope.productList="nonvegList";
+			if(catType.indexOf('egg')>0){
+				$scope.passiveCategory="Eggless";
+			}else{
+				$scope.passiveCategory="Veg";
+			}
+			
+		}else{
+			$scope.headerTitle.name="Veg";
+			$scope.categoryDetails.catType="Veg";
+			$scope.productList="vegList";
+			if(catType.indexOf('less')>0){
+				$scope.passiveCategory="Egg";
+			}else{
+				$scope.passiveCategory="Non veg";
+			}
+		}
+	};
 
 
 	var init=function(){
 		$localStorageService.initializeProductdetails();
 		getProductDetails($scope.categoryDetails.name,"everything");
+		var catType=$scope.categoryDetails.catType;
+		if(catType.indexOf('Non')<0 || catType.indexOf('less')>0){
+			$scope.productList="vegList";
+			if(catType.indexOf('less')>0){
+				$scope.passiveCategory="Egg";
+			}else{
+				$scope.passiveCategory="Non veg";
+			}
+		}else{
+			$scope.productList="nonvegList";
+			if(catType.indexOf('egg')>0){
+				$scope.passiveCategory="Eggless";
+			}else{
+				$scope.passiveCategory="Veg";
+			}
+		}
 		/*$scope.productDetails=[{"prodname":"CALZONE","rate":"50.80","proddesc":"very good CALZONE","imagepath":"img/CALZONE.png","prodid":"prod08"},
 		                       {"prodname":"pizza","rate":"40.80","proddesc":"very good pizza","imagepath":"img/PIZZA.png","prodid":"prod09"},
 		                       {"prodname":"CAKE","rate":"500.80","proddesc":"very good CAKE","imagepath":"img/CAKE.png","prodid":"prod10"}];*/
@@ -102,7 +145,7 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 		console.log("onSlideMove",data.index);
 		$scope.categoryDetails.name=$scope.tabs[data.index].text;
 		$scope.categoryDetails.catId=$scope.categoryDetails.catType;
-		getProductDetails($scope.categoryDetails.name,$scope.categoryDetails.catType);
+		getProductDetails($scope.categoryDetails.name,"everything");
 	};
 
 	$scope.addItemToCart=function(product){

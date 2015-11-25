@@ -19,7 +19,7 @@
 
 		<div class="list card" style="margin: 0">
 		<div class="item item-body" style="padding: 0px"
-			ng-repeat="productId in productDetails.vegList track by $index">
+			ng-repeat="productId in productDetails[productList] track by $index">
 
 
 			<div class="item" 
@@ -107,6 +107,12 @@
 		<div style="background-color: rgb(10, 9, 9);height:18%;position: absolute;bottom: 2%;width: 100%;opacity: 0.3;"><h2 style="color:white;margin-top:3%">Pizza</h2>
 		</div>
 	</div>
-</div> --> </ion-content> </ion-view>
+</div> --> 
+
+<button class="button button-full"   ng-click="changeCatType()"
+ng-class="{'button-balanced':passiveCategory  == 'Veg' || passiveCategory  == 'Eggless',
+'button-assertive': passiveCategory  == 'Non veg'|| passiveCategory  == 'Egg'}">
+{{passiveCategory}}</button>
+</ion-content> </ion-view>
 <!-- <div ng-if="activeScreenDetail.name=='categoryDesc'" ng-include="'templates/categoryDesc.html'"></div> -->
 

@@ -50,7 +50,7 @@
 <div class="content" scroll="true" >
 	<div class="list">
 		<div class="item" style="border: 0px; padding: 0px"
-			ng-repeat="toppins in productToppins">
+			ng-repeat="toppins in productToppins track by $index">
 			<div class="row">
 				<div class="col" style="margin-top: 20px">{{toppins.toppingname}}</div>
 				<div class="col" style="text-align: right">

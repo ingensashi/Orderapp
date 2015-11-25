@@ -71,7 +71,6 @@ app.service('$localStorageService', function($localStorage) {
 	};
 	this.initializeProductdetails=function(){
 		if(angular.isUndefined($localStorage.productDetails)){
-			alert("inside");
 			$localStorage.productDetails={};
 		}	
 	};

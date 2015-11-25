@@ -8,6 +8,7 @@ app.controller('AppCtrl',
 	$scope.searchBar = false;
 	//$scope.user={};
 	$scope.user.userStatus = $localStorageService.getUserStatus();
+	console.log("$localStorageService.getUserStatus()"+$localStorageService.getUserStatus());
 	$scope.user.userDetails = $localStorageService.getUserDetails();
 	$scope.activeScreenDetail={};
 	$scope.headerTitle.name='Home';
@@ -121,7 +122,7 @@ app.controller('AppCtrl',
 		"text" : "Desserts",
 		"catId":5
 	}, {
-		"text" : "Calazones",
+		"text" : "Calzones",
 		"catId":8
 	}, {
 		"text" : "Beverages",
