@@ -25,23 +25,23 @@
 			<div class="item" 
 				style="background-color: ghostWhite; border-width: 0px; padding: 2px;">
 				<img class="full-image" ng-src="{{productDetails.prodDetails[productId].imagepath}}" >
-				<div class="row">
+				<div class="row" style="padding:1px">
 					<div class="col" style="text-align: left">
-						<span class="ion-ionic" style="color: green;"></span>{{productDetails.prodDetails[productId].product_name}}
+						<span class="ion-ionic" style="color: green;margin:0px 7px 0px 0px"></span>{{productDetails.prodDetails[productId].product_name}}
 
 					</div>
 					<div class="col" style="text-align: right; font-size: 14px">
 						Rs. {{productDetails.prodDetails[productId].rate}}</div>
 				</div>
-				<div class="row">
+				<div class="row" style="padding:0px;line-height: 16px">
 					<div class="col"
-						style="text-align: left; margin-left: 5%; font-size: 12px">
-						<i><p>{{productDetails.prodDetails[productId].proddesc}}</p> </i>
+						style="text-align: left; margin-left: 6%; font-size: 12px">
+						<i><p style="margin:0px">{{productDetails.prodDetails[productId].proddesc}}</p> </i>
 					</div>
 					<div class="col" style="text-align: right;z-index:10;">
 					<button
 							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
-							class="button-small button-clear" ng-click="addItemToCart(productDetails.prodDetails[productId])">Add</button>
+							class="button-small button-clear" ng-click="addItemToCart(product)">Add</button>
 						<!-- <i class="pull-left icon ion-ios-minus-outline" ng-click="removeItemFromCart(product)"
 							style="font-size: 1.8em;"></i> <span style="font-size: 1.3em;">{{cartDetails.nodeDetails[product.prodid].count}}</span>
 						<i class=" pull-right icon ion-ios-plus-outline" ng-click="addItemToCart(product)"
