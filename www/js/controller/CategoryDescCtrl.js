@@ -50,7 +50,7 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 					"image_type" : "LDPI",
 					"cat_name" : catName,
 					"cat_type" : catType,
-					"trans_id" : 100
+					"trans_id" : 0
 			};
 			console.log("banner",bannerDetails);
 			$http({
