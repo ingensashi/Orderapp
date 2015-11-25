@@ -13,6 +13,9 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 	//$scope.cheesyChecked=false;
 	var myPopup=null;
 	var init=function(){
+		if($scope.cartDetails.nodeDetails===undefined || $scope.cartDetails.nodeDetails===null){
+			$scope.cartDetails.nodeDetails={};
+		}
 
 		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId])){
 			$scope.cartDetails.nodeDetails[productId]={};

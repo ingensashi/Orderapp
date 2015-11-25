@@ -63,12 +63,12 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 				cordova.plugins.diagnostic.switchToLocationSettings();
 			}
 		}, function(error){
-		    alert("The following error occurred: "+error);
+			alert("The following error occurred: "+error);
 		});
 		getCurrentLocation(positionTracker);
 	};
 
-	
+
 	//TOdo: This is common for both model
 	$ionicModal.fromTemplateUrl('templates/order.html', {
 		scope : $scope,
@@ -85,7 +85,19 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 	};
 	$scope.closeModal1 = function() {
 		$scope.modal1.hide();
+		angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name='home';
+		$rootScope.stateArray=[];
 	};
-	
-	
+
+
+
+
+	$scope.editItemList=function(product){
+		$rootScope.stateArray=[];
+		angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name='addToppins';
+		$scope.cartDetails.activeProduct=product.product;
+		$rootScope.stateArray=['home'];
+		$scope.modal1.hide();
+	};
+
 });
