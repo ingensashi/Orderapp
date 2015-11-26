@@ -1,20 +1,21 @@
 
 <ion-modal-view> <ion-header-bar class="bar bar-royal">
-<h3 style="font-size: 20px;white-space: nowrap;color:white">Order Detail</h3>
+<h3 style="font-size: 20px; white-space: nowrap; color: white">Order
+	Detail</h3>
 <button class="button button-clear button-primary"
 	style="text-align: right; margin-left: 94px; font-size: 32px"
 	ng-click="modal1.hide()">
 	<i class="ion-android-close"></i>
 </button>
-</ion-header-bar> 
+</ion-header-bar>
 
 <div class="bar bar-subheader">
-    <button class="button button-full button-clear button-stable" style="color:Red"  ng-click="closeModal1()">+ADD NEW ITEM</button>
-  </div>
-<ion-content class="padding" has-header="true" style="padding:2px;margin-top:13%">
-
-<ion-list> <ion-item
-	style="background-color:gainsboro;padding:0px">
+	<button class="button button-full button-clear button-stable"
+		style="color: Red" ng-click="closeModal1()">+ADD NEW ITEM</button>
+</div>
+<ion-content class="padding" has-header="true"
+	style="padding:2px;margin-top:13%"> <ion-list>
+<ion-item style="background-color:gainsboro;padding:0px">
 <div class="row" style="font-size: 14px">
 	<div class="col">
 		<p>Name</p>
@@ -24,14 +25,13 @@
 	</div>
 	<div class="col" style="text-align: right">
 		<p>Price</p>
-	</div>		
+	</div>
 	<!-- <div class="col" style="text-align:right">
 			<p>Action</p>
 		</div> -->
 </div>
-{{cart.size}}
-</ion-item> </ion-list> <ion-list ng-repeat="crt in cart.itemList"> 
-<ion-item style="padding:3px">
+{{cart.size}} </ion-item> </ion-list> <ion-list ng-repeat="crt in cart.itemList"> <ion-item
+	style="padding:3px">
 <div class="row">
 	<div class="col" style="font-size: 13px; text-align: left;">
 		<span class="ion-ionic"
@@ -39,8 +39,9 @@
 		{{cart.nodeDetails[crt].product.product_name}}
 		<p>+{{cart.nodeDetails[crt].properties.Size.toLowerCase()}}</p>
 		<p ng-if="cart.nodeDetails[crt].properties.cheesy">+Extra Chesey</p>
-	   <p ng-repeat="toppin in cart.nodeDetails[crt].properties.toppins" style="white-space:normal">
-	   +Toppins:{{cart.nodeDetails[toppin].toppingname.toLowerCase()}} </p>		
+		<p ng-repeat="toppin in cart.nodeDetails[crt].properties.toppins"
+			style="white-space: normal">
+			+Toppins:{{cart.nodeDetails[toppin].toppingname.toLowerCase()}}</p>
 
 	</div>
 	<!-- <div class="col">{{cart.nodeDetails[crt].product.itemtype}}</div> -->
@@ -48,29 +49,25 @@
 	<div class="col" style="text-align: right; font-size: 13px">{{cart.nodeDetails[crt].amount}}</div>
 </div>
 <div style="text-align: right">
+<!-- <button class="button  button-large button-clear">
 	<i style="font-size: 25px; color: black; margin: 4%"
-		class="ion-trash-b"></i> <i style="font-size: 21px; color: red;" ng-click="editItemList(cart.nodeDetails[crt])"
-		class="ion-edit"></i>
+		class="ion-trash-b"></i></button> -->
+	<button  ng-click="editItemList(cart.nodeDetails[crt])" class="button button-clear" style="text-align: inherit;">
+	<i style="font-size: 25px; color: black; margin: 4%"
+		class="ion-trash-b"></i>
+		<i style="font-size: 21px; color: red;"
+			 class="ion-edit"></i>
+	</button>
+
 </div>
 
-</ion-item> </ion-list> <!-- <div class="row" style="background-color: gray; margin-top: 6px">
-	<div class="col">*Taxes are also applicable.</div>
-	<div class="col">Total Price: ` 1,478.00</div>
-	<div class="col">
-		<button class="button-clear button-energized">Continue
-			Shopping</button>
-	</div>
-	<div class="col">
-		<button class="button-clear">Confirm Order</button>
-	</div>
-</div> --> 
+</ion-item> </ion-list>
 <div class="button-bar">
 	<button class="button button-royal button-medium"
-		style="color: white;font-size:1.3em;">
-		Net Price:{{cart.amount}}
-	</button>
+		style="color: white; font-size: 1.3em;">Net
+		Price:{{cart.amount}}</button>
 	<button class="button button-royal button-medium"
-		style="color: white;font-size:1.3em;">Tax:{{cart.amount}}</button>
+		style="color: white; font-size: 1.3em;">Tax:{{cart.amount}}</button>
 </div>
 </ion-content> <ion-footer-bar class="bar-light">
 <div class="button-bar">
@@ -78,7 +75,7 @@
 		style="color: black; font-size: 20px;">
 		<i class="ion-ios-cart"> | RS.2345</i>
 	</button>
-	<button class="button button-assertive"
-		style="color: white; font-size: 17px;">CHECKOUT</button>
+	<button class="button button-assertive" ng-click="Checkout('checkOut')"
+		style="color: white; font-size: 17px;">CHECKOUT <i class="ion-arrow-right-c" style="font-size:26px;"></i></button>
 </div>
 </ion-footer-bar> </ion-modal-view>

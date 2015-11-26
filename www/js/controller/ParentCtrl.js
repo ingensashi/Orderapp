@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootScope,$ionicModal,$ionicScrollDelegate,$cordovaGeolocation,$http) {
+app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootScope,$ionicModal,$ionicScrollDelegate,$cordovaGeolocation,$http,$ionicPopup) {
 	$ionicScrollDelegate.scrollTop();
 	var init=function(){
 		if($localStorageService.getUser()==null){
@@ -16,6 +16,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 	$scope.stateDetails=$state;
 	$scope.cartDetails={};
 	$scope.headerTitle={};
+	var myPopup=null;
 
 	$scope.moveToBackScreen=function(){
 		var popElement=$rootScope.stateArray.pop();
@@ -82,8 +83,8 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 			$scope.modal1.show();
 			$scope.cart=$localStorageService.getCartDetails();
 		}
-		
-	
+
+
 	};
 	$scope.closeModal1 = function() {
 		$scope.modal1.hide();
@@ -102,4 +103,24 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 		$scope.modal1.hide();
 	};
 
+	$scope.Checkout = function(activity) {
+		$scope.event1 ='Track Location';
+		myPopup = $ionicPopup.show({
+			templateUrl : 'templates/itemPopup.html',
+			cssClass : 'full-width;',
+			scope : $scope,
+		});
+		myPopup.then(function(res) {
+		});
+	};
+	$scope.selectLocation=function(activity){
+		switch(activity){
+		case 'Manually':
+			myPopup.close();
+			break;
+		case 'Enable':
+			$scope.showLocation();
+			break;
+		}
+	}
 });
