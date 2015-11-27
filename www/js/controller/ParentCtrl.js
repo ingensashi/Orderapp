@@ -16,6 +16,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 	$scope.stateDetails=$state;
 	$scope.cartDetails={};
 	$scope.headerTitle={};
+	var templateUrl='';
 	var myPopup=null;
 
 	$scope.moveToBackScreen=function(){
@@ -69,26 +70,49 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 		getCurrentLocation(positionTracker);
 	};
 
+	$scope.openFooterModel=function(flag){
+		switch(flag){
+		case 'order':
+		templateUrl='templates/order.html';
+		openModal(templateUrl);
+			break;
+		case 'delivery':
+			
+			break;
+		case 'wallet':
+			break;
+		case 'refferal':
+			templateUrl='templates/refferal.html';
+			openModal(templateUrl);
+			break;
+		case 'more':
+			break;
+		}
 
-	//TOdo: This is common for both model
-	$ionicModal.fromTemplateUrl('templates/order.html', {
-		scope : $scope,
-		animation : 'slide-in-up'
-	}).then(function(modal1) {
-		// modal.show();
-		$scope.modal1 = modal1;
-	});
-	$scope.openModal1 = function(amount) {
-			$scope.modal1.show();
+	}
+	var openModal=function(templateUrl){
+		$ionicModal.fromTemplateUrl(templateUrl, {
+			scope : $scope,
+			animation : 'slide-in-up'
+		}).then(function(modal) {
+			// modal.show();
+			$scope.modal = modal;
+			$scope.modal.show();
+		});
+	}
+	$scope.closeModal = function() {
+		$scope.modal.hide();
 	};
-	$scope.closeModal1 = function() {
-		$scope.modal1.hide();
+	// Cleanup the modal when we're done with it!
+	$scope.$on('$destroy', function() {
+		$scope.modal.remove();
+	});
+
+	$scope.closeOrderModal = function() {
+		$scope.modal.hide();
 		angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name='home';
 		$rootScope.stateArray=[];
 	};
-
-
-
 
 	$scope.editItemList=function(product){
 		$rootScope.stateArray=[];
@@ -112,13 +136,15 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 		switch(activity){
 		case 'Manually':
 			myPopup.close();
+			templateUrl='templates/addressDetail.html';
+			openModal(templateUrl);
 			break;
 		case 'Enable':
 			$scope.showLocation();
 			break;
 		}
 	};
-	
+
 	$scope.addItemToCart=function(product){
 		$CartService.addItemToCart(product,$scope.cartDetails);
 	};

@@ -79,14 +79,14 @@
 	<div>
 	 <span ng-if="user.userStatus!=1 && cartDetails.amount>0" class="valcart-footer">{{cartDetails.amount}}</span>
 	 <span ng-if="user.userStatus==1 && cartDetails.amount>0" class="valcart-footer" style="left:8px;">{{cartDetails.amount}}</span>
-	<ion-tab title="ORDER" icon-on="ion-ios-cart" ng-click="openModal1()"
+	<ion-tab title="ORDER" icon-on="ion-ios-cart" ng-click="openFooterModel('order')"
 		icon-off="ion-ios-cart-outline">
 		
 		 </ion-tab> 
 		</div>
-		 <ion-tab title="DELIVERY" ng-click="showLocation()"
+		 <ion-tab title="DELIVERY"
 		icon-on="ion-android-bicycle" icon-off="ion-android-bicycle">
-	</ion-tab> <ion-tab title="REFERRAL"
+	</ion-tab> <ion-tab title="REFERRAL" ng-click="openFooterModel('refferal')"
 		ng-if="user!=undefined && user.userStatus==1"
 		icon-on="ion-ios-compose" icon-off="ion-ios-compose-outline">
 	</ion-tab> <ion-tab title="E-WALLET"

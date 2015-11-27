@@ -14,6 +14,11 @@
 }
 
 
+.modal-has-header{
+	margin-top:44px;
+	max-height:83%;
+}
+
 .img-responsive-banner{
   display:block;width:100%;height: 35%;
 }
