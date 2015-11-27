@@ -230,7 +230,7 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 		myPopup.close();
 	};
 	$scope.addItemToCart=function(product){
-		$CartService.addItemWithPropsToCart((product,$scope.cartDetails));
+		$CartService.addItemWithPropsToCart(product,$scope.cartDetails);
 	};
 
 	$scope.removeItemFromCart=function(product){

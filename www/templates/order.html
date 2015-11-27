@@ -14,8 +14,15 @@
 	<button class="button button-full button-clear button-stable"
 		style="color: Red" ng-click="closeModal1()">+ADD NEW ITEM</button>
 </div>
+
 <ion-content class="padding" has-header="true"
-	style="padding:2px;margin-top:13%"> <ion-list>
+	style="padding:2px;margin-top:13%"> 
+	<ion-list ng-if="cartDetails.productCount==0 || cartDetails.productCount==undefined">
+<ion-item>
+<h2>Oops No item in your Cart </h2>
+</ion-item>
+</ion-list>
+	<ion-list ng-if="cartDetails.productCount>0">
 <ion-item style="background-color:gainsboro;padding:0px">
 <div class="row" style="font-size: 14px">
 	<div class="col">
@@ -53,24 +60,35 @@
 <!-- <button class="button  button-large button-clear">
 	<i style="font-size: 25px; color: black; margin: 4%"
 		class="ion-trash-b"></i></button> -->
-	<button  ng-click="editItemList(cartDetails.nodeDetails[crt])" class="button button-clear" style="text-align: inherit;">
-	<i style="font-size: 25px; color: black; margin: 4%"
+	<!-- <button   class="button button-clear" style="text-align: inherit;"> -->
+	<i style="font-size: 1.8em; color: black; margin: 4%"
 		class="ion-trash-b"></i>
-		<i style="font-size: 21px; color: red;"
-			 class="ion-edit"></i>
-	</button>
-
+		<i style="font-size: 1.8em; color: red;"
+			 class="ion-edit" ng-if="cartDetails.nodeDetails[crt].properties.toppins"
+			 ng-click="editItemList(cartDetails.nodeDetails[crt].product)"></i>
+			 
+			 <span ng-if="cartDetails.nodeDetails[crt].properties.toppins==undefined"><i class="pull-left icon ion-ios-minus"
+					style="font-size: 1.8em; color: green"
+					ng-click="removeItemFromCart(cartDetails.nodeDetails[crt].product)"></i> <span
+					style="font-size: 1.6em;">{{cartDetails.nodeDetails[crt].count}}</span> <i
+					class=" pull-right icon ion-ios-plus"
+					style="font-size: 1.8em; color: green"
+					ng-click="addItemToCart(cartDetails.nodeDetails[crt].product)"></i></span>
+	<!-- </button>
+ -->
 </div>
 
 </ion-item> </ion-list>
-<div class="button-bar">
+<div class="button-bar" ng-if="cartDetails.productCount>0">
 	<button class="button button-royal button-medium"
 		style="color: white; font-size: 1.3em;">Net
 		Price:{{cartDetails.amount}}</button>
 	<button class="button button-royal button-medium"
 		style="color: white; font-size: 1.3em;">Tax:{{cartDetails.amount}}</button>
 </div>
-</ion-content> <ion-footer-bar class="bar-light">
+
+</ion-content>
+ <ion-footer-bar class="bar-light" ng-if="cartDetails.productCount>0">
 <div class="button-bar">
 	<button class="button button-light button-clear"
 		style="color: black; font-size: 20px;">

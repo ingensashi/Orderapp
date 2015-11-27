@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootScope,$ionicModal,$ionicScrollDelegate,$cordovaGeolocation,$http,$ionicPopup) {
+app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartService,$rootScope,$ionicModal,$ionicScrollDelegate,$cordovaGeolocation,$http,$ionicPopup) {
 	$ionicScrollDelegate.scrollTop();
 	var init=function(){
 		if($localStorageService.getUser()==null){
@@ -79,12 +79,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 		$scope.modal1 = modal1;
 	});
 	$scope.openModal1 = function(amount) {
-		if(amount!=undefined){
 			$scope.modal1.show();
-			//$scope.cartDetails=$localStorageService.getCartDetails();
-		}
-
-
 	};
 	$scope.closeModal1 = function() {
 		$scope.modal1.hide();
@@ -98,7 +93,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 	$scope.editItemList=function(product){
 		$rootScope.stateArray=[];
 		angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name='addToppins';
-		$scope.cartDetails.activeProduct=product.product;
+		$scope.cartDetails.activeProduct=product;
 		$rootScope.stateArray=['home'];
 		$scope.modal1.hide();
 	};
@@ -122,5 +117,13 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 			$scope.showLocation();
 			break;
 		}
-	}
+	};
+	
+	$scope.addItemToCart=function(product){
+		$CartService.addItemToCart(product,$scope.cartDetails);
+	};
+
+	$scope.removeItemFromCart=function(product){
+		$CartService.removeItemFromCart(product,$scope.cartDetails);
+	};
 });
