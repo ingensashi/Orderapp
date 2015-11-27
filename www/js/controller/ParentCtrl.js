@@ -81,7 +81,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$rootSco
 	$scope.openModal1 = function(amount) {
 		if(amount!=undefined){
 			$scope.modal1.show();
-			$scope.cart=$localStorageService.getCartDetails();
+			//$scope.cartDetails=$localStorageService.getCartDetails();
 		}
 
 

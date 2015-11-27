@@ -39,13 +39,15 @@
 						<i><p style="margin:0px">{{productDetails.prodDetails[productId].proddesc}}</p> </i>
 					</div>
 					<div class="col" style="text-align: right;z-index:10;">
-					<button
+					<button ng-if="categoryDetails.name=='Pizzas' || cartDetails.nodeDetails[productId].count==undefined"
 							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
-							class="button-small button-clear" ng-click="addItemToCart(productDetails.prodDetails[productId])">Add</button>
-						<!-- <i class="pull-left icon ion-ios-minus-outline" ng-click="removeItemFromCart(product)"
-							style="font-size: 1.8em;"></i> <span style="font-size: 1.3em;">{{cartDetails.nodeDetails[product.prodid].count}}</span>
-						<i class=" pull-right icon ion-ios-plus-outline" ng-click="addItemToCart(product)"
-							style="font-size: 1.8em;"></i> -->
+							class="button-small button-clear" ng-click="addItemToCart(productDetails.prodDetails[productId])">Add
+							</button>
+							<span ng-if="categoryDetails.name!='Pizzas' && cartDetails.nodeDetails[productId].count>=0 ">
+						<i class="pull-left icon ion-ios-minus-outline" ng-click="removeItemFromCart(productDetails.prodDetails[productId])"
+							style="font-size: 1.8em;"></i> <span style="font-size: 1.3em;">{{cartDetails.nodeDetails[productId].count}}</span>
+						<i class=" pull-right icon ion-ios-plus-outline" ng-click="addItemToCart(productDetails.prodDetails[productId])"
+							style="font-size: 1.8em;"></i></span>
 					</div>
 				</div>
 			</div>

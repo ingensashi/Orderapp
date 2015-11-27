@@ -54,21 +54,16 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 			};
 			console.log("banner",bannerDetails);
 			$http({
-				url : 'http://216.15.228.130:8083/NProductTransaction.php',
+				url : 'http://216.15.228.130:8083/NProductTransactionNew.php',
 				method : "post",
 				data : bannerDetails
 			}).success(function(response) {
 				console.log("reponse catname", response);
-				for(var i=0;i<response.productdetails.veg.length;i++){
-					$scope.productDetails.prodDetails[response.productdetails.veg[i].prodid]=response.productdetails.veg[i];
-					$scope.productDetails.vegList.push(response.productdetails.veg[i].prodid);
-				}
-				for(var j=0;j<response.productdetails.nonveg.length;j++){
-					$scope.productDetails.prodDetails[response.productdetails.nonveg[j].prodid]=response.productdetails.nonveg[i];
-					$scope.productDetails.nonvegList.push(response.productdetails.nonveg[j].prodid);
-				}
-				$scope.productDetails.lastTransId=response.productdetails.lasttransid[0];
-			//	console.log("in controller $scope.productDetails",$scope.productDetails);
+				$scope.productDetails.vegList=response.veglist;
+				$scope.productDetails.nonvegList=response.nonveglist;
+				$scope.productDetails.lastTransId=response.lasttransid;
+				$scope.productDetails.prodDetails=response.proddetails;
+				console.log("in controller $scope.productDetails",$scope.productDetails);
 				var temp= angular.copy($scope.productDetails);
 				$localStorageService.setProductDetails(catName,temp);
 				$scope.hideSpinner();
@@ -79,10 +74,10 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 		}else{
 			$scope.hideSpinner();
 			$scope.productDetails=angular.copy($localStorageService.getProductDetails(catName));
-		//	console.log("in else $scope.productDetails",$scope.productDetails);
+			console.log("in else $scope.productDetails",$scope.productDetails);
 		}
 	};
-	
+
 	$scope.changeCatType=function(){
 		$ionicScrollDelegate.scrollTop();
 		var catType=$scope.categoryDetails.catType;
@@ -95,7 +90,7 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 			}else{
 				$scope.passiveCategory="Veg";
 			}
-			
+
 		}else{
 			$scope.headerTitle.name="Veg";
 			$scope.categoryDetails.catType="Veg";
@@ -149,8 +144,12 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 	};
 
 	$scope.addItemToCart=function(product){
-		$CartService.addItemToCart(product,$scope.cartDetails);
-		$scope.moveToScreen('addToppins','','',product);
+		if($scope.categoryDetails.name=='Pizzas'){
+			$CartService.addItemWithPropsToCart(product,$scope.cartDetails);
+			$scope.moveToScreen('addToppins','','',product);
+		}else{
+			$CartService.addItemToCart(product,$scope.cartDetails);	
+		}
 	};
 
 	$scope.removeItemFromCart=function(product){

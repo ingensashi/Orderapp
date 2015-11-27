@@ -97,7 +97,7 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 			var productDetails={
 					"device_id": "1234",
 					"session_id" : "dgdfg",
-					"prodid" : "M01"  
+					"prodid" : productId  
 			};
 
 			console.log("banner",productDetails);
@@ -217,35 +217,23 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 
 	$scope.showPopup = function(popupItem) {
 		$scope.event1 = popupItem;
-		$scope.data = {};
 		getProductDetails($scope.event1);
-
-		// An elaborate, custom popup
 		myPopup = $ionicPopup.show({
 			templateUrl : 'templates/itemPopup.html',
 			cssClass : 'full-width;',
 			scope : $scope,
-			/*
-			 * buttons: [ { text: '<b>Cancle</b>', type:
-			 * 'button-assertive', onTap: function(e) { if
-			 * ($scope.data.wifi) { //don't allow the user to close unless
-			 * he enters wifi password e.preventDefault(); } else { return
-			 * $scope.data.wifi; } } } ]
-			 */
-
 		});
 		myPopup.then(function(res) {
-			// console.log('Tapped!', res);
 		});
 	};
 	$scope.hidePopup=function(flag){
 		myPopup.close();
 	};
 	$scope.addItemToCart=function(product){
-		$CartService.addItemToCart(product,$scope.cartDetails);
+		$CartService.addItemWithPropsToCart((product,$scope.cartDetails));
 	};
 
 	$scope.removeItemFromCart=function(product){
-		$CartService.removeItemFromCart(product,$scope.cartDetails);
+		$CartService.removeItemWithPropsFromCart(product,$scope.cartDetails);
 	};
 });
