@@ -1,4 +1,4 @@
-<ion-view ng-controller="CategoryDescCtrl"> <ion-content
+<ion-view ng-controller="CategoryDescCtrl" cache-view="true"> <ion-content
 	style="margin-top:8%;margin-bottom:50px;"> <tab-slide-box
 	scroll="false">
 
@@ -12,14 +12,13 @@
 	</div>
 </div>
 <div>
-	
 	<div>
 		<ion-slide-box show-pager="false"
 			on-slide-changed="slideHasChanged($index)"> <ion-slide ng-repeat="tab in tabs">
 
 		<div class="list card" style="margin: 0">
 		<div class="item item-body" style="padding: 0px"
-			ng-repeat="productId in productDetails[productList] track by $index">
+			ng-repeat="productId in productDetails[productList] track by $index |  limitTo:3">
 
 
 			<div class="item" 

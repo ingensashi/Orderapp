@@ -1,0 +1,58 @@
+
+<ion-modal-view style="min-height:86%;top:45px"
+	ng-controller="WalletCtrl"> <ion-header-bar
+	class="bar bar-positive">
+<h3 style="font-size: 20px; white-space: nowrap; color: white">Wallet
+	Details</h3>
+<button class="button button-clear button-primary"
+	style="text-align: right; margin-left: 94px; font-size: 32px"
+	ng-click="closeModal()">
+	<i class="ion-android-close"></i>
+</button>
+</ion-header-bar> <ion-content class="padding" has-header="true" style=" margin-top:39px">
+
+
+<div class="list" ng-if="activetab=='walletAmount'">
+
+
+	<div class="item item-divider item-positive">Refferal bonus :Rs
+		500</div>
+
+	<a class="item" href="#"> </a>
+
+	<div class="item item-divider item-positive">E-wallet Amount :
+		Rs. 200</div>
+
+	<a class="item" href="#"> </a>
+
+	<div class="item item-divider item-positive">Total Amount : Rs.
+		700</div>
+
+	<a class="item" href="#"> </a>
+
+	<button class="button button-full button-positive"
+		style="color: white; font-size: 17px;"
+		ng-click="changeTab('addAmount')">
+		<i class="ion-ios-plus" style="font-size: 1.5em; float: left;"></i>Add
+		amount
+	</button>
+
+</div>
+
+<ion-list ng-if="activetab=='addAmount'"> <ion-item
+	style="padding:3px;border:0px;"> <label
+	class="item item-input item-stacked-label" style="border: 0px">RS.</label>
+<input style="width: 100%; height: 45px; text-align: center"
+	placeholder="Enter amount"> </ion-item>
+<button class="button button-full button-positive"
+	style="color: white; font-size: 17px;">
+	Add <i class="ion-arrow-right-c" style="font-size: 26px;"></i>
+</button>
+</ion-list> </ion-content> <ion-footer-bar ng-if="activetab=='walletAmount'" class="bar-light"
+	style="bottom:1%;">
+<button class="button button-full button-positive"
+	style="color: white; font-size: 17px;" ng-click="closeOrderModal()">
+	<i class="ion-ios-plus" style="font-size: 1.5em; float: left;"></i>Continue
+	Shopping
+</button>
+</ion-footer-bar> </ion-modal-view>

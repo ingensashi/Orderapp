@@ -84,6 +84,9 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 			
 			break;
 		case 'wallet':
+			templateUrl='templates/wallet.html';
+			openModal(templateUrl);
+
 			break;
 		case 'refferal':
 			templateUrl='templates/refferal.html';

@@ -1,5 +1,5 @@
 'use strict';
-app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$CartService,$ionicScrollDelegate) {
+app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$CartService,$ionicScrollDelegate,$ImageCacheFactory) {
 	$scope.headerTitle.name=$scope.categoryDetails.catType;
 	$scope.productDetails={};
 	$scope.productList='';
@@ -60,10 +60,18 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 			}).success(function(response) {
 				console.log("reponse catname", response);
 				$scope.productDetails.vegList=response.veglist;
+				console.log("reponse vegList", $scope.productDetails.vegList);
 				$scope.productDetails.nonvegList=response.nonveglist;
 				$scope.productDetails.lastTransId=response.lasttransid;
 				$scope.productDetails.prodDetails=response.proddetails;
 				console.log("in controller $scope.productDetails",$scope.productDetails);
+				var images = [];
+				for(var i=0; i<$scope.productDetails.vegList.length;i++){
+					images.push($scope.productDetails.prodDetails[$scope.productDetails.vegList[i]].imagepath);
+				}
+				console.log("imagepath",images);
+
+				$ImageCacheFactory.Cache(images);
 				var temp= angular.copy($scope.productDetails);
 				$localStorageService.setProductDetails(catName,temp);
 				$scope.hideSpinner();
