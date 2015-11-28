@@ -130,9 +130,8 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 	};
 
 	$scope.Checkout = function(activity) {
-		$scope.event1 ='Track Location';
 		myPopup = $ionicPopup.show({
-			templateUrl : 'templates/itemPopup.html',
+			templateUrl : 'templates/location.html',
 			cssClass : 'full-width;',
 			scope : $scope,
 		});
