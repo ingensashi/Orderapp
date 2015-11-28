@@ -22,6 +22,7 @@ app.controller('LoginCtrl', function($scope, $ionicPopup,$ionicLoading,$http,$lo
   $scope.invalidOTP=false;
   var passwordResetResponse={};
   var myPopup=null;
+  var registerSuccessPopup=null;
   /**For production
   */
 
@@ -205,29 +206,25 @@ $scope.comparePassword=function(password,conPassword){
     '<h3 style="text-align:center;margin-top:0px">Resend SMS</h3>',
     title: '<span style="text-align:center">Thanks! Did You get a SMS OTP?<br>Enter It here:</span>',
     cssClass:'full-width',
-    scope: $scope,
-    /*buttons: [
-    {
-      text: '<b>Cancle</b>',
-      type: 'button-assertive',
-      onTap: function(e) {
-        if ($scope.data.wifi) {
-            //don't allow the user to close unless he enters wifi password
-            e.preventDefault();
-          } else {
-            return $scope.data.wifi;
-          }
-        }
-      }
-      
-      ]*/
-
+    scope: $scope
     });
 myPopup.then(function(res) {
- //console.log('Tapped!', res);
 });
 };
 
+var registerPopup=function(){
+	registerSuccessPopup=$ionicPopup.show({
+		templateUrl:'templates/registerSuccessPopup.html',
+		cssClass : 'full-width;',
+		scope : $scope,
+	});
+	registerSuccessPopup.then(function(res) {
+	});
+}
+
+$scope.closeRegisterPopup=function(){
+	registerSuccessPopup.close();
+}
 $scope.hidePopup=function(flag){
   if (window.cordova && window.cordova.plugins.Keyboard) {
     cordova.plugins.Keyboard.close();
@@ -276,6 +273,8 @@ $scope.hidePopup=function(flag){
     $scope.userReponse=response;
      //   console.log("localStorage after",$localStorage);
      $state.go('app.home');
+     
+     registerPopup();
      $localStorageService.setUserStatus(1);
      $localStorageService.setUserDetails($scope.userReponse.userdetails);
    }else{
