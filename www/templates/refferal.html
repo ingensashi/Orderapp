@@ -1,46 +1,29 @@
 
-<ion-modal-view class="modal-has-header">
-<ion-header-bar class="bar bar-header bar-light">
-<div class="button-bar">
-	<button class="button button-small" ng-click="changeTab('guest')"
-		ng-class="{'button-positive': activeTab == 'guest','button-light': activeTab == 'user'}">
-		Add referral <i class="ion-android-person-add" style="font-size: 27px"></i>
-	</button>
-	</button>
-	<button class="button button-small" ng-click="changeTab('user')"
-		ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">
-		My referral <i class="ion-android-contacts" style="font-size: 27px"></i>
-	</button>
-	<button class="button button-small" ng-click="changeTab('user')"
-		ng-class="{'button-positive':true}">
-		Referral bonus <i class="ion-social-usd" style="font-size: 27px"></i>
-	</button>
-	</button>
-</div>
-<!-- <button class="button button-clear button-primary"
-	ng-click="modal.hide()">Cancel</button> -->
+<ion-modal-view style="min-height:83%;top:45px;"> <ion-header-bar
+	class="bar bar-positive">
+<h3 style="font-size: 20px; white-space: nowrap; color: white">Refferal</h3>
+<button class="button button-clear button-primary"
+	style="text-align: right; margin-left: 94px; font-size: 32px"
+	ng-click="closeModal()">
+	<i class="ion-android-close"></i>
+</button>
 </ion-header-bar>
-<!-- <div class="bar bar-subheader">
+<div class="bar bar-subheader">
 	<div class="button-bar">
-		<button class="button button-small" ng-click="changeTab('guest')"
-			ng-class="{'button-positive': activeTab == 'guest','button-light': activeTab == 'user'}">
+		<button class="button button-small" ng-click="changeTab('guest')">
 			Add referral <i class="ion-android-person-add"
 				style="font-size: 27px"></i>
 		</button>
-		</button>
-		<button class="button button-small" ng-click="changeTab('user')"
-			ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">
+		<button class="button button-small" ng-click="changeTab('user')">
 			My referral <i class="ion-android-contacts" style="font-size: 27px"></i>
 		</button>
-		<button class="button button-small" ng-click="changeTab('user')"
-			ng-class="{'button-positive': activeTab == 'user','button-light': activeTab == 'guest'}">
-			Referral bonus <i class="ion-social-usd" style="font-size: 27px"></i>
-		</button>
+		<button class="button button-small" ng-click="changeTab('user')">
+			Bonus <i class="ion-social-usd" style="font-size: 27px"></i>
 		</button>
 	</div>
-</div> -->
+</div>
 
-<ion-content class="padding" class="has-header" style="margin-top:50px;">
+<ion-content class="has-header" style="margin-top:50px;" scroll="false">
 <div class="list">
 	<label class="item item-input"> <span class="input-label">Referral
 			Name</span> <input ng-model="newUser.firstName" type="text">
@@ -50,20 +33,6 @@
 		<input ng-model="newUser.email" type="text">
 	</label>
 	<button class="button button-full button-positive"
-		ng-click="createContact(newUser)">Create</button>
+		ng-click="createContact(newUser)">Add</button>
 </div>
-</ion-content >
-<ion-footer-bar ng-if="stateDetails.current.name!='login'">
-	<ion-tabs class="tabs-light  tabs-icon-top tabs-icon-only">
-	<ion-tab title="ORDER" icon-on="ion-ios-cart"
-		icon-off="ion-ios-cart-outline" ng-click="openModal()"> </ion-tab> <ion-tab title="DELIVERY"
-		icon-on="ion-android-bicycle" icon-off="ion-android-bicycle">
-	</ion-tab> <ion-tab title="REFERRAL"
-		ng-if="user!=undefined && user.userStatus==1"
-		icon-on="ion-ios-compose" icon-off="ion-ios-compose-outline">
-	</ion-tab> <ion-tab title="E-WALLET"
-		ng-if="user!=undefined && user.userStatus==1"
-		icon-on="ion-ios-briefcase" icon-off="ion-ios-briefcase-outline">
-	</ion-tab> <ion-tab title="MORE" icon-on="ion-more" icon-off="ion-more">
-   </ion-tab> </ion-tabs> </ion-footer-bar>
- </ion-modal-view class="has-footer">
+</ion-content> </ion-modal-view>
