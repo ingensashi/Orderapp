@@ -25,10 +25,10 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 		angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name=popElement;
 
 	};
-	
-	
-	 $scope.cityNames = ["New Delhi", "Noida", "Gurgaon", "Ghaziabad", "Faridabad"];
-	 
+
+
+	$scope.cityNames = ["New Delhi", "Noida", "Gurgaon", "Ghaziabad", "Faridabad"];
+
 	var positionTracker=function(pos){
 		$http.get("http://maps.googleapis.com/maps/api/geocode/json?latlng="+
 				pos.lat+","+pos.long+"&sensor=true").success( function(response) {
@@ -77,11 +77,11 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 	$scope.openFooterModel=function(flag){
 		switch(flag){
 		case 'order':
-		templateUrl='templates/order.html';
-		openModal(templateUrl);
+			templateUrl='templates/order.html';
+			openModal(templateUrl);
 			break;
 		case 'delivery':
-			
+
 			break;
 		case 'wallet':
 			templateUrl='templates/wallet.html';
@@ -126,7 +126,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 		angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name='addToppins';
 		$scope.cartDetails.activeProduct=product;
 		$rootScope.stateArray=['home'];
-		$scope.modal1.hide();
+		$scope.closeModal();
 	};
 
 	$scope.Checkout = function(activity) {
@@ -158,5 +158,18 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 
 	$scope.removeItemFromCart=function(product){
 		$CartService.removeItemFromCart(product,$scope.cartDetails);
+	};
+	$scope.deleteItemFromCart=function(product){
+		 var confirmPopup = $ionicPopup.confirm({
+		     title: 'Alert',
+		     template: 'Are you sure to delete this product?'
+		   });
+		   confirmPopup.then(function(res) {
+		     if(res) {
+		    	 $CartService.deleteItemFromCart(product,$scope.cartDetails);
+		     } else {
+		       console.log('return to shopping');
+		     }
+		   });
 	};
 });

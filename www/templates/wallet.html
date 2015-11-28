@@ -1,6 +1,6 @@
 
-<ion-modal-view style="min-height:86%;top:45px"
-	ng-controller="WalletCtrl"> <ion-header-bar
+<ion-modal-view style="min-height:86%;top:45px;"
+	ng-controller="WalletCtrl" > <ion-header-bar
 	class="bar bar-positive">
 <h3 style="font-size: 20px; white-space: nowrap; color: white">Wallet
 	Details</h3>
@@ -9,7 +9,7 @@
 	ng-click="closeModal()">
 	<i class="ion-android-close"></i>
 </button>
-</ion-header-bar> <ion-content class="padding" has-header="true" style=" margin-top:39px">
+</ion-header-bar> <ion-content class="padding" has-header="true" style=" margin-top:39px" scroll="false">
 
 
 <div class="list" ng-if="activetab=='walletAmount'">
@@ -51,7 +51,7 @@
 </ion-list> </ion-content> 
 <ion-footer-bar ng-if="activetab=='walletAmount'" class="bar-light"
 	style="bottom:5%;">
-<button class="button button-full button-positive"
+<button class="button button-large button-full button-positive"
 	style="color: white; font-size: 17px;" ng-click="closeOrderModal()">
 Continue Shopping<i class="ion-arrow-right-c" style="font-size:26px;margin-left:7px;"></i>
 </button>

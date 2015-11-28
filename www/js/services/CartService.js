@@ -82,6 +82,25 @@ app.service('$CartService', function($localStorageService) {
 		//	console.log("cartDetails",cartDetails);
 		$localStorageService.setCardDetails(cartDetails);
 	};
+	
+	this.deleteItemFromCart=function(product,cartDetails){
+		//console.log("product addItemToCart",product.prodid);
+		var productId=product.prodid;
+
+		cartDetails.productCount=cartDetails.productCount-cartDetails.nodeDetails[productId].count;
+		//console.log(cartDetails.amount+"cartDetails.amount");
+		cartDetails.amount= (parseFloat( cartDetails.amount)- parseFloat(cartDetails.nodeDetails[productId].amount)).toFixed(2);
+		//	console.log("cartDetails",cartDetails);
+		for(var i=0;i<cartDetails.itemList.length;i++){
+			if(cartDetails.itemList[i]==productId){
+				cartDetails.itemList.splice(i, 1);
+			}
+		}
+		delete cartDetails.nodeDetails[productId];
+		$localStorageService.setCardDetails(cartDetails);
+	};
+	
+	
 	this.addItemToCart=function(product,cartDetails){
 		//	console.log("product addItemToCart",product.prodid);
 		var isDuplicate=false;

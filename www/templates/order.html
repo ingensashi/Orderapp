@@ -1,5 +1,5 @@
 
-<ion-modal-view style="min-height:86%;top:45px"> 
+<ion-modal-view style="min-height:83%;top:45px"> 
 <ion-header-bar class="bar bar-positive">
 <h3 style="font-size: 20px; white-space: nowrap; color: white">Order
 	Details</h3>
@@ -16,7 +16,7 @@
 </div>
 
 <ion-content class="padding" has-header="true"
-	style="padding:2px;margin-top:13%"> 
+	style="padding:2px;margin-top:13%;margin-bottom:20%;"> 
 	<ion-list ng-if="cartDetails.productCount==0 || cartDetails.productCount==undefined">
 <ion-item>
 <h2><i class="ion-sad" style="color:red;font-size: 2.5em;"></i>Oops No item in your Cart </h2>
@@ -62,7 +62,7 @@
 		class="ion-trash-b"></i></button> -->
 	<!-- <button   class="button button-clear" style="text-align: inherit;"> -->
 	<i style="font-size: 1.8em; color: black; margin: 4%"
-		class="ion-trash-b"></i>
+		class="ion-trash-b" ng-click="deleteItemFromCart(cartDetails.nodeDetails[crt].product)"></i>
 		<i style="font-size: 1.8em; color: red;"
 			 class="ion-edit" ng-if="cartDetails.nodeDetails[crt].properties.toppins"
 			 ng-click="editItemList(cartDetails.nodeDetails[crt].product)"></i>
@@ -78,21 +78,15 @@
  -->
 </div>
 
-</ion-item> </ion-list>
-<div class="button-bar" ng-if="cartDetails.productCount>0">
-	<button class="button button-positive button-medium"
-		style="color: white; font-size: 1.3em;">Net
-		Price:{{cartDetails.amount}}</button>
-	<button class="button button-positive button-medium"
-		style="color: white; font-size: 1.3em;">Tax:{{cartDetails.amount}}</button>
-</div>
+</ion-item>
+ </ion-list>
 
 </ion-content>
  <ion-footer-bar class="bar-light" ng-if="cartDetails.productCount>0">
 <div class="button-bar">
 	<button class="button button-light button-clear"
 		style="color: black; font-size: 20px;">
-		<i class="ion-ios-cart"> | RS.2345</i>
+		<i class="ion-ios-cart"> | RS.{{cartDetails.amount}}</i>
 	</button>
 	<button class="button button-positive" ng-click="Checkout('checkOut')"
 		style="color: white; font-size: 17px;">CHECKOUT <i class="ion-arrow-right-c" style="font-size:26px;"></i></button>
