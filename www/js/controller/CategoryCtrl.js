@@ -1,5 +1,5 @@
 'use strict';
-app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate) {
+app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate,$ImageCacheFactory) {
 	$scope.subCategoryDetail={};
 	$scope.headerTitle.name=$scope.categoryDetails.name;
 	var getSubCategoryName=function(catName){
@@ -8,14 +8,17 @@ app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate) {
 		case 'Cakes':
 			$scope.subCategoryDetail.name=['Egg','Eggless','Previous','Trending'];
 			$scope.subCategoryDetail.images=["img/CAKE.png","img/PASTA.png","img/recent.jpg","img/trend.png"];
+			$ImageCacheFactory.Cache($scope.subCategoryDetail.images);
 			break;
 		case 'Beverages':
 			$scope.subCategoryDetail.name=['Previous','Trending'];
 			$scope.subCategoryDetail.images=["img/recent.jpg","img/trend.png"];
+			$ImageCacheFactory.Cache($scope.subCategoryDetail.images);
 			break;
 		default:
 			$scope.subCategoryDetail.name=['Veg','Non Veg','Previous','Trending'];	
-		$scope.subCategoryDetail.images=["img/veg.png","img/nonveg.png","img/recent.jpg","img/trend.png"];
+		    $scope.subCategoryDetail.images=["img/veg.png","img/nonveg.png","img/recent.jpg","img/trend.png"];
+		    $ImageCacheFactory.Cache($scope.subCategoryDetail.images);
 		}
 	};
 
@@ -38,15 +41,22 @@ app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate) {
 		}).success(function(response) {
 			console.log("response",response);
 			$scope.catBannerModel = response.bannerimages;
+			/*var images = [];
+			for(var i=0; i<$scope.catBannerModel.length;i++){
+				images.push($scope.catBannerModel[i].imagepath);
+			}
+			console.log("imagepath",images);
+
+			$ImageCacheFactory.Cache(images);*/
 			// alert("here");
 			/*setTimeout(function() {*/
 			$ionicSlideBoxDelegate.update();
 			$scope.hideSpinner();
 			/*   }, 5000);*/
 		}).error(function (data, status, headers, config) {
-	        console.log("error",status);
-	        return status;
-	});
+			console.log("error",status);
+			return status;
+		});
 		//$scope.bannerModel=["img/CAKE.png","img/PASTA.png","img/PIZZA.png","img/CALZONE.png"];
 	};
 	var init = function() {

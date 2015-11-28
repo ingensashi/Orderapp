@@ -12,32 +12,7 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 	var productId=activeProduct.prodid;
 	//$scope.cheesyChecked=false;
 	var myPopup=null;
-	var init=function(){
-		if($scope.cartDetails.nodeDetails===undefined || $scope.cartDetails.nodeDetails===null){
-			$scope.cartDetails.nodeDetails={};
-		}
 
-		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId])){
-			$scope.cartDetails.nodeDetails[productId]={};
-			$scope.cartDetails.nodeDetails[productId].count=0;
-		}
-		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId].properties)){
-			$scope.cartDetails.nodeDetails[productId].properties={};
-			$scope.cartDetails.nodeDetails[productId].properties.Size="SOLO";
-			$scope.cartDetails.nodeDetails[productId].properties.toppins=[];
-			$scope.checked.size="SOLO";
-			$scope.cartDetails.nodeDetails[productId].properties.toppins.toppinsRate=0;
-		}else{
-			$scope.checked.size=$scope.cartDetails.nodeDetails[productId].properties.Size;
-			$scope.checked.baseChecked=$scope.cartDetails.nodeDetails[productId].properties.Base;
-		}
-		/*if(angular.isUndefined($scope.activeProperty[productId])){
-			$scope.activeProperty[productId]={};
-			$scope.activeProperty[productId].size="SOLO";
-			$scope.activeProperty[productId].base="";
-		}*/
-	};
-	init();
 	var getProductDetails=function(event){
 		switch(event){
 		case 'Size':
@@ -119,6 +94,35 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 	};
 
 
+	var init=function(){
+		if($scope.cartDetails.nodeDetails===undefined || $scope.cartDetails.nodeDetails===null){
+			$scope.cartDetails.nodeDetails={};
+		}
+
+		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId])){
+			$scope.cartDetails.nodeDetails[productId]={};
+			$scope.cartDetails.nodeDetails[productId].count=0;
+		}
+		if(angular.isUndefined($scope.cartDetails.nodeDetails[productId].properties)){
+			$scope.cartDetails.nodeDetails[productId].properties={};
+			$scope.cartDetails.nodeDetails[productId].properties.Size="SOLO";
+			$scope.cartDetails.nodeDetails[productId].properties.toppins=[];
+			$scope.checked.size="SOLO";
+			$scope.cartDetails.nodeDetails[productId].properties.toppins.toppinsRate=0;
+		}else{
+			$scope.checked.size=$scope.cartDetails.nodeDetails[productId].properties.Size;
+			$scope.checked.baseChecked=$scope.cartDetails.nodeDetails[productId].properties.Base;
+		}
+		getProductDetails('Base');
+		/*if(angular.isUndefined($scope.activeProperty[productId])){
+			$scope.activeProperty[productId]={};
+			$scope.activeProperty[productId].size="SOLO";
+			$scope.activeProperty[productId].base="";
+		}*/
+	};
+	init();
+
+
 	$scope.addPropertiesToProduct=function(event,data,rate,checked){
 		//alert("checked"+checked);
 		console.log("rate",rate);
@@ -129,8 +133,8 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 			var nodeDetails=$scope.cartDetails.nodeDetails[productId];
 			$scope.cartDetails.productCount=$scope.cartDetails.productCount-$scope.cartDetails.nodeDetails[productId].count+1;
 			//get toppins data again as toppins rate changes with size of product
-			
-			
+
+
 			var toppinsRate=$scope.cartDetails.nodeDetails[productId].properties.toppins.toppinsRate;
 
 			$scope.cartDetails.amount=(parseFloat( $scope.cartDetails.amount)+parseFloat(toppinsRate)+ parseFloat(rate)-parseFloat(nodeDetails.amount)).toFixed(2);
