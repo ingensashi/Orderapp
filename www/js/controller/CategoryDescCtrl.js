@@ -1,5 +1,7 @@
 'use strict';
-app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$CartService,$ionicScrollDelegate,$ImageCacheFactory) {
+app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$CartService,$ionicScrollDelegate,
+		$ImageCacheFactory,$window) {
+	$window.dynamicIndex=$scope.getTabIndex($scope.categoryDetails.name);
 	$scope.headerTitle.name=$scope.categoryDetails.catType;
 	$scope.productDetails={};
 	$scope.productList='';

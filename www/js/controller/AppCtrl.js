@@ -91,8 +91,7 @@ app.controller('AppCtrl',
 			break;
 		}
 	};
-
-
+	
 	$scope.tabs = [ {
 		"text" : "Pizzas",
 		"catId":1
@@ -125,6 +124,15 @@ app.controller('AppCtrl',
 		"catId":7
 	} ];
 
+
+	$scope.getTabIndex=function(catName){
+		for(var i=0;i<$scope.tabs.length;i++){
+			if($scope.tabs[i].text==catName){
+				return i;
+			}
+		}
+	};
+	
 
 	$scope.showSpinner = function() {
 		$ionicLoading.show({

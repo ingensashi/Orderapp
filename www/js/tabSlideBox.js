@@ -88,7 +88,11 @@ angular.module('tabSlideBox', [])
 					
 					//If initial element is 0, set position of the tab to 0th tab 
 					if(initialIndex == 0){
-						setPosition(0);
+						if($window.dynamicIndex!=-1){
+							setPosition($window.dynamicIndex);
+						}else{
+							setPosition(0);
+						}
 					}
 					
 					$timeout(function() {

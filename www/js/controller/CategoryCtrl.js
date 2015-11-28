@@ -1,7 +1,8 @@
 'use strict';
-app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate,$ImageCacheFactory) {
+app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate,$ImageCacheFactory,$window) {
 	$scope.subCategoryDetail={};
 	$scope.headerTitle.name=$scope.categoryDetails.name;
+	$window.dynamicIndex=$scope.getTabIndex($scope.categoryDetails.name);
 	var getSubCategoryName=function(catName){
 		$scope.subCategoryDetail.name=[];
 		switch(catName){
@@ -62,7 +63,7 @@ app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate,$Im
 	var init = function() {
 		getSubCategoryName($scope.categoryDetails.name);
 		getBannerData($scope.categoryDetails.catId);
-	}
+	};
 	init();
 	$scope.onSlideMove = function(data) {
 		console.log("onSlideMove",data.index);
