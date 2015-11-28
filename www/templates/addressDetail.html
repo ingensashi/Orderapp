@@ -1,0 +1,84 @@
+
+<ion-modal-view style="min-height:86%;top:45px" ng-controller="AddressCtrl"> 
+<div class="bar bar-subheader">
+	<!-- <button class="button button-full button-clear button-stable"
+		style="color: Red" ng-click="closeModal1()">+ADD NEW ITEM</button> -->
+
+	<ion-tabs class="tabs-assertive  tabs-icon-top tabs-icon-only">
+
+	<ion-tab title="DELIVERY" icon-on="ion-android-walk" ng-click="changeTab('addressList')"
+		icon-off="ion-android-walk"> </ion-tab> 
+		<ion-tab title="PICK UP"
+		icon-on="ion-model-s" icon-off="ion-model-s" ng-click="changeTab('pickUp')"> </ion-tab>
+		<ion-tab title="cancel"
+		icon-on="ion-android-close" icon-off="ion-android-close" ng-click="closeModal()"> </ion-tab>  
+		</ion-tabs>
+</div>
+
+<ion-content class="padding" has-header="true" style=" margin-top:39px">
+
+<div class="card" ng-if="activetab=='addressList'">
+
+  <div class="item item-text-wrap">
+    This is a basic Card which contains an item that has wrapping text.
+    <i class="ion-trash-b" style="color:red;font-size:1.7em;float:right"></i>
+  </div>
+  
+</div>
+
+<ion-list ng-if="activetab=='pickUp'">
+<ion-item style="padding:3px;border:0px;">
+<label class="item item-input item-stacked-label" style="border: 0px">Select
+	City</label> <input list="browsers" name="browser"
+	style="width: 100%; height: 45px; text-align: center"
+	placeholder="select city"> <datalist id="browsers">
+	<option ng-repeat="name in cityNames track by $index" value="{{name}}">
+</datalist> </ion-item> <ion-item style="padding:3px;border:0px"> <label
+	class="item item-input item-stacked-label" style="border: 0px">Select
+	Area</label> <input list="browsers" name="browser"
+	style="width: 100%; height: 45px; text-align: center"
+	placeholder="select area"> <datalist id="browsers">
+	<option ng-repeat="name in cityNames track by $index" value="{{name}}">
+</datalist> </ion-item>
+</ion-list>
+
+<ion-list ng-if="activetab=='addAddress'"> 
+<ion-item style="padding:3px;border:0px;">
+<label class="item item-input item-stacked-label" style="border: 0px">Select
+	City</label> <input list="browsers" name="browser"
+	style="width: 100%; height: 45px; text-align: center"
+	placeholder="select city"> <datalist id="browsers">
+	<option ng-repeat="name in cityNames track by $index" value="{{name}}">
+</datalist> </ion-item> <ion-item style="padding:3px;border:0px"> <label
+	class="item item-input item-stacked-label" style="border: 0px">Select
+	Area</label> <input list="browsers" name="browser"
+	style="width: 100%; height: 45px; text-align: center"
+	placeholder="select area"> <datalist id="browsers">
+	<option ng-repeat="name in cityNames track by $index" value="{{name}}">
+</datalist> </ion-item> <ion-item style="padding:3px;border:0px;"> <label
+	class="item item-input item-stacked-label" style="border: 0px">Type
+	street/society name</label> <input
+	style="width: 100%; height: 45px; text-align: center"
+	placeholder="Type street/society name"> </ion-item> <ion-item
+	style="padding:3px;border:0px;"> <label
+	class="item item-input item-stacked-label" style="border: 0px">flat/house
+	no</label> <input style="width: 100%; height: 45px; text-align: center"
+	placeholder="flat/house no"> </ion-item>
+	<button class="button button-full button-assertive"
+		style="color: white; font-size: 17px;">
+		Save Address <i class="ion-arrow-right-c" style="font-size: 26px;"></i>
+	</button>
+	 </ion-list>
+	
+	
+	 </ion-content> 
+	<ion-footer-bar
+	   ng-if="activetab=='addressList'"  class="bar-light" style="bottom:1%;">
+<div class="button-bar">
+	<button class="button button-light button-clear"></button>
+	<button class="button button-assertive"
+		style="color: white; font-size: 17px;" ng-click="changeTab('addAddress')">
+		<i class="ion-ios-plus" style="font-size: 1.5em;float:left;"></i>ADD Address 
+	</button>
+</div>
+</ion-footer-bar> </ion-modal-view>

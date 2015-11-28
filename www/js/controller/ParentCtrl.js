@@ -25,6 +25,10 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 		angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name=popElement;
 
 	};
+	
+	
+	 $scope.cityNames = ["New Delhi", "Noida", "Gurgaon", "Ghaziabad", "Faridabad"];
+	 
 	var positionTracker=function(pos){
 		$http.get("http://maps.googleapis.com/maps/api/geocode/json?latlng="+
 				pos.lat+","+pos.long+"&sensor=true").success( function(response) {
@@ -136,6 +140,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 		switch(activity){
 		case 'Manually':
 			myPopup.close();
+			$scope.closeModal();
 			templateUrl='templates/addressDetail.html';
 			openModal(templateUrl);
 			break;

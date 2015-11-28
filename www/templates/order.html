@@ -1,6 +1,6 @@
 
-<ion-modal-view> 
-<ion-header-bar class="bar bar-royal">
+<ion-modal-view style="min-height:86%;top:45px"> 
+<ion-header-bar class="bar bar-assertive">
 <h3 style="font-size: 20px; white-space: nowrap; color: white">Order
 	Detail</h3>
 <button class="button button-clear button-primary"
@@ -19,7 +19,7 @@
 	style="padding:2px;margin-top:13%"> 
 	<ion-list ng-if="cartDetails.productCount==0 || cartDetails.productCount==undefined">
 <ion-item>
-<h2>Oops No item in your Cart </h2>
+<h2><i class="ion-sad" style="color:red;font-size: 2.5em;"></i>Oops No item in your Cart </h2>
 </ion-item>
 </ion-list>
 	<ion-list ng-if="cartDetails.productCount>0">
@@ -80,10 +80,10 @@
 
 </ion-item> </ion-list>
 <div class="button-bar" ng-if="cartDetails.productCount>0">
-	<button class="button button-royal button-medium"
+	<button class="button button-assertive button-medium"
 		style="color: white; font-size: 1.3em;">Net
 		Price:{{cartDetails.amount}}</button>
-	<button class="button button-royal button-medium"
+	<button class="button button-assertive button-medium"
 		style="color: white; font-size: 1.3em;">Tax:{{cartDetails.amount}}</button>
 </div>
 
