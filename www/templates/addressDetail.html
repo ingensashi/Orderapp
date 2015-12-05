@@ -1,9 +1,6 @@
 
 <ion-modal-view style="min-height:86%;top:45px" ng-controller="AddressCtrl"> 
 <div class="bar bar-subheader">
-	<!-- <button class="button button-full button-clear button-stable"
-		style="color: Red" ng-click="closeModal1()">+ADD NEW ITEM</button> -->
-
 	<ion-tabs class="tabs-positive  tabs-icon-top tabs-icon-only">
 
 	<ion-tab title="DELIVERY" icon-on="ion-android-walk" ng-click="changeTab('addressList')"
@@ -18,9 +15,11 @@
 <ion-content class="padding" has-header="true" style=" margin-top:39px">
 
 <div class="card" ng-if="activetab=='addressList'">
-
-  <div class="item item-text-wrap">
-    This is a basic Card which contains an item that has wrapping text.
+<div class="item item-text-wrap" ng-if="addressList.length==0">
+Add  adrress to see in this list
+</div>
+  <div class="item item-text-wrap" ng-repeat="address in addressList track by $index">
+    {{address.flat}} {{address.street}} {{address.area.name}} {{address.city.name}}
     <i class="ion-trash-b" style="color:red;font-size:1.7em;float:right"></i>
   </div>
   
@@ -29,43 +28,58 @@
 <ion-list ng-if="activetab=='pickUp'">
 <ion-item style="padding:3px;border:0px;">
 <label class="item item-input item-stacked-label" style="border: 0px">Select
-	City</label> <input list="browsers" name="browser"
+	City </label> <input list="browsers" name="browser"
 	style="width: 100%; height: 45px; text-align: center"
-	placeholder="select city"> <datalist id="browsers">
-	<option ng-repeat="name in cityNames track by $index" value="{{name}}">
-</datalist> </ion-item> <ion-item style="padding:3px;border:0px"> <label
-	class="item item-input item-stacked-label" style="border: 0px">Select
-	Area</label> <input list="browsers" name="browser"
-	style="width: 100%; height: 45px; text-align: center"
-	placeholder="select area"> <datalist id="browsers">
-	<option ng-repeat="name in cityNames track by $index" value="{{name}}">
+	placeholder="select city" ng-change="selectCity(city.id)" ng-model="city.id"/> <datalist id="browsers">
+
+	<option id="testId" ng-repeat="city in cityDetails track by $index"  value="{{city.name}}"></option>
 </datalist> </ion-item>
+ <ion-item style="padding:3px;border:0px"> 
+ <label class="item item-input item-stacked-label" style="border: 0px">Select
+	Area</label> 
+	<input list="browsers1" name="browser1" ng-change="selectArea(area)" ng-model="area"
+	style="width: 100%; height: 45px; text-align: center"
+	placeholder="select area"> <datalist id="browsers1">
+	<option ng-repeat="area in areaDetails track by $index" value="{{area.name}}">
+</datalist> </ion-item>
+<button class="button button-full button-positive"
+		style="color: white; font-size: 17px;" ng-click="findOutlet()">
+		Find Outlet <i class="ion-arrow-right-c" style="font-size: 26px;"></i>
+	</button>
+	<ion-item ng-if="outlet">
+	 <div class="item item-text-wrap">
+     {{outletDetails[0].address}} {{outletDetails[0].name}}
+  </div>
+  </ion-item>
 </ion-list>
 
 <ion-list ng-if="activetab=='addAddress'"> 
 <ion-item style="padding:3px;border:0px;">
 <label class="item item-input item-stacked-label" style="border: 0px">Select
-	City</label> <input list="browsers" name="browser"
+	City </label> <input list="browsers" name="browser"
 	style="width: 100%; height: 45px; text-align: center"
-	placeholder="select city"> <datalist id="browsers">
-	<option ng-repeat="name in cityNames track by $index" value="{{name}}">
-</datalist> </ion-item> <ion-item style="padding:3px;border:0px"> <label
-	class="item item-input item-stacked-label" style="border: 0px">Select
-	Area</label> <input list="browsers" name="browser"
+	placeholder="select city" ng-change="selectCity(city.id)" ng-model="city.id"/> <datalist id="browsers">
+
+	<option id="testId" ng-repeat="city in cityDetails track by $index"  value="{{city.name}}"></option>
+</datalist> </ion-item>
+ <ion-item style="padding:3px;border:0px"> 
+ <label class="item item-input item-stacked-label" style="border: 0px">Select
+	Area</label> 
+	<input list="browsers1" name="browser1" ng-change="selectArea(area)" ng-model="area"
 	style="width: 100%; height: 45px; text-align: center"
-	placeholder="select area"> <datalist id="browsers">
-	<option ng-repeat="name in cityNames track by $index" value="{{name}}">
+	placeholder="select area"> <datalist id="browsers1">
+	<option ng-repeat="area in areaDetails track by $index" value="{{area.name}}">
 </datalist> </ion-item> <ion-item style="padding:3px;border:0px;"> <label
 	class="item item-input item-stacked-label" style="border: 0px">Type
 	street/society name</label> <input
 	style="width: 100%; height: 45px; text-align: center"
-	placeholder="Type street/society name"> </ion-item> <ion-item
+	placeholder="Type street/society name" ng-model="addressDetails.street"> </ion-item> <ion-item
 	style="padding:3px;border:0px;"> <label
-	class="item item-input item-stacked-label" style="border: 0px">flat/house
+	class="item item-input item-stacked-label" style="border: 0px" >flat/house
 	no</label> <input style="width: 100%; height: 45px; text-align: center"
-	placeholder="flat/house no"> </ion-item>
+	placeholder="flat/house no" ng-model="addressDetails.flat"> </ion-item>
 	<button class="button button-full button-positive"
-		style="color: white; font-size: 17px;">
+		style="color: white; font-size: 17px;" ng-click="saveAddress()">
 		Save Address <i class="ion-arrow-right-c" style="font-size: 26px;"></i>
 	</button>
 	 </ion-list>
