@@ -12,8 +12,8 @@ app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate,$Im
 			$ImageCacheFactory.Cache($scope.subCategoryDetail.images);
 			break;
 		case 'Beverages':
-			$scope.subCategoryDetail.name=['Previous','Trending'];
-			$scope.subCategoryDetail.images=["img/recent.jpg","img/trend.png"];
+			$scope.subCategoryDetail.name=['Veg','Previous','Trending'];
+			$scope.subCategoryDetail.images=["img/veg.png","img/recent.jpg","img/trend.png"];
 			$ImageCacheFactory.Cache($scope.subCategoryDetail.images);
 			break;
 		default:

@@ -37,7 +37,7 @@ app.controller('AppCtrl',
 			//  setTimeout(function() {
 			$ionicSlideBoxDelegate.update();
 			//  }, 5000);
-			console.log("reponse response.data", response);
+			console.log("reponse banner data home ", response);
 		}).error(function (data, status, headers, config) {
 			console.log("error",status);
 
@@ -49,17 +49,6 @@ app.controller('AppCtrl',
 	}
 	init();
 	//console.log("user details", $scope.user);
-	$scope.expandSerachBar = function(event) {
-		// alert("inside"+event);
-		if (event == 'front') {
-			$scope.searchBar = true;
-		}
-		if (event == 'back') {
-			// alert("in");
-			$scope.searchBar = false;
-		}
-
-	}
 	/*
 	 * // Execute action on hide modal $scope.$on('modal.hidden',
 	 * function() { // Execute action }); // Execute action on remove
@@ -76,16 +65,19 @@ app.controller('AppCtrl',
 		$rootScope.stateArray.push($scope.activeScreenDetail.name);
 		console.log("$rootScope.stateArray",$rootScope.stateArray);
 		$scope.activeScreenDetail.name=screen;
-
+		
 		switch(screen){
 		case 'category':
 			$scope.categoryDetails.name=catName;
+			$scope.headerTitle.name=catName;
 			$scope.categoryDetails.catId=catId;
 			break;
 		case 'categoryDesc':
 			$scope.categoryDetails.catType=catId;
+			$scope.headerTitle.name=catId;
 			break;
 		case 'addToppins' :
+			$scope.headerTitle.name=$scope.categoryDetails.name;
 			$scope.cartDetails.activeProduct=product;
 			console.log("$scope.cartDetails.activeProduct",$scope.cartDetails.activeProduct);
 			break;

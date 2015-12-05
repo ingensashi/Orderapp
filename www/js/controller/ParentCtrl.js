@@ -1,7 +1,7 @@
 'use strict';
-
-app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartService,$rootScope,$ionicModal,$ionicScrollDelegate,$cordovaGeolocation,$http,$ionicPopup) {
-	$ionicScrollDelegate.scrollTop();
+app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartService,$rootScope,$ionicModal,$ionicScrollDelegate,
+		$cordovaGeolocation,$http,$ionicPopup) {
+//	$ionicScrollDelegate.$getByHandle('mainScroll').scrollTop();
 	var init=function(){
 		if($localStorageService.getUser()==null){
 			$localStorageService.setUser();
@@ -19,8 +19,25 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 	var templateUrl='';
 	var myPopup=null;
 
+	$scope.expandSerachBar = function(event) {
+		// alert("inside"+event);
+		if (event == 'front') {
+			$scope.searchBar = true;
+		}else if (event == 'back') {
+			$scope.searchBar = false;
+		}
+
+	}
+	
 	$scope.moveToBackScreen=function(){
+		if($rootScope.stateArray.length==0){
+			return;
+		}
 		var popElement=$rootScope.stateArray.pop();
+		var scopeRef=angular.element(document.querySelector('#homeView')).scope();
+		if(popElement=='home'){
+			angular.element(document.querySelector('#homeView')).scope().headerTitle.name='Home';
+			}
 		console.log("$rootScope.stateArray.pop() after  " +$rootScope.stateArray);
 		angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name=popElement;
 
@@ -100,7 +117,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 	var openModal=function(templateUrl){
 		$ionicModal.fromTemplateUrl(templateUrl, {
 			scope : $scope,
-			animation : 'slide-in-up'
+			animation : false
 		}).then(function(modal) {
 			// modal.show();
 			$scope.modal = modal;
@@ -118,6 +135,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 	$scope.closeOrderModal = function() {
 		$scope.modal.hide();
 		angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name='home';
+		angular.element(document.querySelector('#homeView')).scope().headerTitle.name='Home';
 		$rootScope.stateArray=[];
 	};
 

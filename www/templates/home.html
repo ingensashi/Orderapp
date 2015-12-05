@@ -1,6 +1,6 @@
 <div id="homeView"">
-	<ion-view ng-if="activeScreenDetail.name=='home'" cache-view="true"> <ion-content
-		class="has-footer">
+	<ion-view ng-if="activeScreenDetail.name=='home'" cache-view="true">
+	<ion-content class="has-footer">
 	<div style="margin-bottom: 10px">
 		<ion-slide-box on-slide-changed="slideHasChanged($index)"
 			auto-play="true" does-continue="true" style="margin-top: 1%;">
@@ -9,6 +9,9 @@
 		<div class="center-align">
 			<img ng-src="{{bannerImg.imagepath}}" class="img-responsive-banner"
 				style="padding: 2%">
+			<div class="banner-heading">
+				<h2 style="color: #0074c8;">{{bannerImg.catname}}</h2>
+			</div>
 		</div>
 		</ion-slide> </ion-slide-box>
 	</div>

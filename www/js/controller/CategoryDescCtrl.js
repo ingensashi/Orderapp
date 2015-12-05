@@ -89,27 +89,42 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 	};
 
 	$scope.changeCatType=function(){
-		$ionicScrollDelegate.scrollTop();
+		//$ionicScrollDelegate.scrollTop();
 		var catType=$scope.categoryDetails.catType;
-		if(catType.indexOf('Non')<0 || catType.indexOf('less')>0){
+		/**
+		 * ['Veg','Non Veg','Previous','Trending','Egg','Eggless']
+		 */
+		switch(catType){
+		case 'Veg':
+			$scope.passiveCategory=$scope.categoryDetails.catType;
 			$scope.categoryDetails.catType="Non Veg";
 			$scope.headerTitle.name="Non Veg";
 			$scope.productList="nonvegList";
-			if(catType.indexOf('egg')>0){
-				$scope.passiveCategory="Eggless";
-			}else{
-				$scope.passiveCategory="Veg";
-			}
-
-		}else{
-			$scope.headerTitle.name="Veg";
+			break;
+		case 'Non Veg':
+			$scope.passiveCategory=$scope.categoryDetails.catType;
 			$scope.categoryDetails.catType="Veg";
+			$scope.headerTitle.name="Veg";
 			$scope.productList="vegList";
-			if(catType.indexOf('less')>0){
-				$scope.passiveCategory="Egg";
-			}else{
-				$scope.passiveCategory="Non veg";
-			}
+			break;
+		case 'Egg' :
+			$scope.passiveCategory=$scope.categoryDetails.catType;
+			$scope.categoryDetails.catType="Eggless";
+			$scope.headerTitle.name="Eggless";
+			$scope.productList="nonvegList";
+			break;
+		case 'Eggless':
+			$scope.passiveCategory=$scope.categoryDetails.catType;
+			$scope.categoryDetails.catType="Egg";
+			$scope.headerTitle.name="Egg";
+			$scope.productList="vegList";
+			break;
+		case 'Previous':
+			$scope.headerTitle.name="Previous";
+			break;
+		case 'Trending' :
+			$scope.headerTitle.name="Trending";
+			break;
 		}
 	};
 
@@ -149,7 +164,6 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 	$scope.onSlideMove = function(data) {
 		console.log("onSlideMove",data.index);
 		$scope.categoryDetails.name=$scope.tabs[data.index].text;
-		$scope.categoryDetails.catId=$scope.categoryDetails.catType;
 		getProductDetails($scope.categoryDetails.name,"everything");
 	};
 

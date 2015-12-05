@@ -39,7 +39,7 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 		   });
 		 };
 	$ionicPlatform.ready(function() {
-	$ionicScrollDelegate.scrollTop();
+		$ionicScrollDelegate.scrollTop();
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs).
 		// The reason we default this to hidden is that native apps don't usually show an accessory bar, at
@@ -86,6 +86,9 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 			}else{
 				var popElement=$rootScope.stateArray.pop();
 				console.log("$rootScope.stateArray.pop() after  " +$rootScope.stateArray);
+				if(popElement=='home'){
+				angular.element(document.querySelector('#homeView')).scope().headerTitle.name='Home';
+				}
 				angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name=popElement;
 				angular.element(document.querySelector('#homeView')).scope().$apply();
 			}

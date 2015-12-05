@@ -1,9 +1,10 @@
-<ion-view ng-controller="CategoryCtrl" cache-view="true"> <ion-content
+<ion-view ng-controller="CategoryCtrl" cache-view="true"> 
+<ion-content
 	style="margin-top:8%;margin-bottom:50px;"> <tab-slide-box
 	scroll="false">
 
-<div class="tsb-icons">
-	<div class="tsb-ic-wrp item-divider">
+<div class="tsb-icons" >
+	<div class="tsb-ic-wrp item-divider" >
 		<ion-scroll direction="x" class="tsb-hscroll"> <a
 			style="font-size: 1em; line-height: 3em" href="javascript:;"
 			class="{{tab.icon}}" ng-repeat="tab in tabs"
@@ -12,13 +13,17 @@
 	</div>
 </div>
 <div>
-	<ion-slide-box auto-play="true" does-continue="true"> <ion-slide
-		ng-repeat="bannerImg in catBannerModel">
+	<ion-slide-box auto-play="false" does-continue="true" on-slide-changed="slideHasChanged($index)"> 
+	<ion-slide ng-repeat="bannerImg in catBannerModel">
 	<div class="center-align">
 		<img ng-src="{{bannerImg.imagepath}}" class="img-responsive-banner">
+		<div class="banner-heading">
+			<h2 style="color:#0074c8;">{{bannerImg.catname}}</h2>
+				</div>
 	</div>
-	</ion-slide> </ion-slide-box>
-	<div>
+	</ion-slide>
+	 </ion-slide-box>
+	</div>
 		<ion-slide-box show-pager="false"
 			on-slide-changed="slideHasChanged($index)"> <ion-slide ng-repeat="tab in tabs">
 
