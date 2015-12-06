@@ -54,7 +54,7 @@
 			</div>
 			<div class="row" style="height: 160px" ng-if="subCategoryDetail.name.length>2">
 				<div class="col" style="padding: 0.8%"
-					ng-click="moveToScreen('categoryDesc')">
+					ng-click="moveToScreen('categoryDesc',subCategoryDetail.name[2])">
 					<div class="item item-image" style="height: 155px;border:0px">
 						<img ng-src="{{subCategoryDetail.images[2]}}" class="img-responsive"
 							style="height: 130px; position: relative">
@@ -66,7 +66,7 @@
 
 				</div>
 				<div class="col" style="padding: 0.8%"
-					ng-click="moveToScreen('categoryDesc')" ng-if="subCategoryDetail.name.length>3">
+					ng-click="moveToScreen('categoryDesc',subCategoryDetail.name[3])" ng-if="subCategoryDetail.name.length>3">
 					<div class="item item-image" style="height: 155px;border:0px">
 						<img ng-src="{{subCategoryDetail.images[3]}}" class="img-responsive"
 							style="height: 134px; position: relative">

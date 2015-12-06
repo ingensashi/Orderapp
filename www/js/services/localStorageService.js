@@ -62,9 +62,17 @@ app.service('$localStorageService', function($localStorage) {
 	this.getCartDetails=function(){
 		var cart=$localStorage.cartDetails;
 		if(angular.isUndefined(cart) || cart==null){
+			$localStorage.recentList={};
 			return null;
 		}
 		return cart; 
+	};
+	this.setCardDetails=function(cart){
+		$localStorage.cartDetails=cart;
+	};
+	
+	this.clearCartDetails=function(){
+		delete $localStorage.cartDetails;
 	};
 	this.setCardDetails=function(cart){
 		$localStorage.cartDetails=cart;
@@ -96,4 +104,19 @@ app.service('$localStorageService', function($localStorage) {
 	this.getSingleProduct=function(catName,prodid){
 
 	};
+	this.updateRecentList=function(recentList,catName,prodid){
+		var recentList=$localStorage.recentList;
+		if(angular.isUndefined(recentList[catName]) || angular.isUndefined(recentList[catName])==null){
+			$localStorage.recentList[catName]=[];
+		}
+		$localStorage.recentList[catName].push(prodid); 
+	}
+	this.getrecentList=function(catName){
+		var recentList=$localStorage.recentList;
+		if(angular.isUndefined(recentList[catName]) || angular.isUndefined(recentList[catName])==null){
+			var arr=[];
+			return arr;
+		}
+		return $localStorage.recentList[catName];
+	}
 });

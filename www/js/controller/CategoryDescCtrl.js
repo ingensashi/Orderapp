@@ -90,6 +90,45 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 			$scope.hideSpinner();
 		}
 	};
+	
+	var getTrendingProdDetails=function(){
+		$scope.showSpinner();
+		var catName=$scope.categoryDetails.name;
+		$scope.productDetails.prodDetails={};
+		$scope.productDetails.vegList=[];
+		/*if($localStorageService.getProductDetails($scope.categoryDetails.name)==null){
+			$scope.productList=null;
+			return;
+		}*/
+		$scope.headerTitle.name="Trending";
+		var trendingDetails={
+		  "device_id": "1234",
+		   "session_id" : "dgdfg",
+		  "cat_name" : catName,
+		  "cat_type" : "trending"
+		};
+		$http({
+			url : 'http://216.15.228.130:8083/NProductTrending.php',
+			method : "post",
+			data : trendingDetails
+		}).success(function(response) {
+			console.log("reponse catname", response);
+			$scope.productDetails.prodDetails=angular.copy($localStorageService.getProductDetails(catName)).prodDetails;
+			for(var i=0;i<response.proddetails.length;i++){
+				$scope.productDetails.vegList.push(response.proddetails[i].prodid);	
+			}
+			console.log("Trending vegList", $scope.productDetails.vegList);
+			$scope.productList="vegList";
+			$scope.hideSpinner();
+			/**
+			 * isdataloaded made flase so that non veg will not appear here
+			 */
+			$scope.isDataLoaded=false;
+		}).error(function (data, status, headers, config) {
+			console.log("error",status);
+			return status;
+		});
+	}
 
 	$scope.changeCatType=function(){
 		$ionicScrollDelegate.scrollTop();
@@ -136,8 +175,17 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 
 	var init=function(){
 		$localStorageService.initializeProductdetails();
-		getProductDetails($scope.categoryDetails.name,"everything");
 		var catType=$scope.categoryDetails.catType;
+		switch(catType){
+		case 'Previous':
+			$scope.headerTitle.name="Previous";
+			$scope.productList=null;
+			break;
+		case 'Trending' :
+			getTrendingProdDetails();
+			break;
+		default:
+			getProductDetails($scope.categoryDetails.name,"everything");
 		if(catType.indexOf('Non')<0 || catType.indexOf('less')>0){
 			$scope.productList="vegList";
 			if(catType.indexOf('less')>0){
@@ -152,6 +200,8 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 			}else{
 				$scope.passiveCategory="Veg";
 			}
+		}
+
 		}
 		/*$scope.productDetails=[{"prodname":"CALZONE","rate":"50.80","proddesc":"very good CALZONE","imagepath":"img/CALZONE.png","prodid":"prod08"},
 		                       {"prodname":"pizza","rate":"40.80","proddesc":"very good pizza","imagepath":"img/PIZZA.png","prodid":"prod09"},
@@ -170,7 +220,18 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 		console.log("onSlideMove",data.index);
 		$scope.categoryDetails.name=$scope.tabs[data.index].text;
 		$scope.isDataLoaded=false;
-		getProductDetails($scope.categoryDetails.name,"everything");
+		var catType=$scope.categoryDetails.catType;
+		switch(catType){
+		case 'Previous':
+			$scope.headerTitle.name="Previous";
+			$scope.productList=null;
+			break;
+		case 'Trending' :
+			getTrendingProdDetails();
+			break;
+		default:
+			getProductDetails($scope.categoryDetails.name,"everything");
+		}
 	};
 
 	$scope.addItemToCart=function(product){
