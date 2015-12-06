@@ -21,8 +21,8 @@ app.controller('AddressCtrl',
 	$scope.changeTab=function(flag){
 		$scope.activetab=flag;
 		if(addressPopup!=null){
-		$scope.addressDetails={};
-		addressPopup.close();
+			$scope.addressDetails={};
+			addressPopup.close();
 		}
 	};
 	var getCityList=function(){
@@ -48,7 +48,7 @@ app.controller('AddressCtrl',
 		console.log("dsfdsfrtdf",cityId);
 		for(var i=0;i<$scope.cityDetails.length;i++){
 			if($scope.cityDetails[i].name==cityId){
-				$scope.addressDetails.city=$scope.cityDetails[i];
+				$scope.addressDetails.city=$scope.cityDetails[i].id;
 				var area_details={
 						"device_id":"5445554",
 						"session_id" : "1E4786B6C2D7492",
@@ -78,7 +78,7 @@ app.controller('AddressCtrl',
 		for(var i=0;i<$scope.areaDetails.length;i++){
 			if($scope.areaDetails[i].name==areaId){
 				$scope.activeArea=$scope.areaDetails[i];
-				$scope.addressDetails.area=$scope.areaDetails[i];
+				$scope.addressDetails.area=$scope.areaDetails[i].id;
 			}
 		}
 	};
@@ -101,19 +101,48 @@ app.controller('AddressCtrl',
 
 		});
 	} ;
+	var getAddressList=function(){
+		var addressList={
+			"device_id":"5445554",
+			"session_id" : "32F179622B8F4FC",
+			"flag" :"addresslist"
+			}
+		$http({
+			url : 'http://216.15.228.130:8083/NAddressList.php',
+			method : "post",
+			data : addressList
+		}).success(function(response) {
+			console.log("addressList  :",response);
+			$scope.addressList=response.addresslist;
+		}).error(function (data, status, headers, config) {
+			console.log("error",status);
+			alert("something wrong happened please try again");
+		});
+	};
 
-	
+
 	$scope.findOutlet=function(){
 		$scope.outlet=true;
 		getOutletDetails($scope.activeArea.id);
 	};
-	
+
 	$scope.saveAddress=function(){
+		$scope.addressDetails.device_id="5445554";
+		$scope.addressDetails.session_id="32F179622B8F4FC";
 		console.log($scope.addressDetails)
-		$scope.addressList.push($scope.addressDetails);
-		addressConfirmPopup();
+		$http({
+			url : 'http://216.15.228.130:8083/NAddressSave.php',
+			method : "post",
+			data : $scope.addressDetails
+		}).success(function(response) {
+			addressConfirmPopup();
+			getAddressList();
+		}).error(function (data, status, headers, config) {
+			console.log("error",status);
+			alert("something wrong happened please try again");
+		});
 	};
-	
+
 	var addressConfirmPopup = function() {
 		addressPopup = $ionicPopup.show({
 			templateUrl : 'templates/addressConfirmPopup.html',
@@ -125,6 +154,7 @@ app.controller('AddressCtrl',
 	};
 	var init=function(){
 		getCityList();
+		getAddressList();
 	}
 	init();
 });
