@@ -7,10 +7,27 @@ var user;
 var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox','ionic.ion.imageCacheFactory'])
 
 
-.run(function($ionicPlatform,$localStorage,$state,$timeout,$ionicScrollDelegate,$rootScope,$ionicPopup) {
+.run(function($ionicPlatform,$http,$localStorage,$state,$timeout,$ionicScrollDelegate,$rootScope,
+		$ionicPopup) {
 	user=$localStorage.user;
 	$rootScope.stateArray=[];
 	console.log("$localStorage app run",user);
+	var city_details={
+			"device_id":"5445554",
+			"session_id" : "1E4786B6C2D7492",
+			"location_type":"city"
+	}
+
+	$http({
+		url : 'http://216.15.228.130:8083/NLocationRequest.php',
+		method : "post",
+		data : city_details
+	}).success(function(response) {
+		console.log("cityDetails connected ", response);
+	}).error(function (data, status, headers, config) {
+		console.log("error",status);
+		alert("you are not connected to internet");
+	});
 
 	if(user!==undefined && user.userStatus!=undefined){
 		// alert("1");
@@ -194,26 +211,5 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
   enabled: true,
   requireBase: false
 });*/
-})
-.config(function($httpProvider) {
-	$httpProvider.interceptors.push(function() {
-		return {
-			'response': function(response) {
-				var status = response.status; // error code
-				//alert("status"+status);
-				if ((status >= 400) && (status < 500)) {
-					alert("AuthError", status);
-					return;
-				}
-				if ( (status >= 500) && (status < 600) ) {
-					alert("ServerError", status);
-					return;
-				}
-				return response;
-			}
-		};
-	});
-
-
 });
 

@@ -10,7 +10,13 @@ app.service('$localStorageService', function($localStorage) {
 			return null;
 		}
 		return user.userDetails;
-	}
+	};
+	this.logout = function() { 
+		$localStorage.$reset();
+	  /*  $ionicHistory.clearCache();
+	    $ionicHistory.clearHistory();*/
+	};
+
 
 	this.setUserDetails = function(userDetails) { 
 		/*if(angular.isUndefined($localStorage.user) || $localStorageService.user==null){

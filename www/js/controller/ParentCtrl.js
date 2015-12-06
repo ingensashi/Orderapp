@@ -115,6 +115,10 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 			break;
 		case 'more':
 			break;
+		case 'logout':
+			$localStorageService.logout();
+			$state.go('login');
+			break;
 		}
 
 	}
