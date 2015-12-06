@@ -39,6 +39,13 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 		   });
 		 };
 	$ionicPlatform.ready(function() {
+		document.addEventListener("resume", function() {
+			//alert("here"+angular.element(document.querySelector('body')).scope().isAddressRequired);
+			if(angular.element(document.querySelector('body')).scope().isAddressRequired){
+				angular.element(document.querySelector('body')).scope().showLocation();
+			}
+			console.log("The application is resuming from the background");
+		}, false);
 		$ionicScrollDelegate.scrollTop();
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs).

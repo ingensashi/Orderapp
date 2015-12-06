@@ -1,10 +1,9 @@
-<ion-view ng-controller="CategoryCtrl" cache-view="true"> 
-<ion-content
+<ion-view ng-controller="CategoryCtrl" cache-view="true"> <ion-content
 	style="margin-top:8%;margin-bottom:50px;"> <tab-slide-box
 	scroll="false">
 
-<div class="tsb-icons" >
-	<div class="tsb-ic-wrp item-divider" >
+<div class="tsb-icons">
+	<div class="tsb-ic-wrp item-divider">
 		<ion-scroll direction="x" class="tsb-hscroll"> <a
 			style="font-size: 1em; line-height: 3em" href="javascript:;"
 			class="{{tab.icon}}" ng-repeat="tab in tabs"
@@ -13,21 +12,20 @@
 	</div>
 </div>
 <div>
-	<ion-slide-box auto-play="false" does-continue="true" on-slide-changed="slideHasChanged($index)"> 
-	<ion-slide ng-repeat="bannerImg in catBannerModel">
+	<ion-slide-box auto-play="true" does-continue="true" ng-click="catBannerClick()"> <ion-slide
+		ng-repeat="bannerImg in catBannerModel" >
 	<div class="center-align">
 		<img ng-src="{{bannerImg.imagepath}}" class="img-responsive-banner">
 		<div class="banner-heading">
-			<h2 style="color:#0074c8;">{{bannerImg.catname}}</h2>
-				</div>
+				<h2 style="color: #0074c8;"><i class="ion-home" style="font-size:1.7em;color:#0074c8;float:left" ng-if="catBanner"></i>{{bannerImg.catname}}</h2>
+			</div>
 	</div>
-	</ion-slide>
-	 </ion-slide-box>
-	</div>
-		<ion-slide-box show-pager="false"
-			on-slide-changed="slideHasChanged($index)"> <ion-slide ng-repeat="tab in tabs">
+	</ion-slide> </ion-slide-box>
+	<div>
+		<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)"> 
+		<ion-slide ng-repeat="tab in tabs">
 
-		<div class="item-card" style="margin: 0px 0px">
+		<div class="item-card" style="margin: 0px 0px" ng-if="!catBanner">
 			<div class="row" style="height: 160px" ng-if="subCategoryDetail.name.length>=2">
 				<div class="col" style="padding: 0.8%"
 					ng-click="moveToScreen('categoryDesc',subCategoryDetail.name[0])">
@@ -81,7 +79,45 @@
 				</div>
 			</div>
 		</div>
-		</ion-slide> <!-- <ion-slide>
+		
+		<div class="item item-body" style="padding: 0px" ng-if="catBanner">
+
+
+			<div class="item" 
+				style="background-color: ghostWhite; border-width: 0px; padding: 2px;">
+				<img class="full-image" ng-src="img/soiWebs/soi3.jpg" >
+				<div class="row" style="padding:1px">
+					<div class="col" style="text-align: left">
+						<span class="ion-ionic" style="color: green;margin:0px 7px 0px 0px"></span>Pizza
+
+					</div>
+					<div class="col" style="text-align: right; font-size: 14px">
+						Rs. 500</div>
+				</div>
+				<div class="row" style="padding:0px;line-height: 16px">
+					<div class="col"
+						style="text-align: left; margin-left: 6%; font-size: 12px">
+						<i><p style="margin:0px">Excellent quality</p> </i>
+					</div>
+					<div class="col" style="text-align: right;z-index:10;">
+					<button ng-if="categoryDetails.name=='Pizzas'"
+							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
+							class="button-small button-clear" ng-click="addItemToCart(productDetails.prodDetails[productId])">Add
+							</button>
+							<span ng-if="categoryDetails.name!='Pizzas'">
+						<i class="pull-left icon ion-ios-minus-outline" ng-click="removeItemFromCart(productDetails.prodDetails[productId])"
+							style="font-size: 1.8em;"></i> <span style="font-size: 1.3em;">{{cartDetails.nodeDetails[productId].count}}</span>
+						<i class=" pull-right icon ion-ios-plus-outline" ng-click="addItemToCart(productDetails.prodDetails[productId])"
+							style="font-size: 1.8em;"></i></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		</ion-slide>
+		
+		
+		 <!-- <ion-slide>
 
 		<div class="item-card" style="margin: 0px 0px">
 			<div class="row" style="height: 165px">

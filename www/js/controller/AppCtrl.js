@@ -6,6 +6,7 @@ app.controller('AppCtrl',
 	// $ionicHistory.nextViewOptions({disableBack: true});
 	$scope.bannerModel = {};
 	$scope.searchBar = false;
+	$scope.bannerActive=false;
 	//$scope.user={};
 	$scope.user.userStatus = $localStorageService.getUserStatus();
 	console.log("$localStorageService.getUserStatus()"+$localStorageService.getUserStatus());
@@ -15,6 +16,7 @@ app.controller('AppCtrl',
 	$scope.tabSlideDetail={};
 	$scope.activeScreenDetail.name='home';
 	$scope.categoryDetails={};
+	var activeIndex=-1;
 
 	var bannerDetails;
 	var getBannerData = function(bannerDetails) {
@@ -60,12 +62,27 @@ app.controller('AppCtrl',
     // function
   };*/
 
+	$scope.slideHasChanged=function(index){
+		//console.log("slideHasChanged", index);
+		activeIndex=index;
+		//$scope.bannerActive=true;
+	};
+	$scope.bannerClick=function(index){
+		console.log("bannerClick", activeIndex);
+		$scope.bannerActive=!$scope.bannerActive;
+		if($scope.bannerActive){
+			$ionicSlideBoxDelegate.stop();
+		}else{
+			$ionicSlideBoxDelegate.start();
+		}
+	};
+
 	$scope.moveToScreen=function(screen,catId,catName,product){
 		console.log("catName ::"+catName +"  catId ::"+catId);
 		$rootScope.stateArray.push($scope.activeScreenDetail.name);
 		console.log("$rootScope.stateArray",$rootScope.stateArray);
 		$scope.activeScreenDetail.name=screen;
-		
+
 		switch(screen){
 		case 'category':
 			$scope.categoryDetails.name=catName;
@@ -83,7 +100,7 @@ app.controller('AppCtrl',
 			break;
 		}
 	};
-	
+
 	$scope.tabs = [ {
 		"text" : "Pizzas",
 		"catId":1
@@ -124,7 +141,7 @@ app.controller('AppCtrl',
 			}
 		}
 	};
-	
+
 
 	$scope.showSpinner = function() {
 		$ionicLoading.show({

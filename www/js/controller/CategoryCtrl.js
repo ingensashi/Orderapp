@@ -1,6 +1,8 @@
 'use strict';
 app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate,$ImageCacheFactory,$window) {
 	$scope.subCategoryDetail={};
+	var activeIndex=-1;
+	$scope.catBanner=false;
 	$scope.headerTitle.name=$scope.categoryDetails.name;
 	$window.dynamicIndex=$scope.getTabIndex($scope.categoryDetails.name);
 	var getSubCategoryName=function(catName){
@@ -42,6 +44,7 @@ app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate,$Im
 		}).success(function(response) {
 			console.log("response",response);
 			$scope.catBannerModel = response.bannerimages;
+			
 			/*var images = [];
 			for(var i=0; i<$scope.catBannerModel.length;i++){
 				images.push($scope.catBannerModel[i].imagepath);
@@ -72,7 +75,19 @@ app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate,$Im
 		getSubCategoryName($scope.categoryDetails.name);
 		$scope.headerTitle.name=$scope.categoryDetails.name;
 		getBannerData($scope.categoryDetails.catId);
+		$scope.catBanner=false;
 	};
+	
+	$scope.slideHasChanged=function(index){
+		//console.log("slideHasChanged", index);
+		activeIndex=index;
+		//$scope.bannerActive=true;
+	};
+	$scope.catBannerClick=function(index){
+		console.log("bannerClick", activeIndex);
+		$scope.catBanner=!$scope.catBanner;
+	};
+
 
 //	$scope.bannerModel={"Banner":["img/soiWebs/soi5.jpg","img/soiWebs/soi.jpg","img/soiWebs/soi1.jpg","img/soiWebs/soi3.jpg"]};
 

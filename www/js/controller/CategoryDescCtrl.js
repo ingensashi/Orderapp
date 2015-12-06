@@ -6,6 +6,7 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 	$scope.productDetails={};
 	$scope.productList='';
 	$scope.passiveCategory='';
+	$scope.isDataLoaded=false;
 	var getProductDetailsByCatType=function(catName,catType){
 		$scope.showSpinner();
 		var tempType='';
@@ -77,19 +78,22 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 				var temp= angular.copy($scope.productDetails);
 				$localStorageService.setProductDetails(catName,temp);
 				$scope.hideSpinner();
+				$scope.isDataLoaded=true;
 			}).error(function (data, status, headers, config) {
 				console.log("error",status);
 				return status;
 			});
 		}else{
-			$scope.hideSpinner();
 			$scope.productDetails=angular.copy($localStorageService.getProductDetails(catName));
 			console.log("in else $scope.productDetails",$scope.productDetails);
+			$scope.isDataLoaded=true;
+			$scope.hideSpinner();
 		}
 	};
 
 	$scope.changeCatType=function(){
-		//$ionicScrollDelegate.scrollTop();
+		$ionicScrollDelegate.scrollTop();
+		$scope.isDataLoaded=false;
 		var catType=$scope.categoryDetails.catType;
 		/**
 		 * ['Veg','Non Veg','Previous','Trending','Egg','Eggless']
@@ -126,6 +130,7 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 			$scope.headerTitle.name="Trending";
 			break;
 		}
+		$scope.isDataLoaded=true;
 	};
 
 
@@ -164,6 +169,7 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 	$scope.onSlideMove = function(data) {
 		console.log("onSlideMove",data.index);
 		$scope.categoryDetails.name=$scope.tabs[data.index].text;
+		$scope.isDataLoaded=false;
 		getProductDetails($scope.categoryDetails.name,"everything");
 	};
 

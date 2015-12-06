@@ -2,21 +2,23 @@
 	<ion-view ng-if="activeScreenDetail.name=='home'" cache-view="true">
 	<ion-content class="has-footer">
 	<div style="margin-bottom: 10px">
+	
 		<ion-slide-box on-slide-changed="slideHasChanged($index)"
-			auto-play="true" does-continue="true" style="margin-top: 1%;">
+			auto-play="true" does-continue="true" style="margin-top: 1%;" ng-click="bannerClick($index)">
 		<ion-slide ng-repeat="bannerImg in bannerModel"
 			style="margin-top: 1%;">
 		<div class="center-align">
 			<img ng-src="{{bannerImg.imagepath}}" class="img-responsive-banner"
 				style="padding: 2%">
 			<div class="banner-heading">
-				<h2 style="color: #0074c8;">{{bannerImg.catname}}</h2>
+				<h2 style="color: #0074c8;"><i class="ion-home" style="font-size:1.7em;color:#0074c8;float:left" ng-if="bannerActive"></i>{{bannerImg.catname}}</h2>
 			</div>
 		</div>
 		</ion-slide> </ion-slide-box>
+		
 	</div>
 	<div>
-		<div class="list card" style="margin: 0px 0px">
+		<div class="list card" style="margin: 0px 0px"  ng-if="!bannerActive">
 			<div class="row" style="height: 165px">
 				<div class="col" style="padding: 0.8%"
 					ng-click="moveToScreen('category',1,'Pizzas')">
@@ -150,9 +152,67 @@
 				</div>
 			</div>
 		</div>
+		<div  ng-if="bannerActive">
+		<div class="list card" style="margin: 0px 0px">
+			<div class="row" style="height: 165px">
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('category',1,'Pizzas')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/soiWebs/soi6.jpg" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">CS1</h2>
+						</div>
+					</div>
+
+				</div>
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('category',8,'Calzones')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/soiWebs/soi5.jpg" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">CS2</h2>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="row" style="height: 160px">
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('category',5,'Desserts')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/soiWebs/soi4.jpg" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">CS3</h2>
+						</div>
+					</div>
+
+				</div>
+				<div class="col" style="padding: 0.8%"
+					ng-click="moveToScreen('category',3,'Pastas')">
+					<div class="item item-image" style="height: 155px">
+						<img src="img/soiWebs/soi3.jpg" class="img-responsive"
+							style="height: 150px; position: relative">
+						<div
+							style="background-color: rgb(10, 9, 9); height: 18%; position: absolute; bottom: 2%; width: 100%; opacity: 0.3;">
+							<h2 style="color: white; margin-top: 3%">CS4</h2>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			</div>
+		</div>
 	</div>
 
-	</ion-content> </ion-view>
+	</ion-content>
+	
+	 </ion-view>
 	<div ng-if="activeScreenDetail.name=='category'"
 		ng-include="'templates/category.html'"></div>
 	<div ng-if="activeScreenDetail.name=='categoryDesc'"

@@ -16,6 +16,10 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 	$scope.stateDetails=$state;
 	$scope.cartDetails={};
 	$scope.headerTitle={};
+	$scope.isAddressRequired=false;
+	$scope.activeAddress=undefined;
+
+
 	var templateUrl='';
 	var myPopup=null;
 
@@ -43,20 +47,18 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 
 	};
 
-
-	$scope.cityNames = ["New Delhi", "Noida", "Gurgaon", "Ghaziabad", "Faridabad"];
-
 	var positionTracker=function(pos){
 		$http.get("http://maps.googleapis.com/maps/api/geocode/json?latlng="+
 				pos.lat+","+pos.long+"&sensor=true").success( function(response) {
 					$scope.locationData=response.results;
 					console.log($scope.locationData);
-					$scope.location =$scope.locationData[0].formatted_address.split(",");
-					$scope.searchString= $scope.location[0]+","+$scope.location[1];
-					alert($scope.searchString);	
+					$scope.activeAddress=$scope.locationData[0].formatted_address;
+					/*$scope.location =$scope.locationData[0].formatted_address.split(",");
+					$scope.searchString= $scope.location[0]+","+$scope.location[1];*/
+					$scope.isAddressRequired=false;
+					console.log("active Address",$scope.activeAddress);
 				});
 	};
-
 
 	var getCurrentLocation=function(callback){
 		var posOptions = {timeout: 10000, enableHighAccuracy: false};
@@ -71,24 +73,26 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 			callback(pos);
 		}, function(err) {
 			// error
-			alert("please enable gps");
+			alert("error :"+err);
+		//	alert("please enable gps");
 		});
 
 	};
 
-
-
-
 	$scope.showLocation=function(){
 		cordova.plugins.diagnostic.isLocationEnabled(function(enabled){
+			//alert("Location is " + (enabled ? "enabled" : "disabled"));
 			if(!enabled){
 				//alert("Location is " + (enabled ? "enabled" : "disabled"));
 				cordova.plugins.diagnostic.switchToLocationSettings();
+				$scope.isAddressRequired=true;
+			}else{
+				//alert("inside else");
+				getCurrentLocation(positionTracker);
 			}
 		}, function(error){
 			alert("The following error occurred: "+error);
 		});
-		getCurrentLocation(positionTracker);
 	};
 
 	$scope.openFooterModel=function(flag){
@@ -166,6 +170,10 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 			break;
 		case 'Enable':
 			$scope.showLocation();
+			myPopup.close();
+			$scope.closeModal();
+			templateUrl='templates/addressDetail.html';
+			openModal(templateUrl);
 			break;
 		}
 	};
