@@ -114,6 +114,7 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 			$scope.checked.baseChecked=$scope.cartDetails.nodeDetails[productId].properties.Base;
 		}
 		getProductDetails('Base');
+		getProductDetails('Size');
 		/*if(angular.isUndefined($scope.activeProperty[productId])){
 			$scope.activeProperty[productId]={};
 			$scope.activeProperty[productId].size="SOLO";

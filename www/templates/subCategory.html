@@ -44,14 +44,14 @@
 				style="background-color: #3F3D3D; border-left: 0px; border-right: 0px; border-top: 0px">
 				<div class="row">
 					<div class="col" style="text-align: left">
-						<p style="color: white">size</p>
+						<p style="color: white">Size</p>
 						<h2 style="color: yellow;">{{checked.size}}</h2>
 					</div>
 					<div class="col" style="text-align: right"
-						ng-click="showPopup('Size')">
+						ng-click="showPopup('Size')" ng-if="productSize.length>1">
 						<button
 							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
-							class="button-small button-clear">Edit</button>
+							class="button-small button-clear" >Edit</button>
 					</div>
 				</div>
 			</div>
@@ -59,14 +59,14 @@
 				style="background-color: #3F3D3D; border-left: 0px; border-right: 0px; border-bottom: 0px">
 				<div class="row">
 					<div class="col" style="text-align: left">
-						<h3 style="color: white;">Choose Your Base</h3>
+						<h3 style="color: white;">Base</h3>
 						<p style="color: yellow;">{{checked.baseChecked}}</p>
 					</div>
 					<div class="col" style="text-align: right"
-						ng-click="showPopup('Base')">
+						ng-click="showPopup('Base')" ng-if="productBase.length>1">
 						<button
 							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
-							class="button-small button-clear">Edit</button>
+							class="button-small button-clear" >Edit</button>
 					</div>
 				</div>
 			</div>
@@ -74,7 +74,7 @@
 				style="background-color: #3F3D3D; border-left: 0px; border-right: 0px;">
 				<div class="row">
 					<div class="col" style="text-align: left">
-						<p style="color: white">Veg Toppins</p>
+						<p style="color: white">Toppings</p>
 						<h2 style="color: yellow;" ng-if="cartDetails.nodeDetails[cartDetails.activeProduct.prodid].properties.toppins.length==0">None</h2>
 						<h2 style="color: yellow;"
 						 ng-if="cartDetails.nodeDetails[cartDetails.activeProduct.prodid].properties.toppins.length>0"
@@ -82,10 +82,16 @@
 						 {{cartDetails.nodeDetails[toppinId].toppingname}}</h2>
 					</div>
 					<div class="col" style="text-align: right"
-						ng-click="showPopup('Toppins')">
+						ng-click="showPopup('Toppins')" ng-if="cartDetails.nodeDetails[cartDetails.activeProduct.prodid].properties.toppins.length==0">
 						<button
 							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
 							class="button-small button-clear">Add</button>
+					</div>
+					<div class="col" style="text-align: right"
+						ng-click="showPopup('Toppins')" ng-if="cartDetails.nodeDetails[cartDetails.activeProduct.prodid].properties.toppins.length>0">
+						<button
+							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
+							class="button-small button-clear">Edit</button>
 					</div>
 				</div>
 			</div>
