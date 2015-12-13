@@ -1,11 +1,13 @@
 'use strict';
 app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$CartService,$ionicScrollDelegate,
-		$ImageCacheFactory,$window) {
+		$ImageCacheFactory,$window,$ionicPopup) {
 	$window.dynamicIndex=$scope.getTabIndex($scope.categoryDetails.name);
 	$scope.headerTitle.name=$scope.categoryDetails.catType;
 	$scope.productDetails={};
 	$scope.productList='';
 	$scope.passiveCategory='';
+	$scope.checked={};
+	var myPopup=null;
 	$scope.isDataLoaded=false;
 	var getProductDetailsByCatType=function(catName,catType){
 		$scope.showSpinner();
@@ -90,7 +92,7 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 			$scope.hideSpinner();
 		}
 	};
-	
+
 	var getTrendingProdDetails=function(){
 		$scope.showSpinner();
 		var catName=$scope.categoryDetails.name;
@@ -102,10 +104,10 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 		}*/
 		$scope.headerTitle.name="Trending";
 		var trendingDetails={
-		  "device_id": "1234",
-		   "session_id" : "dgdfg",
-		  "cat_name" : catName,
-		  "cat_type" : "trending"
+				"device_id": "1234",
+				"session_id" : "dgdfg",
+				"cat_name" : catName,
+				"cat_type" : "trending"
 		};
 		$http({
 			url : 'http://216.15.228.130:8083/NProductTrending.php',
@@ -246,6 +248,68 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 
 	$scope.removeItemFromCart=function(product){
 		$CartService.removeItemFromCart(product,$scope.cartDetails);
+	};
+
+	var getSizeOfCake=function(productId){
+		$scope.showSpinner();
+		var productDetails={
+				"device_id": "1234",
+				"session_id" : "dgdfg",
+				"prodid" :productId 	};
+		$http({
+			url : 'http://216.15.228.130:8083/NProductSize.php',
+			method : "post",
+			data : productDetails
+		}).success(function(response) {
+			console.log("cake size", response);
+			$scope.productSize=response.productsizedetails;
+			/*for(var i=0;i<$scope.productSize.length;i++){
+				$scope.productSize[i].sizerate=parseInt($scope.productSize[i].sizerate);
+			}*/
+			$scope.hideSpinner();
+		}).error(function (data, status, headers, config) {
+			console.log("error",status);
+			return status;
+		});
+	};
+
+	$scope.addPropertiesToProduct=function(event,data,rate,checked){
+
+		/*//alert("checked"+checked);
+		$scope.cartDetails.nodeDetails[productId].properties[event]=data;
+		//alert("$scope.cartDetails.nodeDetails[productId].properties.sizeRate"+$scope.cartDetails.nodeDetails[productId].properties.sizeRate);
+		var nodeDetails=$scope.cartDetails.nodeDetails[productId];
+		$scope.cartDetails.productCount=$scope.cartDetails.productCount-$scope.cartDetails.nodeDetails[productId].count+1;
+		//get toppins data again as toppins rate changes with size of product
+		var toppinsRate=$scope.cartDetails.nodeDetails[productId].properties.toppins.toppinsRate;
+
+		$scope.cartDetails.amount=(parseFloat( $scope.cartDetails.amount)+parseFloat(toppinsRate)+ parseFloat(rate)-parseFloat(nodeDetails.amount)).toFixed(2);
+		//rate of product in json of cart details 
+		$scope.cartDetails.nodeDetails[productId].product.rate=rate;
+		//rate of active product updated because size of product changed
+		$scope.cartDetails.activeProduct.rate=rate;
+		//total rate of product including toppinsRate
+		nodeDetails.amount=(parseFloat(rate)+parseFloat(toppinsRate)).toFixed(2);
+		//size of single product to display on ui when size of product will change excluding rate of toppins
+		nodeDetails.sizeRate=rate;
+		$scope.cartDetails.nodeDetails[productId].count=1;*/
+	};		
+
+
+	$scope.showPopup = function(productId) {
+		getSizeOfCake("Mw01");
+		$scope.event1 = "Size";
+		myPopup = $ionicPopup.show({
+			templateUrl : 'templates/itemPopup.html',
+			cssClass : 'full-width;',
+			scope : $scope,
+		});
+		myPopup.then(function(res) {
+		});
+	};
+
+	$scope.hidePopup=function(){
+		myPopup.close();
 	};
 
 });
