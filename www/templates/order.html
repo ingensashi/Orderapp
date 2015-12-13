@@ -1,6 +1,6 @@
 
-<ion-modal-view style="min-height:83%;top:45px"> 
-<ion-header-bar class="bar bar-positive">
+<ion-modal-view style="min-height:0%;top:7%;bottom:7%"> 
+ <ion-header-bar class="bar bar-positive">
 <h3 style="font-size: 20px; white-space: nowrap; color: white">Order
 	Details</h3>
 <button class="button button-clear button-primary"
@@ -41,22 +41,23 @@
  </ion-item> </ion-list> <ion-list ng-repeat="crt in cartDetails.itemList"> <ion-item
 	style="padding:3px">
 <div class="row">
-	<div class="col" style="font-size: 13px; text-align: left;">
+	<div class="col" style="font-size: 13px; text-align: left;" >
 		<span class="ion-ionic"
 			style="color: red; margin-right: 3px; margin-left: -7%"></span>
 		{{cartDetails.nodeDetails[crt].product.product_name}}
-		<p>+{{cartDetails.nodeDetails[crt].properties.Size.toLowerCase()}}</p>
+		<p>size:{{cartDetails.nodeDetails[crt].properties.Size.toLowerCase()}},</p>
 		<p ng-if="cartDetails.nodeDetails[crt].properties.cheesy">+Extra Chesey</p>
+	<p ng-if="cartDetails.nodeDetails[crt].properties.toppins.length>0">Toppins:</p>	
 		<p ng-repeat="toppin in cartDetails.nodeDetails[crt].properties.toppins"
 			style="white-space: normal">
-			+Toppins:{{cartDetails.nodeDetails[toppin].toppingname.toLowerCase()}}</p>
+			{{cartDetails.nodeDetails[toppin].toppingname.toLowerCase()}},</p>
 
 	</div>
 	<!-- <div class="col">{{cart.nodeDetails[crt].product.itemtype}}</div> -->
 	<div class="col" style="text-align: center">{{cartDetails.nodeDetails[crt].count}}</div>
 	<div class="col" style="text-align: right; font-size: 13px">{{cartDetails.nodeDetails[crt].amount}}</div>
 </div>
-<div style="text-align: right">
+<div style="text-align: right;">
 <!-- <button class="button  button-large button-clear">
 	<i style="font-size: 25px; color: black; margin: 4%"
 		class="ion-trash-b"></i></button> -->
@@ -82,7 +83,7 @@
  </ion-list>
 
 </ion-content>
- <ion-footer-bar class="bar-light" ng-if="cartDetails.productCount>0">
+ <ion-footer-bar class="bar-light" ng-if="cartDetails.productCount>0" style="bottom:13px">
 <div class="button-bar">
 	<button class="button button-light button-clear"
 		style="color: black; font-size: 20px;">
@@ -91,4 +92,6 @@
 	<button class="button button-positive" ng-click="Checkout('checkOut')"
 		style="color: white; font-size: 17px;">CHECKOUT <i class="ion-arrow-right-c" style="font-size:26px;"></i></button>
 </div>
-</ion-footer-bar> </ion-modal-view>
+</ion-footer-bar>
+<hr></hr>
+ </ion-modal-view>
