@@ -2,7 +2,7 @@
 	<h4 style="text-align: center">{{event1}}</h4>
 </div>
 <div class="list" ng-if="event1=='Size'">
-	<div class="item" style="border: 0px; padding: 7px"
+	<div class="item" style="border: 0px; padding: 7px;height:106px"
 		ng-repeat="size in productSize  | orderBy:'sizerate'">
 		<div class="row">
 			<div class="col" style="margin-top: 20px">{{size.prodsize}}</div>
@@ -21,7 +21,7 @@
 <div ng-if="event1=='Base'">
 <div class="content" scroll="true" >
 <div class="list">
-	<div class="item" style="border: 0px; padding: 0px"
+	<div class="item" style="border: 0px; padding: 7px;height:106px"
 		ng-repeat="base in productBase">
 		<div class="row">
 			<div class="col" style="margin-top: 20px">{{base.prodcrust}}</div>

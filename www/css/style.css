@@ -122,11 +122,13 @@
 }
 
 
+
+
 .popup-container .popup {
   width: 94%;
   /* height: 242px; */
   max-width: 100%;
-  max-height: 89%;
+  max-height: 80%;
   border-radius: 0px;
   background-color: white;
   display: -webkit-box;
