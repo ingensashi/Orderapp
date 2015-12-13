@@ -210,6 +210,7 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 			$scope.cartDetails.itemList=[];
 			$scope.cartDetails.productCount=0;
 			$scope.cartDetails.amount=0;
+			$scope.cartDetails.taxAmount=0;
 		}
 		if($scope.cartDetails.nodeDetails===undefined || $scope.cartDetails.nodeDetails===null){
 			$scope.cartDetails.nodeDetails={};
