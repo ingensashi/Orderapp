@@ -20,7 +20,6 @@ app.service('$CartService', function($localStorageService) {
 		}
 		cartDetails.nodeDetails[productId].product=product;
 		cartDetails.nodeDetails[productId].count=cartDetails.nodeDetails[productId].count+1;
-		console.log(cartDetails.amount+"cartDetails.amount");
 		var properties=cartDetails.nodeDetails[productId].properties;
 		var toppinsRate=0.00;
 		if(angular.isDefined(properties) ){
@@ -40,9 +39,11 @@ app.service('$CartService', function($localStorageService) {
 		cartDetails.nodeDetails[productId].amount=(parseFloat(cartDetails.nodeDetails[productId].amount)+parseFloat(product.rate)+parseFloat(toppinsRate)).toFixed(2) ;
 		//total amount for all products
 		cartDetails.amount= (parseFloat( cartDetails.amount)+ parseFloat(product.rate)+parseFloat(toppinsRate)).toFixed(2);
+		cartDetails.taxAmount=(parseFloat( cartDetails.taxAmount)+ parseFloat(product.taxpercent)).toFixed(2);
 		//size of single product to display on ui when size of product will change excluding rate of toppins
 		cartDetails.nodeDetails[productId].sizeRate=parseFloat(product.rate).toFixed(2);
-		//	console.log("cartDetails",cartDetails);
+		console.log(cartDetails.taxAmount+"cartDetails");
+		console.log("cartDetails",cartDetails);
 		$localStorageService.setCardDetails(cartDetails);
 	};
 
@@ -79,18 +80,20 @@ app.service('$CartService', function($localStorageService) {
 		cartDetails.productCount=cartDetails.productCount-1;
 		//console.log(cartDetails.amount+"cartDetails.amount");
 		cartDetails.amount= (parseFloat( cartDetails.amount)- parseFloat(product.rate)-parseFloat(toppinsRate)).toFixed(2);
-		//	console.log("cartDetails",cartDetails);
+		cartDetails.taxAmount=(parseFloat( cartDetails.taxAmount)- parseFloat(product.taxpercent)).toFixed(2);
+		console.log("cartDetails",cartDetails);
 		$localStorageService.setCardDetails(cartDetails);
 	};
 	
 	this.deleteItemFromCart=function(product,cartDetails){
 		//console.log("product addItemToCart",product.prodid);
 		var productId=product.prodid;
-
+		var prodCount=cartDetails.nodeDetails[productId].count;
 		cartDetails.productCount=cartDetails.productCount-cartDetails.nodeDetails[productId].count;
 		//console.log(cartDetails.amount+"cartDetails.amount");
 		cartDetails.amount= (parseFloat( cartDetails.amount)- parseFloat(cartDetails.nodeDetails[productId].amount)).toFixed(2);
-		//	console.log("cartDetails",cartDetails);
+		cartDetails.taxAmount= (parseFloat( cartDetails.taxAmount)- parseFloat(prodCount*product.taxpercent)).toFixed(2);
+		console.log("cartDetails.taxAmount",cartDetails.taxAmount);
 		for(var i=0;i<cartDetails.itemList.length;i++){
 			if(cartDetails.itemList[i]==productId){
 				cartDetails.itemList.splice(i, 1);
@@ -130,9 +133,10 @@ app.service('$CartService', function($localStorageService) {
 		cartDetails.nodeDetails[productId].amount=(parseFloat(cartDetails.nodeDetails[productId].amount)+parseFloat(product.rate)).toFixed(2) ;
 		//total amount for all products
 		cartDetails.amount= (parseFloat( cartDetails.amount)+ parseFloat(product.rate)).toFixed(2);
+		cartDetails.taxAmount=(parseFloat( cartDetails.taxAmount)+ parseFloat(product.taxpercent)).toFixed(2);
 		//size of single product to display on ui when size of product will change excluding rate of toppins
 		//cartDetails.nodeDetails[productId].sizeRate=parseFloat(product.rate).toFixed(2);
-		//	console.log("cartDetails",cartDetails);
+		console.log("cartDetails",cartDetails);
 		$localStorageService.setCardDetails(cartDetails);
 	};
 
@@ -159,7 +163,8 @@ app.service('$CartService', function($localStorageService) {
 		cartDetails.productCount=cartDetails.productCount-1;
 		//console.log(cartDetails.amount+"cartDetails.amount");
 		cartDetails.amount= (parseFloat( cartDetails.amount)- parseFloat(product.rate)).toFixed(2);
-		//	console.log("cartDetails",cartDetails);
+		cartDetails.taxAmount=(parseFloat( cartDetails.taxAmount)- parseFloat(product.taxpercent)).toFixed(2);
+		console.log("cartDetails",cartDetails);
 		$localStorageService.setCardDetails(cartDetails);
 	};
 
