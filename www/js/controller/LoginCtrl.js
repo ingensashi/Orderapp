@@ -313,7 +313,7 @@ $scope.showAlert = function(state,msg) {
    title: state,
    template: msg
  });
- alertPopup.success(function(res) {
+ alertPopup.then(function(res) {
      //console.log('Thank you for not eating my delicious ice cream cone');
    });
 };

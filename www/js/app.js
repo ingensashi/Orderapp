@@ -18,7 +18,7 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 			"location_type":"city"
 	}
 
-	$http({
+	/*$http({
 		url : 'http://216.15.228.130:8083/NLocationRequest.php',
 		method : "post",
 		data : city_details
@@ -27,7 +27,7 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 	}).error(function (data, status, headers, config) {
 		console.log("error",status);
 		alert("you are not connected to internet");
-	});
+	});*/
 
 	if(user!==undefined && user.userStatus!=undefined){
 		// alert("1");
@@ -43,18 +43,18 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 		}
 	}
 	$rootScope.showConfirm = function() {
-		   var confirmPopup = $ionicPopup.confirm({
-		     title: 'Alert',
-		     template: 'Are you sure you want Exit App?'
-		   });
-		   confirmPopup.then(function(res) {
-		     if(res) {
-		    	 navigator.app.exitApp();
-		     } else {
-		       console.log('You are not sure');
-		     }
-		   });
-		 };
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Alert',
+			template: 'Are you sure you want Exit App?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+				navigator.app.exitApp();
+			} else {
+				console.log('You are not sure');
+			}
+		});
+	};
 	$ionicPlatform.ready(function() {
 		document.addEventListener("resume", function() {
 			//alert("here"+angular.element(document.querySelector('body')).scope().isAddressRequired);
@@ -79,27 +79,27 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 			// remove the status bar on iOS or change it to use white instead of dark colors.
 			StatusBar.styleDefault();
 		}
-		
+
 		cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
-		   // alert("GPS location is " + (enabled ? "enabled" : "disabled"));
+			// alert("GPS location is " + (enabled ? "enabled" : "disabled"));
 		}, function(error){
-		    //alert("The following gps error occurred: "+error);
+			//alert("The following gps error occurred: "+error);
 		});
 		cordova.plugins.diagnostic.isNetworkLocationEnabled(function(enabled){
-		    //alert("Network location is " + (enabled ? "enabled" : "disabled"));
+			//alert("Network location is " + (enabled ? "enabled" : "disabled"));
 		}, function(error){
-		    //alert("The following net error occurred: "+error);
+			//alert("The following net error occurred: "+error);
 		});
 		cordova.plugins.diagnostic.getLocationMode(function(mode){
-		    //alert("Current location mode is: " + mode);
+			//alert("Current location mode is: " + mode);
 		}, function(error){
-		   // alert("The following error occurred: "+error);
+			// alert("The following error occurred: "+error);
 		});
-		
+
 
 	});
-	
-	
+
+
 
 	$ionicPlatform.registerBackButtonAction(function () {
 		if ($state.current.name!='login') {
@@ -111,7 +111,7 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 				var popElement=$rootScope.stateArray.pop();
 				console.log("$rootScope.stateArray.pop() after  " +$rootScope.stateArray);
 				if(popElement=='home'){
-				angular.element(document.querySelector('#homeView')).scope().headerTitle.name='Home';
+					angular.element(document.querySelector('#homeView')).scope().headerTitle.name='Home';
 				}
 				angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name=popElement;
 				angular.element(document.querySelector('#homeView')).scope().$apply();
@@ -138,8 +138,8 @@ var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox'
 });*/
 });
 
-app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
-
+app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider,$httpProvider) {
+	$httpProvider.interceptors.push('reqResInterceptor');
 	if(!ionic.Platform.isIOS()){
 		$ionicConfigProvider.scrolling.jsScrolling(false);
 	} 
@@ -211,5 +211,43 @@ app.config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
   enabled: true,
   requireBase: false
 });*/
-});
+}) 
 
+.factory('reqResInterceptor',['$q',function($q) {
+ return {
+  responseError: function(res){
+  console.info("Failed to open url: " + res.config.url, res);
+  //Angular returns "success" by default, but we will call "error" if data were not obtained.
+   if(res.data == null && res.status === 0 && res.statusText === ""){
+   alert("you are not connected to internet");
+   return $q.reject(res) //callback error()
+   }       
+   return res //return default success()
+    }
+    };  
+    }]);
+
+/*['$q',function($q) {  
+	var timestampMarker = {
+			request: function(config) {
+				alert("in request");
+				config.requestTimestamp = new Date().getTime();
+				return config;
+			},
+			response: function(response) {
+				console.log(response);
+				alert("in response");
+				response.config.responseTimestamp = new Date().getTime();
+				return response;
+			},
+			responseError: function(response) {
+				alert("connection error");
+				return $q.reject(response);
+			}
+	};
+	return timestampMarker;
+}]);*/
+
+/*module.config(['$httpProvider', function($httpProvider) {  
+
+}]);*/
