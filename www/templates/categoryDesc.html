@@ -46,11 +46,19 @@
 							style="padding: 0px; min-height: 0px; line-height: 14px; color: white; background-color: green; width: 40%; height: 28px"
 							class="button-small button-clear" ng-click="addItemToCart(productDetails.prodDetails[productId])">Add
 							</button>
-							<span ng-if="categoryDetails.name!='Pizzas'">
+							<span ng-if="categoryDetails.name!='Pizzas' && categoryDetails.name!='Cakes'">
 						<i class="pull-left icon ion-ios-minus-outline" ng-click="removeItemFromCart(productDetails.prodDetails[productId])"
 							style="font-size: 1.8em;"></i> <span style="font-size: 1.3em;">{{cartDetails.nodeDetails[productId].count}}</span>
 						<i class=" pull-right icon ion-ios-plus-outline" ng-click="addItemToCart(productDetails.prodDetails[productId])"
 							style="font-size: 1.8em;"></i></span>
+							<div ng-if="categoryDetails.name=='Cakes'" style="color:green">
+							<select style="color:green;font-size:16px;border:none">
+							<option>Large</option>
+							<option>Medium</option>
+							<option>Small</option>
+							
+							</select>
+							</div>
 					</div>
 				</div>
 			</div>
