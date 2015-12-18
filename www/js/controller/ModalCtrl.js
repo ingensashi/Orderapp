@@ -9,6 +9,7 @@ app.controller('AddressCtrl',
 	$scope.outletDetails={};
 	$scope.addressDetails={};
 	$scope.addressList=[];
+	$scope.addressSelected=false;
 	$scope.outlet=false;
 	var addressPopup=null;
 	/**
@@ -82,10 +83,27 @@ app.controller('AddressCtrl',
 			}
 		}
 	};
+	
+	$scope.activateAddress=function(address){
+		$scope.address.activeAddress=address;
+		console.log("modal active address",$scope.address.activeAddress);
+		$scope.addressSelected=true;
+	};
+	$scope.changeAddress=function(){
+		$scope.addressSelected=false;
+	};
+	
+	$scope.deleteAddress=function(address){
+		for(var i=0;i<$scope.addressList.length;i++){
+			if($scope.addressList[i]==address){
+				$scope.addressList.splice(i,1);
+			}
+		}
+	};
 	var getOutletDetails= function(areaId){
 		var area_details={
 				"device_id":"5445554",
-				"session_id" : "1E4786B6C2D7492",
+				"session_id" : $scope.user.sessionId,
 				"location_type":"outlet",
 				"area_id":areaId 
 		}

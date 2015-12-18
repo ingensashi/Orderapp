@@ -10,17 +10,17 @@ app.controller('CategoryCtrl', function($scope, $http,$ionicSlideBoxDelegate,$Im
 		switch(catName){
 		case 'Cakes':
 			$scope.subCategoryDetail.name=['Egg','Eggless','Previous','Trending'];
-			$scope.subCategoryDetail.images=["img/CAKE.png","img/PASTA.png","img/recent.jpg","img/trend.png"];
+			$scope.subCategoryDetail.images=["img/CAKE.png","img/PASTA.png","img/3.jpg","img/2.png"];
 			$ImageCacheFactory.Cache($scope.subCategoryDetail.images);
 			break;
 		case 'Beverages':
 			$scope.subCategoryDetail.name=['Beverage','Previous','Trending'];
-			$scope.subCategoryDetail.images=["img/beverage.jpg","img/recent.jpg","img/trend.png"];
+			$scope.subCategoryDetail.images=["img/beverage.jpg","img/3.jpg","img/2.png"];
 			$ImageCacheFactory.Cache($scope.subCategoryDetail.images);
 			break;
 		default:
 			$scope.subCategoryDetail.name=['Veg','Non Veg','Previous','Trending'];	
-		    $scope.subCategoryDetail.images=["img/veg.png","img/nonveg.png","img/recent.jpg","img/trend.png"];
+		    $scope.subCategoryDetail.images=["img/veg.png","img/nonveg.png","img/3.jpg","img/2.png"];
 		    $ImageCacheFactory.Cache($scope.subCategoryDetail.images);
 		}
 	};

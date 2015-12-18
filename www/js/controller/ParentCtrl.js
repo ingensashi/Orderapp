@@ -17,7 +17,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 	$scope.cartDetails={};
 	$scope.headerTitle={};
 	$scope.isAddressRequired=false;
-	$scope.activeAddress=undefined;
+	$scope.address={};
 
 
 	var templateUrl='';
@@ -52,11 +52,12 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 				pos.lat+","+pos.long+"&sensor=true").success( function(response) {
 					$scope.locationData=response.results;
 					console.log($scope.locationData);
-					$scope.activeAddress=$scope.locationData[0].formatted_address;
+					$scope.address.gpsAddress=$scope.locationData[0].formatted_address;
+					$scope.address.activeAddress=$scope.address.gpsAddress;
 					/*$scope.location =$scope.locationData[0].formatted_address.split(",");
 					$scope.searchString= $scope.location[0]+","+$scope.location[1];*/
 					$scope.isAddressRequired=false;
-					console.log("active Address",$scope.activeAddress);
+					console.log("active Address",$scope.address.activeAddress);
 				});
 	};
 
@@ -118,6 +119,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 		case 'logout':
 			$localStorageService.logout();
 			$state.go('login');
+			$localStorageService.setUser();
 			break;
 		}
 

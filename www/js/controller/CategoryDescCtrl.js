@@ -297,7 +297,7 @@ app.controller('CategoryDescCtrl', function($scope, $http,$localStorageService,$
 
 
 	$scope.showPopup = function(productId) {
-		getSizeOfCake("Mw01");
+		getSizeOfCake("IH08");
 		$scope.event1 = "Size";
 		myPopup = $ionicPopup.show({
 			templateUrl : 'templates/itemPopup.html',
