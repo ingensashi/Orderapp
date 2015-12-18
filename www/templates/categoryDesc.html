@@ -35,9 +35,14 @@
 					</div>
 					<div class="col" style="text-align: right; font-size: 14px">
 					<i ng-if="categoryDetails.name=='Cakes'" style="color:green">
-					<button" ng-click="showPopup(productId)" style="padding: 0px; min-height: 0px; line-height: 14px; color:white;background-color: green;margin-right:10px;"
+					<!-- <button" ng-click="showPopup(productId)" style="padding: 0px; min-height: 0px; line-height: 14px; color:white;background-color: green;margin-right:10px;"
 							class="button-large button-clear">Edit
-							</button>
+							</button> -->
+							<select style="background-color: green; font-size:1.2em">
+							<option>Small</option>
+							<option>Large</option>
+							<option>Medium</option>
+							</select>
 							</i>
 						Rs. {{productDetails.prodDetails[productId].rate | number:0}}</div>
 				</div>
