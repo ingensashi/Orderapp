@@ -19,16 +19,18 @@
 <div class="item item-text-wrap" ng-if="addressList.length==0">
 Add  adrress to see in this list
 </div>
-Select Address :
 <div class="item item-text-wrap" ng-if="address.gpsAddress">
 {{address.gpsAddress}}
 </div>
   <div class="item item-text-wrap" ng-repeat="addr in addressList track by $index"
   style="clear: both;overflow-y: scroll;" >
   	<div class="item item-divider royal" ng-if="address.activeAddress==addr">
-   	Active Address
+   	<i class="ion-checkmark-circled">Selected</i>
   	</div>
   	<div ng-click="activateAddress(addr)">
+  	<i class="ion-checkmark" ng-if="address.activeAddress!=addr">Select</i>
+  	</div>
+  	<div >
     {{addr.flat}} {{addr.street}} {{addr.areaname}} {{addr.cityname}}
     </div>
     <i class="ion-trash-b" style="color:red;font-size:1.7em;float:right" 
