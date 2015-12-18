@@ -1,9 +1,9 @@
-`<div class="header">
-	<h4 style="text-align: center">{{event1}}</h4>
-</div>
 
-	
-   <div ng-if="event1=='Size'">
+   <my-popup ng-if="event1=='Size'">
+   <my-popup-header>
+        <h4 style="text-align: center">{{event1}}</h4>
+    </my-popup-header>
+   <my-popup-body>
 	<div class="content"  style="width: 102%; margin-bottom: 10%">
 		<div class="list">
 			<div class="item" style="border: 0px; padding: 2px;"
@@ -20,6 +20,8 @@
 			</div>
 		</div>
 	</div>
+	</my-popup-body>
+	<my-popup-footer>
 	<div class="bar bar-footer">
 	<div class="button-bar">
 		<button class=" button button-small  button-clear"></button>
@@ -28,8 +30,13 @@
 			ng-click="hidePopup('ok')">Ok</button>
 	</div>
 	</div>
-</div>
-<div ng-if="event1=='Base'">
+	</my-popup-footer>
+	</my-popup>
+<my-popup ng-if="event1=='Base'">
+<my-popup-header>
+        <h4 style="text-align: center">{{event1}}</h4>
+    </my-popup-header>
+    <my-popup-body>
 	<div class="content" style="width: 102%; margin-bottom: 10%">
 		<div class="list">
 			<div class="item" style="border: 0px; padding: 2px;"
@@ -48,6 +55,8 @@
 			</div>
 		</div>
 	</div>
+	</my-popup-body>
+	<my-popup-footer>
 	<div class="bar bar-footer">
 	<div class="button-bar">
 		<button class=" button button-small  button-clear"
@@ -58,10 +67,15 @@
 			ng-click="hidePopup('ok')">Ok</button>
 	</div>
 	</div>
-</div>
-<div ng-if="event1=='Toppins'">
+	</my-popup-footer>
+</my-popup>
 
-	<div class="content" scroll="true">
+<my-popup ng-if="event1=='Toppins'">
+    <my-popup-header>
+        <h4 style="text-align: center">{{event1}}</h4>
+    </my-popup-header>
+    <my-popup-body>
+        <div class="content" scroll="true">
 		<div class="list">
 			<div class="item" style="border: 0px; padding: 0px"
 				ng-repeat="toppins in productToppins track by $index">
@@ -75,10 +89,11 @@
 					</div>
 				</div>
 			</div>
-			<div style="text-align: right"></div>
 		</div>
 	</div>
-	<div class="bar bar-footer">
+    </my-popup-body>
+    <my-popup-footer >
+       <div class="bar bar-footer">
 	<div class="button-bar">
 		<button class=" button button-medium button-clear"
 			style="background-color: greenyellow; color: green; right: 3px"
@@ -88,7 +103,6 @@
 			ng-click="hidePopup('ok')">Ok</button>
 	</div>
 	</div>
-	
-</div>
-
+    </my-popup-footer>
+</my-popup>
 
