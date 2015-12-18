@@ -13,6 +13,18 @@
 
 }
 
+.has-bottom .scroll{
+  padding-bottom:120px !important;
+}
+
+/* .fixed-outside{
+  position: absolute;
+  bottom: 0;
+  color:white;
+  width: 100%;
+  text-align:center;
+} */
+
 .banner-heading{
 	position: absolute;
 	 top: 2%;
@@ -125,10 +137,10 @@
 
 
 .popup-container .popup {
-  width: 94%;
-  /* height: 242px; */
+  width: 98%;
+   height: 300px; 
   max-width: 100%;
-  max-height: 80%;
+  max-height: 100%;
   border-radius: 0px;
   background-color: white;
   display: -webkit-box;
