@@ -227,6 +227,18 @@ app.controller('SubCategoryCtrl', function($scope, $http,$ionicPopup,$localStora
 			templateUrl : 'templates/itemPopup.html',
 			cssClass : 'full-width;',
 			scope : $scope,
+			buttons: [
+			          { text: '<b>RESET</b>',
+			        	  type: 'button-positive'},
+			          {
+			            text: '<b>OK</b>',
+			            type: 'button-positive',
+			            onTap: function(e) {
+			            	 myPopup.close();
+			            }
+			          }
+			        ]
+		
 		});
 		myPopup.then(function(res) {
 		});
