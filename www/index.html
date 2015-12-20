@@ -45,7 +45,7 @@
 
 <body ng-controller="ParentCtrl">
 
-	<ion-nav-view> <ion-nav-var class="bar-stable">
+	<ion-nav-view> 
 	
 	<!-- header for expand search screen -->
 	<ion-header-bar ng-if="searchBar" >
@@ -90,7 +90,7 @@
 		<span ng-if="cartDetails.productCount>0" class="valcart">{{cartDetails.productCount}}</span>
 		</span> 
 		</div></ion-header-bar> 
-		</ion-nav-bar> <ion-nav-view
+		 <ion-nav-view
 		name="app-home" nav-view-transition="none" nav-view-direction="none">
 	</ion-nav-view> <ion-footer-bar ng-if="stateDetails.current.name!='login'">
 	<ion-tabs class="tabs-light  tabs-icon-top tabs-icon-only">
