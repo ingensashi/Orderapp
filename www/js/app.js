@@ -4,7 +4,8 @@ var user;
 //angular.module is a global place for creating, registering and retrieving Angular modules
 //'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 //the 2nd parameter is an array of 'requires'
-var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox','ionic.ion.imageCacheFactory'])
+var app=angular.module('foodApp', ['ionic','ngStorage','ngCordova','tabSlideBox',
+                                   'ion-autocomplete','ionic.ion.imageCacheFactory'])
 
 
 .run(function($ionicPlatform,$http,$localStorage,$state,$timeout,$ionicScrollDelegate,$rootScope,

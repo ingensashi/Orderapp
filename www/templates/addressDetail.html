@@ -41,21 +41,40 @@ Add  adrress to see in this list
 
 <ion-list ng-if="activetab=='pickUp'">
 <ion-item style="padding:3px;border:0px;">
-<label class="item item-input item-stacked-label" style="border: 0px">Select
+<!-- <label class="item item-input item-stacked-label" style="border: 0px">Select
 	City </label> <input list="browsers" name="browser"
 	style="width: 100%; height: 45px; text-align: center"
 	placeholder="select city" ng-change="selectCity(city.id)" ng-model="city.id"/> <datalist id="browsers">
 
 	<option id="testId" ng-repeat="city in cityDetails track by $index"  value="{{city.name}}"></option>
-</datalist> </ion-item>
+</datalist>  --> 
+<label class="item item-input">  <input ion-autocomplete type="text"
+	readonly="readonly" class="ion-autocomplete" autocomplete="off"
+	ng-model="city.id" item-value-key="id" item-view-value-key="name"
+	items-method="getCityItems(query)" items-method-value-key="cities"
+	placeholder="Enter city"
+	items-clicked-method="selectCity(city.id)"
+	items-removed-method="itemsRemoved(callback)" max-selected-items="1" />
+</label>
+            
+</ion-item>
  <ion-item style="padding:3px;border:0px"> 
- <label class="item item-input item-stacked-label" style="border: 0px">Select
+<!--  <label class="item item-input item-stacked-label" style="border: 0px">Select
 	Area</label> 
 	<input list="browsers1" name="browser1" ng-change="selectArea(area)" ng-model="area"
 	style="width: 100%; height: 45px; text-align: center"
 	placeholder="select area"> <datalist id="browsers1">
 	<option ng-repeat="area in areaDetails track by $index" value="{{area.name}}">
-</datalist> </ion-item>
+</datalist> -->
+<label class="item item-input">  <input ion-autocomplete type="text"
+	readonly="readonly" class="ion-autocomplete" autocomplete="off"
+	ng-model="areaId" item-value-key="id" item-view-value-key="name"
+	items-method="getAreaItems(query)" items-method-value-key="areas"
+	placeholder="Enter locality"
+	items-clicked-method="selectArea(areaId)"
+	items-removed-method="itemsRemoved(callback)" max-selected-items="1" />
+</label>
+ </ion-item>
 <button class="button button-full button-positive"
 		style="color: white; font-size: 17px;" ng-click="findOutlet()">
 		Find Outlet <i class="ion-arrow-right-c" style="font-size: 26px;"></i>
@@ -69,21 +88,40 @@ Add  adrress to see in this list
 
 <ion-list ng-if="activetab=='addAddress'"> 
 <ion-item style="padding:3px;border:0px;">
-<label class="item item-input item-stacked-label" style="border: 0px">Select
+<!-- <label class="item item-input item-stacked-label" style="border: 0px">Select
 	City </label> <input list="browsers" name="browser"
 	style="width: 100%; height: 45px; text-align: center"
 	placeholder="select city" ng-change="selectCity(city.id)" ng-model="city.id"/> <datalist id="browsers">
 
 	<option id="testId" ng-repeat="city in cityDetails track by $index"  value="{{city.name}}"></option>
-</datalist> </ion-item>
+</datalist> -->
+<label class="item item-input">  <input ion-autocomplete type="text"
+	readonly="readonly" class="ion-autocomplete" autocomplete="off"
+	ng-model="city.id" item-value-key="id" item-view-value-key="name"
+	items-method="getCityItems(query)" items-method-value-key="cities"
+	placeholder="Enter city"
+	items-clicked-method="selectCity(city.id)"
+	items-removed-method="itemsRemoved(callback)" max-selected-items="1" />
+</label>
+ </ion-item>
  <ion-item style="padding:3px;border:0px"> 
- <label class="item item-input item-stacked-label" style="border: 0px">Select
+ <!-- <label class="item item-input item-stacked-label" style="border: 0px">Select
 	Area</label> 
 	<input list="browsers1" name="browser1" ng-change="selectArea(area)" ng-model="area"
 	style="width: 100%; height: 45px; text-align: center"
 	placeholder="select area"> <datalist id="browsers1">
 	<option ng-repeat="area in areaDetails track by $index" value="{{area.name}}">
-</datalist> </ion-item> <ion-item style="padding:3px;border:0px;"> <label
+</datalist> -->
+<label class="item item-input">  <input ion-autocomplete type="text"
+	readonly="readonly" class="ion-autocomplete" autocomplete="off"
+	ng-model="areaId" item-value-key="id" item-view-value-key="name"
+	items-method="getAreaItems(query)" items-method-value-key="areas"
+	placeholder="Enter locality"
+	items-clicked-method="selectArea(areaId)"
+	items-removed-method="itemsRemoved(callback)" max-selected-items="1" />
+</label>
+
+ </ion-item> <ion-item style="padding:3px;border:0px;"> <label
 	class="item item-input item-stacked-label" style="border: 0px">Type
 	street/society name</label> <input
 	style="width: 100%; height: 45px; text-align: center"
