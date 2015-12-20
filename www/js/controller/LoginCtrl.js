@@ -6,13 +6,13 @@ app.controller('LoginCtrl', function($scope, $ionicPopup,$ionicLoading,$http,$lo
   $scope.forgotPassword=false;
   $scope.mobileNoScreen=false;
   $scope.passwordScreen=false;
+  var mobileNo;
   var passwordReset={};
   var isDevelopment=true;
   $scope.choice={};
   var deviceId='';
   var deviceName='';
   var deviceVersion;
-  var mobileNo="";
 
   $scope.activeTab="guest";
   $scope.passwordMatches=false;
@@ -85,6 +85,8 @@ app.controller('LoginCtrl', function($scope, $ionicPopup,$ionicLoading,$http,$lo
 if($scope.userReponse.userstatus=="success"){
   $localStorageService.setUserStatus(1);
   $localStorageService.setUserDetails($scope.userReponse.userdetails);
+  mobileNo=userName.toString();
+  $localStorageService.setMobileNo(mobileNo);
  $state.go('app.home');/*.success(function() {
   $scope.hideSpinner();
 });*/
@@ -277,6 +279,7 @@ $scope.hidePopup=function(flag){
      registerPopup();
      $localStorageService.setUserStatus(1);
      $localStorageService.setUserDetails($scope.userReponse.userdetails);
+     $localStorageService.setMobileNo($scope.user.mobileNo.toString());
    }else{
      $scope.hideSpinner();
      $scope.showAlert('Invalid request',"please try again");
@@ -340,6 +343,7 @@ $http({
  console.log("reponse passwordResetResponse",passwordResetResponse);
  if(passwordResetResponse.userstatus=="Success"){
   $scope.showPopup();
+  mobileNo=mobileNo.toString();
 }else{
   $scope.hideSpinner();
   $scope.showAlert('Mobile no does not exist','Register as new user');
@@ -366,6 +370,7 @@ $http({
  if(passwordResetResponse.passwordchangedstatus=="success"){
    $localStorageService.setUserStatus(1);
    $localStorageService.setUserDetails(passwordResetResponse.userdetails);
+   $localStorageService.setMobileNo(mobileNo);
    $scope.forgotPassword=false;
     $scope.passwordScreen=false;
    $state.go('app.home');

@@ -237,3 +237,10 @@
 	width: auto;
 	z-index: 1;
 }
+.ios-header-margin{
+	margin-top: 15px;
+}
+.ios-modal-margin{
+	margin-top: 15px;
+	min-height:79%;
+}

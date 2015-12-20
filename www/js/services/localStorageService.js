@@ -45,6 +45,12 @@ app.service('$localStorageService', function($localStorage) {
 			$localStorage.user={};	
 		}*/
 		$localStorage.user.userStatus=status;		
+	};
+	this.setSessionId = function(sessionId) { 
+		$localStorage.user.userDetails.sessionid=sessionId;		
+	};
+	this.setMobileNo = function(mobileno) { 
+		$localStorage.user.userDetails.mobileno=mobileno;		
 	}
 
 

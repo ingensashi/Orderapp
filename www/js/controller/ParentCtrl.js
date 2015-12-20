@@ -1,17 +1,10 @@
 'use strict';
 app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartService,$rootScope,$ionicModal,$ionicScrollDelegate,
-		$cordovaGeolocation,$http,$ionicPopup) {
-//	$ionicScrollDelegate.$getByHandle('mainScroll').scrollTop();
-	var init=function(){
-		if($localStorageService.getUser()==null){
-			$localStorageService.setUser();
-		}
-		/*if($localStorageService.getCartDetails()!=null){
-			$scope.cartDetails=$localStorageService.getCartDetails();
-			console.log("cart details",$scope.cartDetails.productCount);
-		}*/
-	};
-	init();
+		$cordovaGeolocation,$http,$ionicPopup,$cordovaDevice) {
+	$scope.deviceDetails={};
+	var deviceId='a3b2a43154f74e2d';
+	var  deviceName='XT1022';
+	var deviceVersion='4.4.4';
 	$scope.user = {};
 	$scope.stateDetails=$state;
 	$scope.cartDetails={};
@@ -23,6 +16,67 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 	var templateUrl='';
 	var myPopup=null;
 
+
+
+//	$ionicScrollDelegate.$getByHandle('mainScroll').scrollTop();
+	document.addEventListener("deviceready", function () {
+		console.log("$cordovaDevice",$cordovaDevice);
+		if(window.cordova){
+			$scope.deviceDetails.deviceName = $cordovaDevice.getModel();
+			// var cordova = $cordovaDevice.getCordova();
+			//  var model = $cordovaDevice.getModel();
+			$scope.deviceDetails.platform = $cordovaDevice.getPlatform();
+			$scope.deviceDetails.deviceId= $cordovaDevice.getUUID();
+			$scope.deviceDetails.deviceVersion = $cordovaDevice.getVersion();
+			$scope.deviceDetails.isIos=($scope.deviceDetails.platform=='iOS');
+//			alert("inside cordova"+JSON.stringify($scope.deviceDetails));
+		}
+		console.log("$scope.deviceDetails",$scope.deviceDetails);
+
+	}, false);
+	var getSessionId=function(){
+		var user={};
+		user.device_id=deviceId;
+		user.device_name=deviceName;
+		user.device_version=deviceVersion;
+		user.mobile_no="8010012450";
+		console.log("user",user);
+		$http({
+			url:'http://216.15.228.130:8083/NUserLoginRequest.php', 
+			method: "post",
+			data: user
+		}).success(function(response){
+			console.log("reponse sessionId",response);
+			if(response.userstatus=="Success"){
+				console.log("before user",$localStorageService.getUser());
+				$localStorageService.setSessionId(response.userdetails.sessionid);
+				console.log("after user",$localStorageService.getUser());
+			}else{
+				// alert($scope.userReponse.userdetails.result);
+			}
+			//   $localStorage.sessionId=response.data.UserDetails.SessionId;
+		}).error(function (data, status, headers, config) {
+			console.log("error",status);
+			return status;
+		});
+	};
+	var init=function(){
+		if($localStorageService.getUser()==null){
+			$localStorageService.setUser();
+		}else{
+			$scope.user=$localStorageService.getUser();
+			/**
+			 * handle first time login case for get sessionId
+			 */
+			getSessionId();
+		}
+		/*if($localStorageService.getCartDetails()!=null){
+			$scope.cartDetails=$localStorageService.getCartDetails();
+			console.log("cart details",$scope.cartDetails.productCount);
+		}*/
+	};
+	init();
+
 	$scope.expandSerachBar = function(event) {
 		// alert("inside"+event);
 		if (event == 'front') {
@@ -31,8 +85,8 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 			$scope.searchBar = false;
 		}
 
-	}
-	
+	};
+
 	$scope.moveToBackScreen=function(){
 		if($rootScope.stateArray.length==0){
 			return;
@@ -41,7 +95,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 		var scopeRef=angular.element(document.querySelector('#homeView')).scope();
 		if(popElement=='home'){
 			angular.element(document.querySelector('#homeView')).scope().headerTitle.name='Home';
-			}
+		}
 		console.log("$rootScope.stateArray.pop() after  " +$rootScope.stateArray);
 		angular.element(document.querySelector('#homeView')).scope().activeScreenDetail.name=popElement;
 
@@ -75,7 +129,7 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 		}, function(err) {
 			// error
 			alert("error :"+err);
-		//	alert("please enable gps");
+			//	alert("please enable gps");
 		});
 
 	};
@@ -192,16 +246,16 @@ app.controller('ParentCtrl',function($scope,$state,$localStorageService,$CartSer
 		$CartService.removeItemFromCart(product,$scope.cartDetails);
 	};
 	$scope.deleteItemFromCart=function(product){
-		 var confirmPopup = $ionicPopup.confirm({
-		     title: 'Alert',
-		     template: 'Are you sure to delete this product?'
-		   });
-		   confirmPopup.then(function(res) {
-		     if(res) {
-		    	 $CartService.deleteItemFromCart(product,$scope.cartDetails);
-		     } else {
-		       console.log('return to shopping');
-		     }
-		   });
+		var confirmPopup = $ionicPopup.confirm({
+			title: 'Alert',
+			template: 'Are you sure to delete this product?'
+		});
+		confirmPopup.then(function(res) {
+			if(res) {
+				$CartService.deleteItemFromCart(product,$scope.cartDetails);
+			} else {
+				console.log('return to shopping');
+			}
+		});
 	};
 });
